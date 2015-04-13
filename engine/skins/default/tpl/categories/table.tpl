@@ -78,9 +78,9 @@ function categoryModifyRequest(cmd, cid) {
 <tbody id="admCatList">
 {% include localPath(0)~"entries.tpl" %}
 </tbody>
-<tfoot>
-<tr><td colspan="8" class="contentEdit" align="right">&nbsp; {% if (flags.canModify) %}<form method="get" action=""><input type="hidden" name="mod" value="categories"/><input type="hidden" name="action" value="add"/><input type="submit" value="Добавить категорию" class="button" /></form>{% endif %}</td></tr>
-</tfoot>
+
+<tr><td colspan="8" class="contentEdit" align="right">&nbsp; {% if (flags.canModify) %}<form method="get" action=""><input type="hidden" name="mod" value="categories"/><input type="hidden" name="action" value="add"/><input type="submit" value="Добавить категорию" class="fr" /></form>{% endif %}</td></tr>
+
 </table>
 
 </form>
