@@ -40,7 +40,6 @@ $skins_url = skins_url;
 $mod = $_REQUEST['mod'];
 $action = isset($_REQUEST['action'])?$_REQUEST['action']:'';
 
-$h_active_options = (in_array($mod, array('options', 'categories', 'static')))?' class="active"':'';
 $h_active_extras = (($mod=='extra-config')||($mod=='extras'))?' class="active"':'';
 $h_active_addnews = (($mod=='news'))?' class="active"':'';
 $h_active_images = ($mod=='images')?' class="active"':'';
@@ -118,7 +117,7 @@ $(document).ready(function(){
 			<a class="navbar-brand fr" href="?mod=news&action=add" title="$lang[addnews_t]"><i class="fa fa-file-o"></i></a>
 		</div>
 	<div class="side-menu-container">
-        <ul class="navbar-nav" id="navmenu-v">
+		<ul class="navbar-nav" id="navmenu-v">
 			<li><a href="$PHP_SELF?mod=news"$h_active_addnews><i class="fa fa-newspaper-o"></i> Новости<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
 					<li><a href="$PHP_SELF?mod=news">Все новости</a></li>
@@ -181,8 +180,8 @@ $(document).ready(function(){
 			<li><a href="$PHP_SELF?mod=statistics"><i class="fa fa-line-chart"></i> Статистика</a></li>
 			<li><a href="http://ngcms.ru/forum/" target="_blank"><i class="fa fa-heartbeat"></i> Форум поддержки</a></li>
 			<li><a href="$config[home_url]/readme/docs/index.html" target="_blank"><i class="fa fa-leanpub"></i> Документация</a></li>
-		
-	
+		</ul>
+	</div>
 </nav>
 <div id="adminDataBlock" class="side-body">
 HTML;
