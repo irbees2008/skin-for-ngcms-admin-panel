@@ -10,27 +10,27 @@
 
 <!--Login block-->
 
- <div id="login_wrap">
-  <div class="l_block">
+<form name="login" id="loginForm" method="post" action="{php_self}">
+	<input type="hidden" name="redirect" value="{redirect}" />
+	<input type="hidden" name="action" value="login" />
+	 
+	<div class="field">
+		<label>{l_name}</label>
+		<div class="input"><input type="text" name="username" id="login" value="" maxlength="60" tabindex="1" /></div>
+	</div>
 
-   <div class="in">
-    <img src="{skins_url}/images/login/logo.png" width="283" height="129" />
-    <form name="login" method="post" action="{php_self}">
-     <input type="hidden" name="redirect" value="{redirect}" />
-     <input type="hidden" name="action" value="login" />
-     <label>{l_name}
-          <input type="text" name="username" value="" maxlength="60" tabindex="1" />
-     </label>
-     <label>{l_password}
-          <input class="password" type="password" name="password" maxlength="20" tabindex="2" />
-     </label>
-	<br />
-    <input type="submit" class="filterbutton" value="{l_login}" />
-    </form>
-    </div>
-  </div>
-  <p class="log_copyright">2008-2015 В© <a href="http://ngcms.ru" target="_blank">Next Generation CMS</a></p>
-</div>
+	<div class="field">
+		<label>{l_password}</label>
+		<div class="input"><input type="password" name="password" id="pass" maxlength="20" tabindex="2" /></div>
+	</div>
+
+	<div class="submit">
+		<input type="submit" value="{l_login}" />
+	</div>
+</form>
+
+  <p class="copyright">2008-2015 © <a href="http://ngcms.ru" target="_blank">Next Generation CMS</a></p>
+
 <!--/Login block-->
 
 </body>
