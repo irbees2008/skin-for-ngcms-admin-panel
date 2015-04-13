@@ -1,0 +1,118 @@
+@charset "windows-1251";
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+/*height:100%;*/
+}
+
+body {
+background: #fff;
+margin : 0;
+padding : 0;
+height:auto !important;
+min-height:100%;
+font: normal 16px/28px Tahoma,sans-serif;
+color: #666;
+}
+
+a {
+	
+color: #075e7c;
+text-decoration: underline;
+}
+
+a:hover {
+color: #5a912d;
+text-decoration: none;
+}
+
+#login_wrap { width: 400px; background: url(../images/login/block_bg.png) top center no-repeat; margin: 0 auto; margin-top: 152px; text-align:center; padding: 18px 0 34px 0;}
+.l_block { width: 320px; height: 320px; background:#ecf1f7; border:#dbe4ed 1px solid; margin: 0 auto;}
+p.log_copyright { font-size: 10px; color:#b0b0b0;}
+.l_block .in { margin: 15px 0 15px 0;}
+
+label {
+	cursor: pointer;
+	width: 283px;
+}
+input[type="text"],
+input[type="url"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+button,
+.button {
+	font: 300 normal 12px/26px Arial, Helvetica, sans-serif;
+	text-transform: none;
+	text-indent: 0;
+	height: 26px;
+	vertical-align: middle;
+	margin: 8px 0;
+	padding: 1px 8px;
+	outline: none;
+	-khtml-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	width: 283px;
+}
+
+input[type="text"],
+input[type="url"],
+input[type="email"],
+input[type="password"],
+input[type="search"] {
+	border: 1px solid #c8c8c8;
+	color: #444;
+	cursor: auto;
+	background-color: #fff;
+}
+input[type="search"]{
+	-webkit-appearance: textfield;
+}
+input[type="radio"], input[type="checkbox"]{
+cursor: pointer;
+  margin: 0;
+  min-height: 14px;
+  min-width: 14px;
+  vertical-align: middle;
+}
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+button,
+.button {
+	cursor: pointer;
+	background-color: #20b9cb;
+	border: 1px solid #20b9cb;
+	color: #fff;
+	overflow: visible;
+	line-height:normal;
+	margin: 8px 1px;
+}
+input[type="button"]:hover ,
+input[type="reset"]:hover,
+input[type="submit"]:hover,
+button:hover {
+	background-color: #08c;
+	border: 1px solid #08c;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="search"]:focus,
+textarea:focus,
+select:focus, option:focus {
+ border: 1px solid #08c;
+ color: #000;
+ outline: 0;
+ box-shadow: none;
+}
