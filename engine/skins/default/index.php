@@ -40,12 +40,19 @@ $skins_url = skins_url;
 $mod = $_REQUEST['mod'];
 $action = isset($_REQUEST['action'])?$_REQUEST['action']:'';
 
-$h_active_extras = (($mod=='extra-config')||($mod=='extras'))?' class="active"':'';
-$h_active_addnews = (($mod=='news'))?' class="active"':'';
+$h_active_pm = ($mod=='pm')?' class="active"':'';
+
+$h_active_news = (($mod=='news'))?' class="active"':'';
+$h_active_categories = (($mod=='categories'))?' class="active"':'';
+$h_active_static = (($mod=='static'))?' class="active"':'';
 $h_active_images = ($mod=='images')?' class="active"':'';
 $h_active_files = ($mod=='files')?' class="active"':'';
 $h_active_users = (($mod=='users')||($mod=='ipban')||($mod=='ugroup')||($mod=='perm'))?' class="active"':'';
-$h_active_pm = ($mod=='pm')?' class="active"':'';
+$h_active_extras = (($mod=='extra-config')||($mod=='extras'))?' class="active"':'';
+$h_active_templates = ($mod=='templates')?' class="active"':'';
+$h_active_options = (($mod=='options')||($mod=='dbo')||($mod=='rewrite')||($mod=='cron'))?' class="active"':'';
+$h_active_configuration = ($mod=='configuration')?' class="active"':'';
+$h_active_statistics = ($mod=='statistics')?' class="active"':'';
 
 $skin_header = <<<HTML
 <!DOCTYPE html>
@@ -118,19 +125,19 @@ $(document).ready(function(){
 		</div>
 	<div class="side-menu-container">
 		<ul class="navbar-nav" id="navmenu-v">
-			<li><a href="$PHP_SELF?mod=news"$h_active_addnews><i class="fa fa-newspaper-o"></i> Новости<i class="fa fa-angle-right fr"></i></a>
+			<li><a href="$PHP_SELF?mod=news"$h_active_news><i class="fa fa-newspaper-o"></i> Новости<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
 					<li><a href="$PHP_SELF?mod=news">Все новости</a></li>
 					<li><a href="$PHP_SELF?mod=news&action=add">Добавить новость</a></li>
 				</ul>
 			</li>
-			<li><a href="$PHP_SELF?mod=categories"><i class="fa fa-folder-open-o"></i> Категории<i class="fa fa-angle-right fr"></i></a>
+			<li><a href="$PHP_SELF?mod=categories"$h_active_categories><i class="fa fa-folder-open-o"></i> Категории<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
 					<li><a href="$PHP_SELF?mod=categories">Все категории</a></li>
 					<li><a href="$PHP_SELF?mod=categories&action=add">Добавить категорию</a></li>
 				</ul>
 			</li>
-			<li><a href="$PHP_SELF?mod=static"><i class="fa fa-file-text-o"></i> Статьи<i class="fa fa-angle-right fr"></i></a>
+			<li><a href="$PHP_SELF?mod=static"$h_active_static><i class="fa fa-file-text-o"></i> Статьи<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
 					<li><a href="$PHP_SELF?mod=static">Все статьи</a></li>
 					<li><a href="$PHP_SELF?mod=static&action=addForm">Добавить статью</a></li>
@@ -139,15 +146,15 @@ $(document).ready(function(){
 			<li><a href="$PHP_SELF?mod=images"$h_active_images><i class="fa fa-file-image-o"></i> Изображения<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
 					<li><a href="$PHP_SELF?mod=images&action=list">Все изображения</a></li>
-					<li><a href="$PHP_SELF?mod=images&action=uploadnew">Загрузить</a></li>
-					<li><a href="$PHP_SELF?mod=images&action=categories">Категории</a></li>
+					<li><a href="$PHP_SELF?mod=images&action=uploadnew">Загрузить изображение</a></li>
+					<li><a href="$PHP_SELF?mod=images&action=categories">Категории изображений</a></li>
 				</ul>
 			</li>
 			<li><a href="$PHP_SELF?mod=files"$h_active_files><i class="fa fa-file-archive-o"></i> Файлы<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
 					<li><a href="$PHP_SELF?mod=files&action=list">Все файлы</a></li>
-					<li><a href="$PHP_SELF?mod=files&action=uploadnew">Загрузить</a></li>
-					<li><a href="$PHP_SELF?mod=files&action=categories">Категории</a></li>
+					<li><a href="$PHP_SELF?mod=files&action=uploadnew">Загрузить файл</a></li>
+					<li><a href="$PHP_SELF?mod=files&action=categories">Категории файлов</a></li>
 				</ul>
 			</li>
 
@@ -167,8 +174,8 @@ $(document).ready(function(){
 					<li><a href="$PHP_SELF?mod=extras&action=uninstalled">$lang[extras_list_needinstall]</a></li>
 				</ul>
 			</li>
-			<li><a href="$PHP_SELF?mod=templates"><i class="fa fa-th-large"></i> Шаблоны</a></li>
-			<li><a href="$PHP_SELF?mod=options"><i class="fa fa-cogs"></i> Настройки<i class="fa fa-angle-right fr"></i></a>
+			<li><a href="$PHP_SELF?mod=templates"$h_active_templates><i class="fa fa-th-large"></i> Шаблоны</a></li>
+			<li><a href="$PHP_SELF?mod=options"$h_active_options><i class="fa fa-cogs"></i> Настройки<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
 					<li><a href="$PHP_SELF?mod=options">Все настройки</a></li>
 					<li><a href="$PHP_SELF?mod=dbo">База данных</a></li>
@@ -176,8 +183,8 @@ $(document).ready(function(){
 					<li><a href="$PHP_SELF?mod=cron">Планировщик задач</a></li>
 				</ul>
 			</li>
-			<li><a href="$PHP_SELF?mod=configuration"><i class="fa fa-wrench"></i> Настройка системы</a></li>
-			<li><a href="$PHP_SELF?mod=statistics"><i class="fa fa-line-chart"></i> Статистика</a></li>
+			<li><a href="$PHP_SELF?mod=configuration"$h_active_configuration><i class="fa fa-wrench"></i> Настройка системы</a></li>
+			<li><a href="$PHP_SELF?mod=statistics"$h_active_statistics><i class="fa fa-line-chart"></i> Статистика</a></li>
 			<li><a href="http://ngcms.ru/forum/" target="_blank"><i class="fa fa-heartbeat"></i> Форум поддержки</a></li>
 			<li><a href="$config[home_url]/readme/docs/index.html" target="_blank"><i class="fa fa-leanpub"></i> Документация</a></li>
 		</ul>
