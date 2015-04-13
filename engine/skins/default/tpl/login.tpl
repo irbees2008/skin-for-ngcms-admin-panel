@@ -4,7 +4,7 @@
   <meta charset="{l_encoding}">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>{home_title} - {l_adminpanel}</title>
-  <link rel="stylesheet" href="{skins_url}/css/login/.css">
+  <link rel="stylesheet" href="{skins_url}/css/login.css">
  </head>
  <body>
 
