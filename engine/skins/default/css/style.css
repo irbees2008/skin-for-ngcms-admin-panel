@@ -164,7 +164,7 @@ label {
 font-size: 88%;
 }
 
-.lable-title, contentHead {font-size: 18px;}
+.lable-title, .contentHead {font-size: 18px;}
 
 fieldset {
  display: block;
