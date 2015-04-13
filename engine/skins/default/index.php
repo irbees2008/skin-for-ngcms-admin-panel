@@ -2,38 +2,6 @@
 // Protect against hack attempts
 if (!defined('NGCMS')) die ('HAL');
 
-@include_once root.'skins/default/inc/functions.php';
-if(isset($_REQUEST["creattpl"])) {
-	$filename_sms = $_REQUEST["creattpl"];
-	$path_parts = pathinfo(parse_url($filename_sms, PHP_URL_PATH));
-	$filename = '../../../../templates/'.$filename_sms;
-	$text ='<p>Пустой шаблон</p>';
-
-	if (!file_exists('../../../../templates/'.$path_parts['dirname'])) {
-		if (mkdir('../../../../templates/'.$path_parts['dirname'], 0644, true)) {
-			$message=$message. 'Папка создана.<br/>';
-	   }
-	}
-
-	if( file_exists($filename)) {
-		$message=$message."Такой файл уже существует.<br/>";
-		if(!is_writeable($filename)) {
-			$message=$message."Вы не можете записать в этот файл.<br/>";
-		}
-	} else {
-		if(!touch($filename)) {
-			$message=$message."Нельзя создать файл.<br/>";
-		} else {
-			$f = fopen($filename , "w");
-			fwrite($f , $text);
-			fclose($f);
-			$message=$message.'Файл <b>'.$filename_sms.'</b> успешно создан!<br/>';
-		}
-	}
-	$sms="MyCallback(\"$message\");";
-	echo $sms;
-}
-
 //Загрузка языка скина админ панели
 function LoadLang_askin($what, $area = '') {
 	global $config;
@@ -74,10 +42,10 @@ $action = isset($_REQUEST['action'])?$_REQUEST['action']:'';
 
 $h_active_options = (in_array($mod, array('options', 'categories', 'static')))?' class="active"':'';
 $h_active_extras = (($mod=='extra-config')||($mod=='extras'))?' class="active"':'';
-$h_active_addnews = (($mod=='news')&&($action=='add'))?' class="active"':'';
-$h_active_editnews = (($mod=='news')&&($action!='add'))?' class="active"':'';
+$h_active_addnews = (($mod=='news'))?' class="active"':'';
 $h_active_images = ($mod=='images')?' class="active"':'';
 $h_active_files = ($mod=='files')?' class="active"':'';
+$h_active_users = (($mod=='users')||($mod=='ipban')||($mod=='ugroup')||($mod=='perm'))?' class="active"':'';
 $h_active_pm = ($mod=='pm')?' class="active"':'';
 
 $skin_header = <<<HTML
@@ -169,29 +137,22 @@ $(document).ready(function(){
 					<li><a href="$PHP_SELF?mod=static&action=addForm">Добавить статью</a></li>
 				</ul>
 			</li>
-			<!--li><a href="$PHP_SELF?mod=files"><i class="fa fa-file-image-o"></i> Медиафайлы<i class="fa fa-angle-right fr"></i></a>
+			<li><a href="$PHP_SELF?mod=images"$h_active_images><i class="fa fa-file-image-o"></i> Изображения<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
-					<li><a href="$PHP_SELF?mod=files">Файлы</a></li>
-					<li><a href="$PHP_SELF?mod=images">Изображения</a></li>
-				</ul>
-			</li-->
-
-			<li><a href="$PHP_SELF?mod=images"><i class="fa fa-file-image-o"></i> Изображения<i class="fa fa-angle-right fr"></i></a>
-				<ul> 
-					<li><a href="$PHP_SELF?mod=images&action=list">Список</a></li>
+					<li><a href="$PHP_SELF?mod=images&action=list">Все изображения</a></li>
 					<li><a href="$PHP_SELF?mod=images&action=uploadnew">Загрузить</a></li>
 					<li><a href="$PHP_SELF?mod=images&action=categories">Категории</a></li>
 				</ul>
 			</li>
-			<li><a href="$PHP_SELF?mod=files"><i class="fa fa-file-archive-o"></i> Файлы<i class="fa fa-angle-right fr"></i></a>
+			<li><a href="$PHP_SELF?mod=files"$h_active_files><i class="fa fa-file-archive-o"></i> Файлы<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
-					<li><a href="$PHP_SELF?mod=files&action=list">Список</a></li>
+					<li><a href="$PHP_SELF?mod=files&action=list">Все файлы</a></li>
 					<li><a href="$PHP_SELF?mod=files&action=uploadnew">Загрузить</a></li>
 					<li><a href="$PHP_SELF?mod=files&action=categories">Категории</a></li>
 				</ul>
 			</li>
 
-			<li><a href="$PHP_SELF?mod=users"><i class="fa fa-users"></i> Пользователи<i class="fa fa-angle-right fr"></i></a>
+			<li><a href="$PHP_SELF?mod=users"$h_active_users><i class="fa fa-users"></i> Пользователи<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
 					<li><a href="$PHP_SELF?mod=users">Управление</a></li>
 					<li><a href="$PHP_SELF?mod=ipban">Блокировка</a></li>
