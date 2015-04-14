@@ -80,7 +80,7 @@ $skin_header = <<<HTML
 		<div class="navbar-header">
 			<span class="navbar-toggle"><i class="fa fa-bars"></i></span>
 			<a class="navbar-brand fl" href="$config[home_url]" title="$lang[mainpage_t]" target="_blank"><span class="mobile-hide-480">$config[home_title]</span> <i class="fa fa-external-link"></i></a>
-			<a class="navbar-brand fr" href="$PHP_SELF?action=logout" title="$lang[logout_t]"><i class="fa fa-sign-out"></i></a>
+			<a class="navbar-brand fr mobile-hide-320" href="$PHP_SELF?action=logout" title="$lang[logout_t]"><i class="fa fa-sign-out"></i></a>
 			<a class="navbar-brand fr" href="$PHP_SELF?mod=pm" title="$lang[pm_t]"><i class="fa fa-envelope-o"></i> ($newpm)</a>
 			$unapproved
 		</div>

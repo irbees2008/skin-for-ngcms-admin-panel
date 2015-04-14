@@ -1,9 +1,12 @@
 <script type="text/javascript" src="{{ home }}/lib/ajax.js"></script>
 <script type="text/javascript" src="{{ home }}/lib/libsuggest.js"></script>
 <script type="text/javascript">
-//
 // Global variable: ID of current active input area
-{% if (flags.edit_split) %}var currentInputAreaID = 'ng_news_content_short';{% else %}var currentInputAreaID = 'ng_news_content';{% endif %}
+{% if (flags.edit_split) %}
+	var currentInputAreaID = 'ng_news_content_short';
+{% else %}
+	var currentInputAreaID = 'ng_news_content';
+{% endif %}
 function ChangeOption(optn) {
 	document.getElementById('maincontent').style.display	= (optn == 'maincontent')?"block":"none";
 	document.getElementById('additional').style.display	= (optn == 'additional')?"block":"none";
@@ -54,11 +57,11 @@ function changeActive(name) {
 <form id="postForm" name="form" ENCTYPE="multipart/form-data" method="post" action="{{ php_self }}" target="_self">
 	<input type="hidden" name="token" value="{{ token }}"/>
 
-		<div class="content-nav">
-			<input class="navbutton active" type="button" onclick="ChangeOption('maincontent');" value="{{ lang.addnews['bar.maincontent'] }}" />
-			<input class="navbutton" type="button" onclick="ChangeOption('additional');" value="{{ lang.addnews['bar.additional'] }}" />
-			<input class="navbutton" type="button" onclick="ChangeOption('attaches');" value="{{ lang.addnews['bar.attaches'] }}" />
-		</div>
+	<div class="content-nav">
+		<input class="navbutton active" type="button" onclick="ChangeOption('maincontent');" value="{{ lang.addnews['bar.maincontent'] }}" />
+		<input class="navbutton" type="button" onclick="ChangeOption('additional');" value="{{ lang.addnews['bar.additional'] }}" />
+		<input class="navbutton" type="button" onclick="ChangeOption('attaches');" value="{{ lang.addnews['bar.attaches'] }}" />
+	</div>
 
 	<!-- Left edit column -->
 	<div class="content-main-left">
@@ -93,6 +96,7 @@ function changeActive(name) {
 				<label class="lable-title" for="alt_name">{{ lang.addnews['alt_name'] }}</label>
 				<input style="width:100%;" type="text" name="alt_name" id="alt_name" value="" tabindex="3" />
 			{% endif %}
+			
 			{% if (flags.meta) %}
 				<label class="lable-title" for="description">{{ lang.addnews['description'] }}</label>
 				<textarea name="description" id="description"></textarea>
@@ -107,21 +111,21 @@ function changeActive(name) {
 			</table>
 		</div>
 
-
 		<!-- ADDITIONAL -->
 		<div id="additional" style="display: none;">
 			<table>
 				{% if not flags['customdate.disabled'] %}
-					<tr>
+				<tr>
 					<td>
 						<label class="lable-title" for="customdate">{{ lang.addnews['custom_date'] }}</label>
 					</td>
-					</tr>
-					<tr>
+				</tr>
+				<tr>
 					<td>
-					<input type="checkbox" name="customdate" id="customdate" value="customdate" />
-					<input type="text" id="cdate" name="cdate" value="{{ cdate }}" /></td>
-					</tr>
+						<input type="checkbox" name="customdate" id="customdate" value="customdate" />
+						<input type="text" id="cdate" name="cdate" value="{{ cdate }}" />
+					</td>
+				</tr>
 				{% endif %}
 				{% if (pluginIsActive('xfields')) %}{{ plugin.xfields[0] }}{% endif %}
 				{% if (pluginIsActive('nsched')) %}{{ plugin.nsched }}{% endif %}
@@ -200,27 +204,19 @@ function changeActive(name) {
 		</div>
 	</div>
 
+	{% if (pluginIsActive('xfields')) %}{{ plugin.xfields.general }}{% endif %}
 
+	<div class="clear content-footer-left">
+		<input type="hidden" name="mod" value="news" />
+		<input type="hidden" name="action" value="add" />
+		<input type="hidden" name="subaction" value="submit" />
+		<input type="hidden" name="approve" id="approve" value="0"/>
 
-
-
-	{% if (pluginIsActive('xfields')) %}
-	<!-- XFields [GENERAL] -->
-	{{ plugin.xfields.general }}
-	<!-- /XFields [GENERAL] -->
-	{% endif %}
-
-		<div class="clear content-footer-left">
-			<input type="hidden" name="mod" value="news" />
-			<input type="hidden" name="action" value="add" />
-			<input type="hidden" name="subaction" value="submit" />
-			<input type="hidden" name="approve" id="approve" value="0"/>
-
-			<input type="button" value="{{ lang.addnews['preview'] }}" class="button fl" onclick="return preview();" />
-			<input type="submit" value="{{ lang['draft'] }}" class="button fl" onclick="return approveMode(-1);" />
-			{% if flags['can_publish'] %}<input type="submit" value="{{ lang.addnews['approve'] }}" class="button fr" onclick="return approveMode(1);" />{% endif %}
-			<input type="submit" value="{{ lang['pending'] }}" class="button fr" onclick="return approveMode(0);" />
-		</div>
+		<input type="button" value="{{ lang.addnews['preview'] }}" class="button fl" onclick="return preview();" />
+		<input type="submit" value="{{ lang['draft'] }}" class="button fl" onclick="return approveMode(-1);" />
+		{% if flags['can_publish'] %}<input type="submit" value="{{ lang.addnews['approve'] }}" class="button fr" onclick="return approveMode(1);" />{% endif %}
+		<input type="submit" value="{{ lang['pending'] }}" class="button fr" onclick="return approveMode(0);" />
+	</div>
 </form>
 
 </div>
