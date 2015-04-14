@@ -24,7 +24,7 @@ $lang = array_merge (LoadLang('index', 'admin'), LoadLang_askin());
 
 if (is_array($userROW)) {
 	$newpm = $mysql->result("SELECT count(pmid) FROM ".prefix."_users_pm WHERE to_id = ".db_squote($userROW['id'])." AND viewed = '0'");
-	$newpm = ($newpm != "0") ? '('.$newpm.')' : '(0)';
+	$newpm = ($newpm != "0") ? $newpm : '0';
 
 	// Calculate number of un-approved news
 	$unapproved = '';
@@ -81,7 +81,7 @@ $skin_header = <<<HTML
 			<span class="navbar-toggle"><i class="fa fa-bars"></i></span>
 			<a class="navbar-brand fl" href="$config[home_url]" title="$lang[mainpage_t]" target="_blank"><span class="mobile-hide-480">$config[home_title]</span> <i class="fa fa-external-link"></i></a>
 			<a class="navbar-brand fr" href="$PHP_SELF?action=logout" title="$lang[logout_t]"><i class="fa fa-sign-out"></i></a>
-			<a class="navbar-brand fr" href="$PHP_SELF?mod=pm" title="$lang[pm_t]"><i class="fa fa-envelope-o"></i> $newpm</a>
+			<a class="navbar-brand fr" href="$PHP_SELF?mod=pm" title="$lang[pm_t]"><i class="fa fa-envelope-o"></i> ($newpm)</a>
 			$unapproved
 		</div>
 	<div class="side-menu-container">
