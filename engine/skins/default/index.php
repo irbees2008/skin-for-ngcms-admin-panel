@@ -61,10 +61,10 @@ $skin_header = <<<HTML
 		<meta charset="$lang[encoding]">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<title>$config[home_title] - $lang[adminpanel]</title>
+		<link rel="stylesheet" href="$skins_url/css/style.css">
 		<link rel="stylesheet" href="$config[home_url]/lib/jqueryui/jquery-ui-1.9.0.custom.css">
 		<link rel="stylesheet" href="$config[home_url]/lib/jquery-ui-timepicker-addon.css">
 		<link rel="stylesheet" href="$config[home_url]/lib/jquery.multiselect.css">
-		<link rel="stylesheet" href="$skins_url/css/style.css">
 		<link rel="stylesheet" href="$skins_url/font-awesome/4.3.0/css/font-awesome.min.css">
 		<script src="$config[home_url]/lib/jquery-1.8.2.min.js"></script>
 		<script src="$config[home_url]/lib/jquery-ui-1.9.0.custom.min.js"></script>
