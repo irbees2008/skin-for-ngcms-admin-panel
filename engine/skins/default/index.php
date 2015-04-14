@@ -2,7 +2,7 @@
 // Protect against hack attempts
 if (!defined('NGCMS')) die ('HAL');
 
-//Загрузка языка скина админ панели
+// Load skin language
 function LoadLang_askin($what, $area = '') {
 	global $config;
 	$filename = 'lang/'.$config['default_lang'].'/skin.ini';
@@ -24,14 +24,14 @@ $lang = array_merge (LoadLang('index', 'admin'), LoadLang_askin());
 
 if (is_array($userROW)) {
 	$newpm = $mysql->result("SELECT count(pmid) FROM ".prefix."_users_pm WHERE to_id = ".db_squote($userROW['id'])." AND viewed = '0'");
-	$newpm = ($newpm != "0") ? '<b>'.$newpm.'</b>' : '0';
+	$newpm = ($newpm != "0") ? '('.$newpm.')' : '(0)';
 
 	// Calculate number of un-approved news
 	$unapproved = '';
 	if ($userROW['status'] == 1 || $userROW['status'] == 2) {
 		$unapp = $mysql->result("SELECT count(id) FROM ".prefix."_news WHERE approve = '0'");
 		if ($unapp)
-			$unapproved = ' [ <a href="?mod=news&amp;status=2"><font color="red"><b>'.$unapp.'</b></font></a> ] ';
+			$unapproved = '<a class="navbar-brand fr" href="?mod=news&amp;status=2" title="На модерации"><i class="fa fa-file-o"></i> ('.$unapp.')</a>';
 	}
 }
 
@@ -57,62 +57,23 @@ $h_active_statistics = ($mod=='statistics')?' class="active"':'';
 $skin_header = <<<HTML
 <!DOCTYPE html>
 <html lang="$lang[langcode]">
-<head>
- <meta charset="$lang[encoding]">
- <meta name="viewport" content="width=device-width,initial-scale=1.0">
- <title>$config[home_title] - $lang[adminpanel]</title>
- <link rel="stylesheet" href="$skins_url/css/style.css">
- <link rel="stylesheet" href="$config[home_url]/lib/jqueryui/jquery-ui-1.9.0.custom.css">
- <link rel="stylesheet" href="$config[home_url]/lib/jquery-ui-timepicker-addon.css">
- <link rel="stylesheet" href="$config[home_url]/lib/jquery.multiselect.css">
- <link rel="stylesheet" href="$skins_url/font-awesome/4.3.0/css/font-awesome.min.css">
- <script src="$config[home_url]/lib/jquery-1.8.2.min.js"></script>
- <script src="$config[home_url]/lib/jquery-ui-1.9.0.custom.min.js"></script>
- <script src="$config[home_url]/lib/jquery-ui-timepicker-addon.js"></script>
- <script src="$config[home_url]/lib/jquery.multiselect.min.js"></script>
- <script src="$config[home_url]/lib/functions.js"></script>
- <script src="$config[home_url]/lib/admin.js"></script>
- <script src="$skins_url/js/custom.js"></script>
-	<script type="text/javascript">
-	$(function () {
-    $('.navbar-toggle').click(function () {
-        $('.navbar-nav').toggleClass('slide-in');
-        $('.side-body').toggleClass('body-slide-in');        
-    });
-});
-
-
-navHover = function() {
-        var lis = document.getElementById("navmenu-v").getElementsByTagName("li");
-        for (var i=0; i<lis.length; i++) {
-                lis[i].onmouseover=function() {
-                        this.className+=" iehover";
-                }
-                lis[i].onmouseout=function() {
-                        this.className=this.className.replace(new RegExp(" iehover\\b"), "");
-                }
-        }
-}
-if (window.attachEvent) window.attachEvent("onload", navHover);
-
-$(document).ready(function(){
-	$('.navbar a, .navbutton').each(function () {
-		var location = window.location.href;
-		var link = this.href; 
-		if(location == link) {
-			$(this).addClass('active');
-		}
-	});
-	
-	$('.navbutton').click(function(){
-		$('.navbutton').each(function () {
-			$('.navbutton').removeClass('active')
-		});
-		$(this).addClass('active');
-	});
-});
-</script>
-</head>
+	<head>
+		<meta charset="$lang[encoding]">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>$config[home_title] - $lang[adminpanel]</title>
+		<link rel="stylesheet" href="$config[home_url]/lib/jqueryui/jquery-ui-1.9.0.custom.css">
+		<link rel="stylesheet" href="$config[home_url]/lib/jquery-ui-timepicker-addon.css">
+		<link rel="stylesheet" href="$config[home_url]/lib/jquery.multiselect.css">
+		<link rel="stylesheet" href="$skins_url/css/style.css">
+		<link rel="stylesheet" href="$skins_url/font-awesome/4.3.0/css/font-awesome.min.css">
+		<script src="$config[home_url]/lib/jquery-1.8.2.min.js"></script>
+		<script src="$config[home_url]/lib/jquery-ui-1.9.0.custom.min.js"></script>
+		<script src="$config[home_url]/lib/jquery-ui-timepicker-addon.js"></script>
+		<script src="$config[home_url]/lib/jquery.multiselect.min.js"></script>
+		<script src="$config[home_url]/lib/functions.js"></script>
+		<script src="$config[home_url]/lib/admin.js"></script>
+		<script src="$skins_url/js/custom.js"></script>
+	</head>
 <body>
 <div id="loading-layer"><i class="fa fa-spinner fa-pulse"></i> $lang[loading]</div>
     <nav class="navbar" role="navigation">
@@ -120,8 +81,8 @@ $(document).ready(function(){
 			<span class="navbar-toggle"><i class="fa fa-bars"></i></span>
 			<a class="navbar-brand fl" href="$config[home_url]" title="$lang[mainpage_t]" target="_blank"><span class="mobile-hide-480">$config[home_title]</span> <i class="fa fa-external-link"></i></a>
 			<a class="navbar-brand fr" href="$PHP_SELF?action=logout" title="$lang[logout_t]"><i class="fa fa-sign-out"></i></a>
-			<a class="navbar-brand fr" href="$PHP_SELF?mod=pm" title="$lang[pm_t]"><i class="fa fa-envelope-o"></i> ($newpm)</a>
-			<a class="navbar-brand fr" href="?mod=news&action=add" title="$lang[addnews_t]"><i class="fa fa-file-o"></i></a>
+			<a class="navbar-brand fr" href="$PHP_SELF?mod=pm" title="$lang[pm_t]"><i class="fa fa-envelope-o"></i> $newpm</a>
+			$unapproved
 		</div>
 	<div class="side-menu-container">
 		<ul class="navbar-nav" id="navmenu-v">
