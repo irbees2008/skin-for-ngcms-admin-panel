@@ -1,3 +1,5 @@
+<h2 class="content-head">{{ lang['users_title'] }}</h2>
+
 <script type="text/javascript">
 function ChangeOption(selectedOption) {
 	document.getElementById('list').style.display		= "none";
@@ -47,21 +49,13 @@ function validateAction() {
 }
 </script>
 
+{% if flags.canModify %}
+	<div class="content-nav clear">
+		<input class="navbutton active" type="button" onclick="javascript:ChangeOption('list')" value="{{ lang['users'] }}" />
+		<input class="navbutton" type="button" onclick="javascript:ChangeOption('adduser')" value="{{ lang['adduser'] }}" />
+	</div>
+{% endif %}
 
-<table border="0" width="100%" cellpadding="0" cellspacing="0">
-<tr>
-<td width=100% colspan="5" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8"><a href="?mod=users">{{ lang['users_title'] }}</a></td>
-</tr>
-</table>
-{% if flags.canModify %}<table border="0" cellspacing="0" cellpadding="0" width="100%">
-<tr align="center">
-<td width="100%" class="contentNav" align="center" valign="top">
-<input type="button" onmousedown="javascript:ChangeOption('list')" value="{{ lang['users'] }}" class="navbutton" />
-<input type="button" onmousedown="javascript:ChangeOption('adduser')" value="{{ lang['adduser'] }}" class="navbutton" />
-</td>
-</tr>
-</table>
-<br />{% endif %}
 <table id="list" border="0" width="100%" cellspacing="0" cellpadding="0" align="center" class="content">
 <tr>
 <td>

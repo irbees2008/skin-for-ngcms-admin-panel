@@ -1,12 +1,9 @@
+<h2 class="content-head">{{ lang.ipban['hdr.list'] }}</h2>
 
 <table class="content" border="0" cellspacing="0" cellpadding="2" align="center">
 <tr>
 <td width="66%" style="padding-right:10px;" valign="top">
 <table border="0" width="100%" cellpadding="0" cellspacing="0">
-<tr>
-<td width=100% colspan="5" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" alt="" /><a href="admin.php?mod=ipban">{{ lang.ipban['hdr.list'] }}</a></td>
-</tr>
-
 <tr align="left" class="contHead">
 <td>{{ lang.ipban['hdr.ip'] }}</td>
 <td>{{ lang.ipban['hdr.counter'] }}</td>

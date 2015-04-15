@@ -1,12 +1,11 @@
+<h2 class="content-head">{{ lang['profile_of'] }} "{{ name }}"</h2>
+
 <form action="{{ php_self }}?mod=users" method="post">
 <input type="hidden" name="token" value="{{ token }}"/>
 <table class="content" border="0" cellspacing="0" cellpadding="0" align="center">
 <tr>
 <td width="100%" style="padding-right:10px;" valign="top">
 <table border="0" width="100%" cellspacing="0" cellpadding="0" align="left">
-<tr>
-<td width=100% colspan="2" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" /><a href="?mod=users">{{ lang['users_title'] }}</a> &#8594; {{ lang['profile_of'] }} "{{ name }}"</td>
-</tr>
 <tr>
 <td width=50% class=contentEntry1>{{ lang['groupName'] }}</td>
 <td width=50% class=contentEntry2 valign=middle><select name="status">{{ status }}</select></td>

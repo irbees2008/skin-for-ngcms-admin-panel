@@ -1,10 +1,4 @@
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tbody>
-<tr>
-<td colspan="5" class="contentHead" width="100%"><img src="{{ skins_url }}/images/nav.gif" hspace="8"><a href="?mod=cron" title="{{ lang.cron['title'] }}">{{ lang.cron['title'] }}</a></td>
-</tr>
-</tbody>
-</table>
+<h2 class="content-head">{{ lang.cron['title'] }}</h2>
 
 <form action="?mod=cron" method="post" name="commitForm" id="commitForm">
 <input type="hidden" name="mod" value="cron">

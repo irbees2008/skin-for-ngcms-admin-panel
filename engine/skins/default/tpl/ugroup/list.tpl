@@ -1,13 +1,6 @@
+<h2 class="content-head">”правление группами пользователей</h2>
 
-
-<table border="0" width="100%" cellpadding="0" cellspacing="0">
-<tr>
-<td width=100% colspan="5" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8"><a href="?mod=ugroup">”правление группами пользователей</a></td>
-</tr>
-</table>
-
-
-<table width="97%" class="content" border="0" cellspacing="0" cellpadding="0" align="center">
+<table>
 <thead>
 <tr align="left" class="contHead">
 <td width="5%">#</td>

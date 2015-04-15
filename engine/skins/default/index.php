@@ -62,6 +62,7 @@ $skin_header = <<<HTML
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<title>$config[home_title] - $lang[adminpanel]</title>
 		<link rel="stylesheet" href="$skins_url/css/style.css">
+		<link rel="stylesheet" href="$skins_url/css/default.css" id="default">
 		<link rel="stylesheet" href="$config[home_url]/lib/jqueryui/jquery-ui-1.9.0.custom.css">
 		<link rel="stylesheet" href="$config[home_url]/lib/jquery-ui-timepicker-addon.css">
 		<link rel="stylesheet" href="$config[home_url]/lib/jquery.multiselect.css">
@@ -129,7 +130,7 @@ $skin_header = <<<HTML
 			</li>
 			<li><a href="$PHP_SELF?mod=extras" $h_active_extras><i class="fa fa-puzzle-piece"></i> $lang[extras]<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
-					<li><a href="$PHP_SELF?mod=extras&action=all">$lang[extras_list_all]</a></li>
+					<li><a href="$PHP_SELF?mod=extras&action=all">$lang[extras_list_all] <span class="fr cnt-plug-all"></span></a></li>
 					<li><a href="$PHP_SELF?mod=extras&action=active">$lang[extras_list_active]</a></li>
 					<li><a href="$PHP_SELF?mod=extras&action=inactive">$lang[extras_list_inactive]</a></li>
 					<li><a href="$PHP_SELF?mod=extras&action=uninstalled">$lang[extras_list_needinstall]</a></li>

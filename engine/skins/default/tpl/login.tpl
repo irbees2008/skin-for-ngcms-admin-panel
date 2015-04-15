@@ -9,28 +9,30 @@
  <body>
 
 <!--Login block-->
-
-<form name="login" id="loginForm" method="post" action="{php_self}">
+<div id="loginForm">
+<form name="login" method="post" action="{php_self}">
 	<input type="hidden" name="redirect" value="{redirect}" />
 	<input type="hidden" name="action" value="login" />
 	 
 	<div class="field">
-		<label>{l_name}</label>
+		<label for="login">{l_name}</label>
 		<div class="input"><input type="text" name="username" id="login" value="" maxlength="60" tabindex="1" /></div>
 	</div>
 
 	<div class="field">
-		<label>{l_password}</label>
+		<label for="pass">{l_password}</label>
 		<div class="input"><input type="password" name="password" id="pass" maxlength="20" tabindex="2" /></div>
 	</div>
 
+	
 	<div class="submit">
+		<div class="copyright">2008-2015 © <a href="http://ngcms.ru" target="_blank">Next Generation CMS</a></div>
 		<input type="submit" value="{l_login}" />
 	</div>
+	
+	
 </form>
-
-  <p class="copyright">2008-2015 Â© <a href="http://ngcms.ru" target="_blank">Next Generation CMS</a></p>
-
+</div>
 <!--/Login block-->
 
 </body>

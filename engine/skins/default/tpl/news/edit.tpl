@@ -1,3 +1,5 @@
+<h2 class="content-head">{{ lang.editnews['editnews_title'] }} "{{ title }}"</h2>
+
 <script type="text/javascript" src="{{ home }}/lib/ajax.js"></script>
 <script type="text/javascript" src="{{ home }}/lib/libsuggest.js"></script>
 <script type="text/javascript">
@@ -46,8 +48,6 @@ function changeActive(name) {
 }
 </script>
 
-<h2 class="content-head">{{ lang.editnews['editnews_title'] }} "{{ title }}"</h2>
-
 <form name="DATA_tmp_storage" action="" id="DATA_tmp_storage">
 	<input type="hidden" name="area" value="" />
 </form>
@@ -65,7 +65,7 @@ function changeActive(name) {
 		<input type="hidden" name="action" value="edit"/>
 		<input type="hidden" name="subaction" value="submit"/>
 
-		<div class="content-nav">
+		<div class="content-nav clear">
 			<input class="navbutton active" type="button" onclick="javascript:ChangeOption('maincontent')" value="{{ lang.editnews['bar.maincontent'] }}" />
 			<input class="navbutton" type="button" onclick="javascript:ChangeOption('additional')" value="{{ lang.editnews['bar.additional'] }}" />
 			<input class="navbutton" type="button" onclick="javascript:ChangeOption('attaches')" value="{{ lang.editnews['bar.attaches'] }} ({% if (attachCount>0) %}{{ attachCount }}{% else %}{{ lang['noa'] }}{% endif %})" />
@@ -272,11 +272,11 @@ function changeActive(name) {
 			{% if flags.can_unpublish %}		<option value="0" {% if (approve == 0) %}selected="selected"{% endif %}>{{ lang['state.unpublished'] }}</option>{% endif %}
 			{% if flags.can_publish %}		<option value="1" {% if (approve == 1) %}selected="selected"{% endif %}>{{ lang['state.published'] }}</option>{% endif %}
 			</select>
-			<input type="submit" value="{{ lang.editnews['do_editnews'] }}" accesskey="s" class="button" />&nbsp;{% endif %}
+				<input class="button-success" type="submit" value="{{ lang.editnews['do_editnews'] }}" accesskey="s" />&nbsp;{% endif %}
 			</td>
 			{% if flags.deleteable %}
 			<td class="contentEditW" align="right" valign="top" width="150">
-			<input type="button" value="{{ lang.editnews['delete'] }}" onClick="confirmit('{{ php_self }}?mod=news&amp;action=manage&amp;subaction=mass_delete&amp;selected_news[]={{ id }}&amp;token={{ token }}', '{{ lang.editnews['sure_del'] }}')" class="button" />
+				<input class="button-danger fr" type="button" value="{{ lang.editnews['delete'] }}" onClick="confirmit('{{ php_self }}?mod=news&amp;action=manage&amp;subaction=mass_delete&amp;selected_news[]={{ id }}&amp;token={{ token }}', '{{ lang.editnews['sure_del'] }}')" />
 			</td>
 			{% endif %}
 			</tr>

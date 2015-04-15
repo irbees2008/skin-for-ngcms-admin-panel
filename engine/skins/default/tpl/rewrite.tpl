@@ -1,13 +1,10 @@
+<h2 class="content-head">{{ lang['rewrite'] }}</h2>
+
 <script type="text/javascript" src="{{ admin_url }}/includes/js/ajax.js"></script>
 <script type="text/javascript" src="{{ admin_url }}/includes/js/admin.js"></script>
 <form method="post" action="{{ php_self }}?mod=rewrite" name="rewriteForm" id="rewriteForm">
 <span id="temp.data" style="position: absolute; display: none;"></span>
 <span id="DEBUG"></span>
-<table border="0" width="100%" cellpadding="0" cellspacing="0">
-<tr>
-<td width=100% colspan="5" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8"><a href="?mod=rewrite">{{ lang['rewrite'] }}</a></td>
-</tr>
-</table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="content" align="center">
 
 <thead>

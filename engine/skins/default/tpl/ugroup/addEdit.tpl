@@ -1,3 +1,5 @@
+<h2 class="content-head">{% if flags.editMode %}Редактирование группы пользователей "{{ entry.identity }}" [ {{ entry.id }} ]{% else %}Добавление группы пользователей{% endif %}</h2>
+
 <form action="{{ php_self }}?mod=ugroup" method="post">
 <input type="hidden" name="token" value="{{ token }}"/>
 <input type="hidden" name="id" value="{{ entry.id }}"/>
@@ -5,10 +7,7 @@
 <table class="content" border="0" cellspacing="0" cellpadding="0" align="center">
 <tr>
 <td width="100%" style="padding-right:10px;" valign="top">
-<table border="0" width="100%" cellspacing="0" cellpadding="0" align="left">
-<tr>
-<td width=100% colspan="2" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" /><a href="?mod=ugroup">Управление группами пользователей</a> &#8594; {% if flags.editMode %} редактирование группы "{{ entry.identity }}" [ {{ entry.id }} ]{% else %}добавление группы{% endif %}</td>
-</tr>
+<table>
 <tr>
 <td width=50% class=contentEntry1>ID:</td>
 <td width=50% class=contentEntry2 valign=middle><b>{{ entry.id }}</b></td>

@@ -1,3 +1,5 @@
+<h2 class="content-head">{{ lang['extras'] }}</h2>
+
 <script type="text/javascript" src="{{ admin_url }}/includes/js/admin.js"></script>
 <script type="text/javascript" language="javascript">
 
@@ -93,32 +95,35 @@ $(function() {
 });
 </script>
 
-<div id="pluginMenu">
+<div class="content clear" id="pluginMenu">
 
-<h2 class="content-head">{{ lang['extras'] }}</h2>
+	<!--div class="content-nav clear">
+		<input class="navbutton active" type="button" onclick="ChangeOption('maincontent');" value="{{ lang.addnews['bar.maincontent'] }}" />
+		<input class="navbutton" type="button" onclick="ChangeOption('additional');" value="{{ lang.addnews['bar.additional'] }}" />
+		<input class="navbutton" type="button" onclick="ChangeOption('attaches');" value="{{ lang.addnews['bar.attaches'] }}" />
+	</div-->
+	
+	<div class="content-nav clear" id="pluginTypeMenu">
+		<span id="pTypeAll" class="navbutton pInactive" onclick="setDisplayMode(0);">{{ lang['list.all'] }} (<span id="cnt-plug-all">{{ cntAll }}</span>)</span>
+		
+		<span id="pTypeActive" class="navbutton pInactive" onclick="setDisplayMode(1);">{{ lang['list.active'] }} ({{ cntActive }})</span>
+		
+		<span id="pTypeInactive" class="navbutton pInactive" onclick="setDisplayMode(2);">{{ lang['list.inactive'] }} ({{ cntInactive }})</span>
+		
+		<span id="pTypeUninstalled" class="navbutton pInactive" onclick="setDisplayMode(3);">{{ lang['list.needinstall'] }} ({{ cntUninstalled }})</span>
+	</div>
 
 <table class="odd hover">
 <thead>
-<tr>
-<td width=100% colspan="8" class="contentNav">
-<div id="pluginTypeMenu">
-<span id="pTypeAll" class="pInactive" onclick="setDisplayMode(0);">{{ lang['list.all'] }} ({{ cntAll }})</span><span class="pSeparator">&nbsp;</span>
-<span id="pTypeActive" class="pInactive" onclick="setDisplayMode(1);">{{ lang['list.active'] }} ({{ cntActive }})</span><span class="pSeparator">&nbsp;</span>
-<span id="pTypeInactive" class="pInactive" onclick="setDisplayMode(2);">{{ lang['list.inactive'] }} ({{ cntInactive }})</span><span class="pSeparator">&nbsp;</span>
-<span id="pTypeUninstalled" class="pInactive" onclick="setDisplayMode(3);">{{ lang['list.needinstall'] }} ({{ cntUninstalled }})</span>
-</div>
-&nbsp;
-</td>
-</tr>
 <tr align="left" class="contHead">
-<td>{{ lang['id'] }}</td>
-<td>{{ lang['title'] }}</td>
-<td>{{ lang['type'] }}</td>
-<td>{{ lang['version'] }}</td>
-<td>&nbsp;</td>
-<td>{{ lang['description'] }}</td>
-<td>{{ lang['author'] }}</td>
-<td>{{ lang['action'] }}</td>
+<th>{{ lang['id'] }}</th>
+<th>{{ lang['title'] }}</th>
+<th>{{ lang['type'] }}</th>
+<th>{{ lang['version'] }}</th>
+<th>&nbsp;</th>
+<th>{{ lang['description'] }}</th>
+<th>{{ lang['author'] }}</th>
+<th>{{ lang['action'] }}</th>
 </tr>
 </thead>
 <tbody id="entryList">

@@ -1,3 +1,5 @@
+<h2 class="content-head">{l_files_title}</h2>
+
 <!-- Preload uploadify engine -->
 <script type="text/javascript" src="{admin_url}/includes/js/swfobject.js"></script>
 <script type="text/javascript" src="{admin_url}/includes/js/jquery.uploadify.v2.1.4.min.js"></script>
@@ -43,21 +45,13 @@ function setStatus(mode) {
 </script>
 <form action="{php_self}?mod=files&amp;action=list" method="post" name="options_bar">
 <input type="hidden" name="area" value="{area}" />
-<table border="0" width="100%" cellpadding="0" cellspacing="0">
-<tr>
-<td width=100% colspan="5" class="contentHead"><img src="{skins_url}/images/nav.gif" hspace="8">{l_files_title}</td>
-</tr>
-</table>
-<table border="0" cellspacing="0" cellpadding="0" width="100%">
-<tr align="center">
-<td width="100%" class="contentNav" align="center" valign="top">
-<input type="button" onmousedown="javascript:ChangeOption('list')" value="{l_list}" class="navbutton" />
-[status]<input type="button" onmousedown="javascript:ChangeOption('categories')" value="{l_categories}" class="navbutton" />[/status]
-<input type="button" onmousedown="javascript:ChangeOption('uploadnew')" value="{l_uploadnew}" class="navbutton" />
-</td>
-</tr>
-</table>
-<br />
+
+	<div class="content-nav clear">
+		<input class="navbutton active" type="button" onclick="javascript:ChangeOption('list')" value="{l_list}" />
+		[status]<input class="navbutton" type="button" onclick="javascript:ChangeOption('categories')" value="{l_categories}" />[/status]
+		<input class="navbutton" type="button" onclick="javascript:ChangeOption('uploadnew')" value="{l_uploadnew}" />
+	</div>
+
 <table id="list" border="0" width="100%" cellspacing="0" cellpadding="0" align="center" class="contentNav">
 <tr>
 <td width="20%" style="padding-left : 10px;">{l_sort}</td>

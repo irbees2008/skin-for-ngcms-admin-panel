@@ -1,16 +1,13 @@
+<h2 class="content-head">Редактирование изображения</h2>
+
 <script language="javascript">
 function markNameEdit() {
  var e = document.getElementById('bk_editImageName');
  var d = e.innerHTML;
  e.innerHTML = '<input type="text" name="newname" value="'+escape(d)+'"/>';
 }
-
 </script>
-<table border="0" width="100%" cellpadding="0" cellspacing="0">
-<tr>
-<td width=100% colspan="5" class="contentHead"><img src="{skins_url}/images/nav.gif" hspace="8">Редактировать</td>
-</tr>
-</table>
+
 <br/>
 <a href="{link_back}"><strong>Вернуться к списку</strong></a><br/>
 <br/>

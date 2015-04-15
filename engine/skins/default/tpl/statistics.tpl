@@ -1,3 +1,5 @@
+<h2 class="content-head">Статистика системы</h2>
+
 <style>
 #modalmsgDialog { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: none;}
 #modalmsgWindow { margin: 5px; padding: 5px; border: 1px solid #CCCCCC; background-color: #F0F0F0; width: 400px; position: absolute; left: 40%; top: 40%; }
@@ -126,28 +128,20 @@ function _modal_close() {
 <td width="30%" class="contentEntry2">{{ files }}</td>
 </tr>
 </table>
-<!--
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
-<tr>
-<td colspan="2" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" alt="" />{{ lang['system'] }}</td>
-</tr>
-<tr>
-</table>
--->
 </td>
 </tr>
 <tr><td colspan="2">&nbsp;</td></tr>
 
 <tr>
 <td width="50%" style="padding-right:10px;" valign="top">
- <table border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr><td colspan="2" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" alt="" />{{ lang['note'] }}</td></tr>
+ <table>
+  <tr><td class="contentHead">{{ lang['note'] }}</td></tr>
   <tr>
-   <td width="50%" colspan="2" class="contentEntry1">
+   <td>
     <form method="post" action="{{ php_self }}?mod=statistics">
      <input type="hidden" name="action" value="save" />
-     <textarea name="note">{{ admin_note }}</textarea><br />
-     <input type="submit" class="button" value="{{ lang['save_note'] }}" />
+     <textarea name="note">{{ admin_note }}</textarea>
+     <input class="fr" type="submit" value="{{ lang['save_note'] }}" />
     </form>
    </td>
   </tr>

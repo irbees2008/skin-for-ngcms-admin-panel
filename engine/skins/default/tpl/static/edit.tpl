@@ -1,8 +1,8 @@
+<h2 class="content-head">{% if (flags.editMode) %}{{ lang['static_title_edit'] }} "{{ data.title }}"{% else %}{{ lang['static_title_add'] }}{% endif %}</h2>
+
 <script language="javascript" type="text/javascript">
 var currentInputAreaID = 'content';
 </script>
-
-<h2 class="content-head">{% if (flags.editMode) %}{{ lang['static_title_edit'] }} "{{ data.title }}"{% else %}{{ lang['static_title_add'] }}{% endif %}</h2>
 
 <form name="DATA_tmp_storage" action="" id="DATA_tmp_storage"><input type="hidden" name="area" value="" /></form>
 

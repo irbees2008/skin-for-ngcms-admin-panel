@@ -1,3 +1,5 @@
+<h2 class="content-head">{{ lang.templates['title'] }}</h2>
+
 <style type="text/css">
 .CodeMirror {
   font-family: monospace;
@@ -42,7 +44,7 @@ $(document).ready( function() {
 });
 </script>
 
-<h2 class="content-head">{{ lang.templates['title'] }}</h2>
+
 
 <script>
 
@@ -87,6 +89,7 @@ submitTemplateSelector();
 }
 
 </script>
+
 		<div class="content-nav clear">
 			<form name="selectForm" id="selectForm">
 				<dl class="fl"><dt>
@@ -128,7 +131,7 @@ submitTemplateSelector();
 	<div id="fileEditorButtonLine" class="content-footer-right clear">
 		<!--input class="fl" type="button" value="Создать файл" onclick="_creattpl()"/>
 		<input style="display: none;" class="fl button-del-tpl" type="button" value="Удалить файл" onclick="_deltpl()"/-->
-		<input class="fr" type="button" value="Сохранить файл" onclick="submitTemplateEdit();" />
+		<input class="fr" title="Ctrl+S" type="button" value="Сохранить файл" onclick="submitTemplateEdit();" />
 	</div>
 	
 <link rel="stylesheet" href="{{ home }}/lib/codemirror/codemirror.css">

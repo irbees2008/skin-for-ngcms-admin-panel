@@ -1,10 +1,4 @@
-
-
-<table border="0" width="100%" cellpadding="0" cellspacing="0">
-<tr>
-<td width=100% colspan="5" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8"><a href="?mod=perm">Управление правами доступа</a></td>
-</tr>
-</table>
+<h2 class="content-head">Управление правами доступа</h2>
 
 <script type="text/javascript">
 var permDefault = {{ DEFAULT_JSON }};

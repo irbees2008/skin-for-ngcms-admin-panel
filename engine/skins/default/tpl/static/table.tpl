@@ -1,7 +1,6 @@
-<!-- Navigation bar -->
 <h2 class="content-head">{{ lang['static_title'] }}</h2>
 
-<!-- Info content -->
+<!-- Navigation bar -->
 <div class="clear">
 	<form action="{{ php_self }}" method="get" name="options_bar">
 		<input type="hidden" name="mod" value="static" />
@@ -17,7 +16,7 @@
 	</form>
 </div>
 
-
+<!-- Info content -->
 <form action="{{ php_self }}?mod=static" method="post" name="static">
 	<input type="hidden" name="token" value="{{ token }}"/>
 	<table class="hover odd">

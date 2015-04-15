@@ -1,3 +1,5 @@
+<h2 class="content-head">{{ lang.addnews['addnews_title'] }}</h2>
+
 <script type="text/javascript" src="{{ home }}/lib/ajax.js"></script>
 <script type="text/javascript" src="{{ home }}/lib/libsuggest.js"></script>
 <script type="text/javascript">
@@ -46,8 +48,6 @@ function changeActive(name) {
 }
 </script>
 
-<h2 class="content-head">{{ lang.addnews['addnews_title'] }}</h2>
-
 <form name="DATA_tmp_storage" action="" id="DATA_tmp_storage">
 	<input type="hidden" name="area" value="" />
 </form>
@@ -57,7 +57,7 @@ function changeActive(name) {
 <form id="postForm" name="form" ENCTYPE="multipart/form-data" method="post" action="{{ php_self }}" target="_self">
 	<input type="hidden" name="token" value="{{ token }}"/>
 
-	<div class="content-nav">
+	<div class="content-nav clear">
 		<input class="navbutton active" type="button" onclick="ChangeOption('maincontent');" value="{{ lang.addnews['bar.maincontent'] }}" />
 		<input class="navbutton" type="button" onclick="ChangeOption('additional');" value="{{ lang.addnews['bar.additional'] }}" />
 		<input class="navbutton" type="button" onclick="ChangeOption('attaches');" value="{{ lang.addnews['bar.attaches'] }}" />

@@ -14,6 +14,7 @@ body {
 
 #loginForm {
   width: 290px;
+  max-width: 100%;
   padding: 24px 24px 0;
   margin: 10% auto 0;
   background: #fefefe;
@@ -23,16 +24,17 @@ body {
   box-shadow: rgb(136, 136, 136) 0px 0px 6px;
 }
 
-#loginForm .field {
+.field {
   margin: 0 0 18px;
 }
 
-#loginForm .field label {
+.field label {
   display: block;
   margin: 0 0 11px;
+  cursor: pointer;
 }
 
-#loginForm .field input {
+.field input {
   font: 12px Arial, Tahoma, sans-serif;
   color: #444;
   width: 100%;
@@ -42,11 +44,11 @@ body {
   outline: none;
 }
 
-#loginForm .field input:focus {
-  border-color: #B7D4EA;
+.field input:focus {
+  border-color: #08c;
 }
 
-#loginForm .submit {
+.submit {
   overflow: hidden;
   margin: 30px -24px 0;
   padding: 22px 24px;
@@ -55,18 +57,24 @@ body {
   border-radius: 0 0 4px 4px;
 }
 
-#loginForm .submit input {
+.submit input {
   float: right;
-  padding: 6px 20px;
-  border: 1px solid #7ac;
+  padding: 6px;
+  border: 1px solid transparent;
   border-radius: 4px;
   color: #FFF;
   background-color: #08c;
   cursor: pointer;
   outline: none;
-  font-weight: bold;
+  font-weight: normal;
+  font-size: 16px;
+  width: 100%;
 }
 
-.copyright {
-  text-align: center;
+.copyright, .copyright a {
+	text-align: center;
+	color: #888;
+	font-size: 12px;
+	margin-top: -16px;
+	margin-bottom: 20px;
 }

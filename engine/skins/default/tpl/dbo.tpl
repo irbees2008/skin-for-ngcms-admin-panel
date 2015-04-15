@@ -1,3 +1,5 @@
+<h2 class="content-head">{{ lang.dbo.title }}</h2>
+
 <!-- FORM: Perform actions with tables -->
 <form name="form" method="post" action="{{php_self}}?mod=dbo">
 <input type="hidden" name="subaction" value="modify" />
@@ -8,11 +10,6 @@
 <input type="hidden" name="massrepair" value="" />
 <input type="hidden" name="massoptimize" value="" />
 <input type="hidden" name="massdelete" value="" />
-<table border="0" width="100%" cellpadding="0" cellspacing="0">
-<tr>
-<td width=100% colspan="5" class="contentHead"><img src="{{skins_url}}/images/nav.gif" hspace="8"><a href="admin.php?mod=dbo">{{ lang.dbo.title }}</a></td>
-</tr>
-</table>
 <table class="content" border="0" cellspacing="0" cellpadding="0" width="100%">
 <tr align="left" class="contHead">
 <td width="15%">{{ lang.dbo.table }}</td>

@@ -1,3 +1,5 @@
+<h2 class="content-head">{{ lang.editnews['news_title'] }}</h2>
+
 <style>
 dl.fl input[type="text"], dl.fl input[type="button"], dl.fl input[type="reset"], dl.fl input[type="submit"], dl.fl select {
 width:48%;
@@ -95,7 +97,6 @@ function filter_attach_DateEdit(id) {
 <span id="suggestBlock"></span>
 <a href="#" id="suggestClose">close</a>
 </div>
-<h2 class="content-head">{{ lang.editnews['news_title'] }}</h2>
 
 <div class="clear">
 <form action="{{ php_self }}?mod=news" method="post" name="options_bar">
