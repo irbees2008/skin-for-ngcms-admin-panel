@@ -734,7 +734,7 @@ function ngCheckEmail() {
 	<div class="content-footer clear">
 		<input type="hidden" name="subaction" value="save" />
 		<input type="hidden" name="save" value="" />
-		<input class="fr" type="submit" value="{{ lang['save'] }}" />
+		<input class="button-success fr" type="submit" value="{{ lang['save'] }}" />
 	</div>
 	
 	<script type="text/javascript" language="javascript">

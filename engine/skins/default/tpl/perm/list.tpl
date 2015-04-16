@@ -49,11 +49,11 @@ function onUpdateSubmit() {
 
 				{% for block in CONFIG %}
 					<div class="pconf">
-						<h1>{{ block.title }}</h1>
+						<h3>{{ block.title }}</h3>
 						{% if (block.description) %}<i>{{ block.description }}</i>{% endif %}
 
 						{% for area in block.items %}
-							<h2>{{ area.title }}</h2>
+							<h4>{{ area.title }}</h4>
 							{% if (area.description) %}<i>{{ area.description }}</i><br/><br/>{% endif %}
 
 							<table class="hover odd">
@@ -86,7 +86,7 @@ function onUpdateSubmit() {
 
 
 	<div class="content-footer clear">
-		<input class="fr" type="submit" value="Сохранить изменения" onclick="return onUpdateSubmit();" />
+		<input class="button-success fr" type="submit" value="Сохранить изменения" onclick="return onUpdateSubmit();" />
 	</div>
 
 </form>

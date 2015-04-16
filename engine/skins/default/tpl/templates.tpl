@@ -49,6 +49,7 @@ $(document).ready( function() {
 <script>
 
 function _creattpl(){
+//alert('{{ skins_url }}/inc/functions.php');
 	var creattpl  = prompt('Введите название файла. Например, \n\n\my-first.tpl или css/my-custom.css\n', '');
 	if (!creattpl) {
 		ngNotifyWindow('Отменено пользователем', 'RESULT');
@@ -61,9 +62,10 @@ function _creattpl(){
 		return;
 	}else{
 		ngShowLoading();
-		var sc=document.createElement("SCRIPT");
+		/*var sc=document.createElement("SCRIPT");
 		sc.src='{{ skins_url }}/index.php?creattpl='+ngTemplateName+'/'+creattpl;
-		document.body.appendChild(sc);
+		document.body.appendChild(sc);*/
+		
 	}
 }
 
@@ -131,7 +133,7 @@ submitTemplateSelector();
 	<div id="fileEditorButtonLine" class="content-footer-right clear">
 		<!--input class="fl" type="button" value="Создать файл" onclick="_creattpl()"/>
 		<input style="display: none;" class="fl button-del-tpl" type="button" value="Удалить файл" onclick="_deltpl()"/-->
-		<input class="fr" title="Ctrl+S" type="button" value="Сохранить файл" onclick="submitTemplateEdit();" />
+		<input class="button-success fr" title="Ctrl+S" type="button" value="Сохранить файл" onclick="submitTemplateEdit();" />
 	</div>
 	
 <link rel="stylesheet" href="{{ home }}/lib/codemirror/codemirror.css">

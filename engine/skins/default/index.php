@@ -2,36 +2,21 @@
 // Protect against hack attempts
 if (!defined('NGCMS')) die ('HAL');
 
-// Load skin language
-function LoadLang_askin($what, $area = '') {
-	global $config;
-	$filename = 'lang/'.$config['default_lang'].'/skin.ini';
-	
-	if (!$content = parse_ini_file($filename, true)) {
-		$filename = 'lang/english/skin.ini';
-		$content = parse_ini_file($filename, true);
-	}
-	if (!is_array($lang_askin)) { $lang_askin = array(); }
-	if ($area) {
-		$lang_askin[$area] = $content;
-	} else {
-		$lang_askin = array_merge($lang_askin, $content);
-	}
-	return $lang_askin;
-}
-
-$lang = array_merge (LoadLang('index', 'admin'), LoadLang_askin());
+@require_once root.'skins/default/inc/functions.php';
 
 if (is_array($userROW)) {
 	$newpm = $mysql->result("SELECT count(pmid) FROM ".prefix."_users_pm WHERE to_id = ".db_squote($userROW['id'])." AND viewed = '0'");
-	$newpm = ($newpm != "0") ? $newpm : '0';
+	$newpm = ($newpm != "0") ? '('.$newpm.')' : '';
 
 	// Calculate number of un-approved news
 	$unapproved = '';
 	if ($userROW['status'] == 1 || $userROW['status'] == 2) {
-		$unapp = $mysql->result("SELECT count(id) FROM ".prefix."_news WHERE approve = '0'");
-		if ($unapp)
-			$unapproved = '<a class="navbar-brand fr" href="?mod=news&amp;status=2" title="На модерации"><i class="fa fa-file-o"></i> ('.$unapp.')</a>';
+		$unapp1 = $mysql->result("SELECT count(id) FROM ".prefix."_news WHERE approve = '-1'");
+		$unapp2 = $mysql->result("SELECT count(id) FROM ".prefix."_news WHERE approve = '0'");
+		if ($unapp1)
+		$unapproved1 = '<li><a href="'.$PHP_SELF.'?mod=news&status=1">Черновики <b class="fr">'.$unapp1.'</b></a></li>';
+		if ($unapp2)
+		$unapproved2 = '<li><a href="'.$PHP_SELF.'?mod=news&status=2">На модерации <b class="fr">'.$unapp2.'</b></a></li>';
 	}
 }
 
@@ -40,8 +25,7 @@ $skins_url = skins_url;
 $mod = $_REQUEST['mod'];
 $action = isset($_REQUEST['action'])?$_REQUEST['action']:'';
 
-$h_active_pm = ($mod=='pm')?' class="active"':'';
-
+$h_active_pm = ($mod=='pm')?' active':'';
 $h_active_news = (($mod=='news'))?' class="active"':'';
 $h_active_categories = (($mod=='categories'))?' class="active"':'';
 $h_active_static = (($mod=='static'))?' class="active"':'';
@@ -82,14 +66,15 @@ $skin_header = <<<HTML
 			<span class="navbar-toggle"><i class="fa fa-bars"></i></span>
 			<a class="navbar-brand fl" href="$config[home_url]" title="$lang[mainpage_t]" target="_blank"><span class="mobile-hide-480">$config[home_title]</span> <i class="fa fa-external-link"></i></a>
 			<a class="navbar-brand fr mobile-hide-320" href="$PHP_SELF?action=logout" title="$lang[logout_t]"><i class="fa fa-sign-out"></i></a>
-			<a class="navbar-brand fr" href="$PHP_SELF?mod=pm" title="$lang[pm_t]"><i class="fa fa-envelope-o"></i> ($newpm)</a>
-			$unapproved
+			<a class="navbar-brand fr $h_active_pm" href="$PHP_SELF?mod=pm" title="$lang[pm_t]"><i class="fa fa-envelope-o"></i> $newpm</a>
 		</div>
 	<div class="side-menu-container">
 		<ul class="navbar-nav" id="navmenu-v">
 			<li><a href="$PHP_SELF?mod=news"$h_active_news><i class="fa fa-newspaper-o"></i> Новости<i class="fa fa-angle-right fr"></i></a>
-				<ul> 
+				<ul>
 					<li><a href="$PHP_SELF?mod=news">Все новости</a></li>
+					$unapproved1
+					$unapproved2
 					<li><a href="$PHP_SELF?mod=news&action=add">Добавить новость</a></li>
 				</ul>
 			</li>
@@ -105,20 +90,8 @@ $skin_header = <<<HTML
 					<li><a href="$PHP_SELF?mod=static&action=addForm">Добавить статью</a></li>
 				</ul>
 			</li>
-			<li><a href="$PHP_SELF?mod=images"$h_active_images><i class="fa fa-file-image-o"></i> Изображения<i class="fa fa-angle-right fr"></i></a>
-				<ul> 
-					<li><a href="$PHP_SELF?mod=images&action=list">Все изображения</a></li>
-					<li><a href="$PHP_SELF?mod=images&action=uploadnew">Загрузить изображение</a></li>
-					<li><a href="$PHP_SELF?mod=images&action=categories">Категории изображений</a></li>
-				</ul>
-			</li>
-			<li><a href="$PHP_SELF?mod=files"$h_active_files><i class="fa fa-file-archive-o"></i> Файлы<i class="fa fa-angle-right fr"></i></a>
-				<ul> 
-					<li><a href="$PHP_SELF?mod=files&action=list">Все файлы</a></li>
-					<li><a href="$PHP_SELF?mod=files&action=uploadnew">Загрузить файл</a></li>
-					<li><a href="$PHP_SELF?mod=files&action=categories">Категории файлов</a></li>
-				</ul>
-			</li>
+			<li><a href="$PHP_SELF?mod=images"$h_active_images><i class="fa fa-file-image-o"></i> Изображения</a></li>
+			<li><a href="$PHP_SELF?mod=files"$h_active_files><i class="fa fa-file-archive-o"></i> Файлы</a></li>
 
 			<li><a href="$PHP_SELF?mod=users"$h_active_users><i class="fa fa-users"></i> Пользователи<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
@@ -128,14 +101,7 @@ $skin_header = <<<HTML
 					<li><a href="$PHP_SELF?mod=perm">Права доступа</a></li>
 				</ul>
 			</li>
-			<li><a href="$PHP_SELF?mod=extras" $h_active_extras><i class="fa fa-puzzle-piece"></i> $lang[extras]<i class="fa fa-angle-right fr"></i></a>
-				<ul> 
-					<li><a href="$PHP_SELF?mod=extras&action=all">$lang[extras_list_all] <span class="fr cnt-plug-all"></span></a></li>
-					<li><a href="$PHP_SELF?mod=extras&action=active">$lang[extras_list_active]</a></li>
-					<li><a href="$PHP_SELF?mod=extras&action=inactive">$lang[extras_list_inactive]</a></li>
-					<li><a href="$PHP_SELF?mod=extras&action=uninstalled">$lang[extras_list_needinstall]</a></li>
-				</ul>
-			</li>
+			<li><a href="$PHP_SELF?mod=extras" $h_active_extras><i class="fa fa-puzzle-piece"></i> $lang[extras]</a></li>
 			<li><a href="$PHP_SELF?mod=templates"$h_active_templates><i class="fa fa-th-large"></i> Шаблоны</a></li>
 			<li><a href="$PHP_SELF?mod=options"$h_active_options><i class="fa fa-cogs"></i> Настройки<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
@@ -147,8 +113,15 @@ $skin_header = <<<HTML
 			</li>
 			<li><a href="$PHP_SELF?mod=configuration"$h_active_configuration><i class="fa fa-wrench"></i> Настройка системы</a></li>
 			<li><a href="$PHP_SELF?mod=statistics"$h_active_statistics><i class="fa fa-line-chart"></i> Статистика</a></li>
-			<li><a href="http://ngcms.ru/forum/" target="_blank"><i class="fa fa-heartbeat"></i> Форум поддержки</a></li>
-			<li><a href="$config[home_url]/readme/docs/index.html" target="_blank"><i class="fa fa-leanpub"></i> Документация</a></li>
+			<li><a href="http://ngcms.ru/forum/" target="_blank"><i class="fa fa-leanpub"></i> Помощь<i class="fa fa-angle-right fr"></i></a>
+				<ul>
+					<li><a href="http://ngcms.ru/forum/" target="_blank"> Форум поддержки</a></li>
+					<li><a href="http://wiki.ngcms.ru/" target="_blank"> Wiki NG CMS</a></li>
+					<li><a href="$config[home_url]/readme/docs/index.html" target="_blank"> Документация</a></li>
+					<li><a href="$config[home_url]/readme/bb-codes.html" target="_blank"> BB-коды движка</a></li>
+					<li><a href="http://ngcms.ru/" target="_blank"> Официальный сайт</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 </nav>

@@ -72,6 +72,7 @@ function changeActive(name) {
 			<span><br>Как правило заголовок новости или статьи должен состоять из</span>
 			<input style="width:100%;" type="text" id="newsTitle" name="title" value="" tabindex="1" placeholder="Введите заголовок новости. Поле является обязательным"/>
 
+			<label class="lable-title" for="">Текст новости</label>
 			{{ quicktags }}
 			<div id="smilies">{{ smilies }}</div>
 

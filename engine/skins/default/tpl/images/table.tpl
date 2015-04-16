@@ -6,14 +6,6 @@
 
 <!-- Main scripts -->
 <script type="text/javascript">
-function getUrlVars() {
-	return window.location.href.slice(window.location.href.indexOf('?')).split(/[&?]{1}[\w\d]+=/);
-}
-$(function() {
-	var action = (getUrlVars()[2]) ? getUrlVars()[2] : 'list';
-	ChangeOption(action);
-});
-
 var flagRequireReload = 0;
 function ChangeOption(selectedOption) {
 	document.getElementById('list').style.display = "none";

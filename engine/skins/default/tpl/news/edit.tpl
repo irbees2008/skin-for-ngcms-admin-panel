@@ -55,8 +55,6 @@ function changeActive(name) {
 <!-- Hidden SUGGEST div -->
 <div id="suggestWindow" class="suggestWindow"><table id="suggestBlock"></table><a href="#" align="right" id="suggestClose">close</a></div>
 
-<div class="">{% if (approve == -1) %}{{ lang['state.draft'] }}{% elseif (approve == 0) %}{{ lang['state.unpublished'] }}{% else %}{{ lang['state.published'] }} &#8594; <small><a href="{{ link }}" target="_blank">{{ link }}</a></small>{% endif %}</div>
-
 <!-- Main content form -->
 <div class="content clear">
 	<form id="postForm" name="form" ENCTYPE="multipart/form-data" method="post" action="{{ php_self }}" target="_self">
@@ -80,10 +78,17 @@ function changeActive(name) {
 				<label class="lable-title" for="newsTitle">{{ lang.editnews['title'] }}</label>
 				<span><br>Как правило заголовок новости или статьи должен состоять из</span>
 				<input style="width:100%;" type="text" id="newsTitle" name="title" value="{{ title }}" tabindex="1" placeholder="Введите заголовок новости. Поле является обязательным" />
+
+				{% if (approve == 1) %}
+					<label class="lable-title" for="url">URL новости</label> <a href="{{ link }}" target="_blank"><i class="fa fa-external-link"></i></a>
+					<input style="width:100%;" type="text" name="url" id="url" readonly="readonly" value="{{ link }}" tabindex="1" />
+				{% endif %}
 				
+				
+				<label class="lable-title" for="">Текст новости</label>
 				{{ quicktags }}
 				<div id="smilies">{{ smilies }}</div>
-			
+
 				{% if (flags.edit_split) %}
 					<div id="container.content.short" class="contentActive">
 						<textarea placeholder="Краткое описание новости" onclick="changeActive('short');" onfocus="changeActive('short');" name="ng_news_content_short" id="ng_news_content_short" tabindex="2">{{ content.short }}</textarea>
@@ -192,6 +197,7 @@ function changeActive(name) {
 				<h3 class="content-sidebar-title">{{ lang['comminfo'] }}</h3>
 				<ul class="content-sidebar-list">
 					<li class="content-sidebar-list-item">{{ lang['editor.author'] }}: <a href="{{ php_self }}?mod=users&amp;action=editForm&amp;id={{ authorid }}"><b>{{ author }}</b></a> {% if (pluginIsActive('uprofile')) %} <a href="{{ author_page }}" target="_blank" title="{{ lang.editnews['site.viewuser'] }}"><img src="{{ skins_url }}/images/open_new.png" alt="{{ lang.editnews['newpage'] }}"/></a>{% endif %}</li>
+					<li class="content-sidebar-list-item">Статус новости: <b>{% if (approve == -1) %}<font color="e74c3c">{{ lang['state.draft'] }}</font>{% elseif (approve == 0) %}<font color="e74c3c">{{ lang['state.unpublished'] }}</font>{% else %}<font color="2ecc71">{{ lang['state.published'] }}{% endif %}</font></b></li>
 					<li class="content-sidebar-list-item">{{ lang['editor.dcreate'] }}: <b>{{ createdate }}</b></li>
 					<li class="content-sidebar-list-item">{{ lang['editor.dedit'] }}: <b>{{ editdate }}</b></li>
 				</ul>
@@ -227,7 +233,7 @@ function changeActive(name) {
 					<li class="content-sidebar-list-item"><label><input type="checkbox" name="setViews" value="1" class="check" id="setViews" {% if (flags['setviews.disabled']) %}disabled{% endif %} /> {{ lang.editnews['set_views'] }}:</label> <input type="text" size="4" name="views" value="{{ views }}"  {% if (flags['setviews.disabled']) %}disabled{% endif %}/></li>
 					
 					{% if (pluginIsActive('comments')) %}
-						<li class="content-sidebar-list-item">
+						<li class="content-sidebar-list-item clear">
 							<hr/>
 							{{ lang['comments:mode.header'] }}:
 							<select name="allow_com">
@@ -237,6 +243,7 @@ function changeActive(name) {
 							</select>
 						</li>
 					{% endif %}
+					
 				</ul>
 			</div>
 		</div>
@@ -244,43 +251,40 @@ function changeActive(name) {
 		{% if (pluginIsActive('xfields')) %}{{ plugin.xfields.general }}{% endif %}	
 
 		<div id="showEditNews" style="display: block;" class="clear content-footer-left">
-			<table id="edit">
+			<div id="edit">
 			{% if flags['params.lost'] %}
-			<tr><td colspan="3" class="contentEditErr">
-			Обратите снимание - у вас недостаточно прав для полноценного редактирования новости.<br/>
-			При сохранении будут произведены следующие изменения:<br/><br/>
-			{% if flags['publish.lost'] %}<div class="errMessage">&#8594; Новость будет снята с публикации</div>{% endif %}
-			{% if flags['html.lost'] %}<div class="errMessage">&#8594; В новости будет запрещено использование HTML тегов и автоформатирование</div>{% endif %}
-			{% if flags['mainpage.lost'] %}<div class="errMessage">&#8594; Новость будет убрана с главной страницы</div>{% endif %}
-			{% if flags['pinned.lost'] %}<div class="errMessage">&#8594; С новости будет снято прикрепление на главной</div>{% endif %}
-			{% if flags['catpinned.lost'] %}<div class="errMessage">&#8594; С новости будет снято прикрепление в категории</div>{% endif %}
-			{% if flags['favorite.lost'] %}<div class="errMessage">&#8594; Новость будет удалена из закладок администратора</div>{% endif %}
-			{% if flags['multicat.lost'] %}<div class="errMessage">&#8594; Из новости будут удалены все дополнительные категории</div>{% endif %}
-			</td></tr>
+				Обратите снимание - у вас недостаточно прав для полноценного редактирования новости.<br/>
+				При сохранении будут произведены следующие изменения:<br/><br/>
+				{% if flags['publish.lost'] %}<div class="errMessage">&#8594; Новость будет снята с публикации</div>{% endif %}
+				{% if flags['html.lost'] %}<div class="errMessage">&#8594; В новости будет запрещено использование HTML тегов и автоформатирование</div>{% endif %}
+				{% if flags['mainpage.lost'] %}<div class="errMessage">&#8594; Новость будет убрана с главной страницы</div>{% endif %}
+				{% if flags['pinned.lost'] %}<div class="errMessage">&#8594; С новости будет снято прикрепление на главной</div>{% endif %}
+				{% if flags['catpinned.lost'] %}<div class="errMessage">&#8594; С новости будет снято прикрепление в категории</div>{% endif %}
+				{% if flags['favorite.lost'] %}<div class="errMessage">&#8594; Новость будет удалена из закладок администратора</div>{% endif %}
+				{% if flags['multicat.lost'] %}<div class="errMessage">&#8594; Из новости будут удалены все дополнительные категории</div>{% endif %}
 			{% endif %}
-			<tr>
-			<td width="150" class="contentEditW" align="left" valign="top"><input type="button" value="{{ lang.editnews['preview'] }}" class="button" onClick="preview()" /> </td>
-			<td class="contentEditW" align="center" valign="top">
-			<input type="hidden" name="id" value="{{ id }}" />
-			{% if flags.editable %}
-			Статус новости:
-			<select size="1" disabled>
-			<option>{% if (approve == -1) %}{{ lang['state.draft'] }}{% elseif (approve == 0) %}{{ lang['state.unpublished'] }}{% else %}{{ lang['state.published'] }}{% endif %}</option>
-			</select> &#8594;
-			<select size="1" name="approve" id="approve">
-			{% if flags.can_draft %}	<option value="-1" {% if (approve == -1) %}selected="selected"{% endif %}>{{ lang['state.draft'] }}</option>{% endif %}
-			{% if flags.can_unpublish %}		<option value="0" {% if (approve == 0) %}selected="selected"{% endif %}>{{ lang['state.unpublished'] }}</option>{% endif %}
-			{% if flags.can_publish %}		<option value="1" {% if (approve == 1) %}selected="selected"{% endif %}>{{ lang['state.published'] }}</option>{% endif %}
-			</select>
-				<input class="button-success" type="submit" value="{{ lang.editnews['do_editnews'] }}" accesskey="s" />&nbsp;{% endif %}
-			</td>
-			{% if flags.deleteable %}
-			<td class="contentEditW" align="right" valign="top" width="150">
-				<input class="button-danger fr" type="button" value="{{ lang.editnews['delete'] }}" onClick="confirmit('{{ php_self }}?mod=news&amp;action=manage&amp;subaction=mass_delete&amp;selected_news[]={{ id }}&amp;token={{ token }}', '{{ lang.editnews['sure_del'] }}')" />
-			</td>
-			{% endif %}
-			</tr>
-			</table>
+			
+			
+				<div class="clear">
+				<input class="fl" type="button" value="{{ lang.editnews['preview'] }}" class="button" onClick="preview()" />
+				
+				{% if flags.deleteable %}
+					<input class="button-danger fl" type="button" value="{{ lang.editnews['delete'] }}" onClick="confirmit('{{ php_self }}?mod=news&amp;action=manage&amp;subaction=mass_delete&amp;selected_news[]={{ id }}&amp;token={{ token }}', '{{ lang.editnews['sure_del'] }}')" />
+				{% endif %}
+				
+				{% if flags.editable %}
+					<input type="hidden" name="id" value="{{ id }}" />
+					<input class="button-success fr" type="submit" value="{{ lang.editnews['do_editnews'] }}" accesskey="s" />
+					
+					<!--Статус новости:-->
+					<select class="fr" size="1" name="approve" id="approve">
+						{% if flags.can_draft %}<option value="-1" {% if (approve == -1) %}selected="selected"{% endif %}>{{ lang['state.draft'] }}</option>{% endif %}
+						{% if flags.can_unpublish %}<option value="0" {% if (approve == 0) %}selected="selected"{% endif %}>{{ lang['state.unpublished'] }}</option>{% endif %}
+						{% if flags.can_publish %}<option value="1" {% if (approve == 1) %}selected="selected"{% endif %}>{{ lang['state.published'] }}</option>{% endif %}
+					</select>
+				{% endif %}
+				</div>
+			</div>
 		</div>
 		
 	</form>

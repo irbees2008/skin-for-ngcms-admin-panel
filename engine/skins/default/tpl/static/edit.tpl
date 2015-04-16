@@ -20,10 +20,11 @@ var currentInputAreaID = 'content';
 				<input style="width:100%;" type="text" id="newsTitle" name="title" value="{{ data.title }}" tabindex="1" />
 				
 				{% if (flags.isPublished) %}
-					URL статьи
-					<input style="width:100%;" type="text" name="url" readonly="readonly" value="{{ data.url }}" tabindex="1" /> [ <a target="_blank" href="{{ data.url }}">открыть</a> ]
+					<label class="lable-title" for="url">URL статьи</label> <a target="_blank" href="{{ data.url }}"><i class="fa fa-external-link"></i></a>
+					<input style="width:100%;" type="text" name="url" id="url" readonly="readonly" value="{{ data.url }}" tabindex="1" />
 				{% endif %}
 
+				<label class="lable-title" for="content">Текст статьи</label>
 				{{ quicktags }}
 				<div id="smilies">{{ smilies }}</div>
 				

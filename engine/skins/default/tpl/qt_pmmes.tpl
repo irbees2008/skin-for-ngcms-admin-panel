@@ -1,24 +1,22 @@
-<span id="tags">
-<a onclick="javascript:insertext('[b]','[/b]', {area})" title='{l_tags.bold}'><img src="{skins_url}/tags/bold.gif" hspace="5" vspace="5"></a>
-<a onclick="javascript:insertext('[u]','[/u]', {area})" title='{l_tags.underline}'><img src="{skins_url}/tags/underline.gif" hspace="5" vspace="5"></a>
-<a onclick="javascript:insertext('[left]','[/left]', {area})" title='{l_tags.left}'><img src="{skins_url}/tags/left.gif" hspace="5" vspace="5"></a>
-<a onclick="javascript:insertext('[center]','[/center]', {area})" title='{l_tags.center}'><img src="{skins_url}/tags/center.gif" hspace="5" vspace="5"></a>
-<a onclick="javascript:insertext('[ul]\n[li][/li]\n[li][/li]\n[li][/li]\n[/ul]','', {area})" title='{l_tags.bulllist}'><img src="{skins_url}/tags/bulllist.gif" hspace="5" vspace="5"></a>
-<a onclick="javascript:insertext('[url]','[/url]', {area})" title='{l_tags.link}'><img src="{skins_url}/tags/link.gif" hspace="5" vspace="5"></a>
-<a onclick="javascript:insertext('[email]','[/email]', {area})" title='{l_tags.email}'><img src="{skins_url}/tags/email.gif" hspace="5" vspace="5"></a>
-<!--
-<a style="cursor: pointer;"  onclick="document.form.content{area}.rows += 5;" title='{l_qt_rowadd}'><img src="{skins_url}/tags/rowadd.gif" hspace="5" vspace="5" alt="{l_qt_rowadd}" /></a>
-<a style="cursor: pointer;"  onclick="document.form.content{area}.cols += 5;" title='{l_qt_coladd}'><img src="{skins_url}/tags/coladd.gif" hspace="5" vspace="5" alt="{l_qt_coladd}" /></a>
--->
-<br />
-<a onclick="javascript:insertext('[s]','[/s]', {area})" title='{l_tags.crossline}'><img src="{skins_url}/tags/crossline.gif" hspace="5" vspace="5"></a>
-<a onclick="javascript:insertext('[i]','[/i]', {area})" title='{l_tags.italic}'><img src="{skins_url}/tags/italic.gif" hspace="5" vspace="5"></a>
-<a onclick="javascript:insertext('[right]','[/right]', {area})" title='{l_tags.right}'><img src="{skins_url}/tags/right.gif" hspace="5" vspace="5"></a>
-<a onclick="javascript:insertext('[justify]','[/justify]', {area})" title='{l_tags.justify}'><img src="{skins_url}/tags/justify.gif" hspace="5" vspace="5" width="16" height="16" alt="{l_tags.justify}" /></a>
-<a onclick="javascript:insertext('[ol]\n[li][/li]\n[li][/li]\n[li][/li]\n[/ol]','', {area})" title='{l_tags.numlist}'><img src="{skins_url}/tags/numlist.gif" hspace="5" vspace="5"></a>
-<a onclick="javascript:insertext('[img]','[/img]', {area})" title='{l_tags.imagelink}'><img src="{skins_url}/tags/imagelink.gif" hspace="5" vspace="5"></a>
-<!--
-<a style="cursor: pointer;"  onclick="document.form.content{area}.rows -= 5;" title='{l_qt_rowdel}'><img src="{skins_url}/tags/rowdel.gif" hspace="5" vspace="5" alt="{l_qt_rowdel}" /></a>
-<a style="cursor: pointer;"  onclick="document.form.content{area}.cols -= 5;" title='{l_qt_coldel}'><img src="{skins_url}/tags/coldel.gif" hspace="5" vspace="5" alt="{l_qt_coldel}" /></a>
--->
-</span><br />
+<div id="tags">
+	<a onclick="insertext('[b]','[/b]', {area})" title='{l_tags.bold}'><i class="fa fa-bold"></i></a>
+	<a onclick="insertext('[u]','[/u]', {area})" title='{l_tags.underline}'><i class="fa fa-underline"></i></a>
+	<a onclick="insertext('[i]','[/i]', {area})" title='{l_tags.italic}'><i class="fa fa-italic"></i></a>
+	<a onclick="insertext('[s]','[/s]', {area})" title='{l_tags.crossline}'><i class="fa fa-strikethrough"></i></a>
+	|
+	<a onclick="insertext('[left]','[/left]', {area})" title='{l_tags.left}'><i class="fa fa-align-left"></i></a>
+	<a onclick="insertext('[center]','[/center]', {area})" title='{l_tags.center}'><i class="fa fa-align-center"></i></a>
+	<a onclick="insertext('[right]','[/right]', {area})" title='{l_tags.right}'><i class="fa fa-align-right"></i></a>
+	<a onclick="insertext('[justify]','[/justify]', {area})" title='{l_tags.justify}'><i class="fa fa-align-justify"></i></a>
+	|
+	<a onclick="insertext('[ul]\n[li][/li]\n[li][/li]\n[li][/li]\n[/ul]','', {area})" title='{l_tags.bulllist}'><i class="fa fa-list-ul"></i></a>
+	<a onclick="insertext('[ol]\n[li][/li]\n[li][/li]\n[li][/li]\n[/ol]','', {area})" title='{l_tags.numlist}'><i class="fa fa-list-ol"></i></a>
+	|
+	<a onclick="insertext('[spoiler]','[/spoiler]', {area})" title='{l_tags.spoiler}'><i class="fa fa-list-alt"></i></a>
+	<a onclick="insertext('[quote]','[/quote]', {area})" title='{l_tags.comment}'><i class="fa fa-quote-left"></i></a>
+	<a onclick="insertext('[code]','[/code]', {area})" title='{l_tags.code}'><i class="fa fa-code"></i></a>
+	|
+	<a onclick="insertext('[email]','[/email]', {area})" title='{l_tags.email}'><i class="fa fa-envelope-o"></i></a>
+	<a onclick="insertext('[url]','[/url]', {area})" title='{l_tags.link}'><i class="fa fa-link"></i></a>
+	<a onclick="insertext('[img]','[/img]', {area})" title='{l_tags.imagelink}'><i class="fa fa-picture-o"></i></a>
+</div>

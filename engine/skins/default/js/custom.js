@@ -26,6 +26,9 @@ $(document).ready(function(){
 	//Активация вкладок
 	$('.navtab').css('display', 'none');
 	$('.navtab:first').css('display', 'block');
+	
+	//
+	$('.content-sidebar-title').click(function(){$(this).next().toggle()});
 });
 
 //Изменение вкладок
