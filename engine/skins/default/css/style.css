@@ -23,6 +23,7 @@
 .w_33 {width: 33.3333%;}
 .w_25 {width: 25%;}
 
+
 /* Clearing */
 /* For modern browsers */
 .clear:before,
@@ -117,7 +118,7 @@ table {
  width: 100%;
  border: 0;
  border-bottom: 1px solid #c8c8c8;
- margin: 0 0 18px 0;
+ margin: 8px 0;
  cursor: default;
  font-size: 88%;
 }
@@ -131,6 +132,7 @@ caption {/*примен¤етс¤ только внутри table*/
 }
 thead {
   border-top: 1px solid #ddd;
+  border-left: 4px solid #e8e8e8;
 }
 th {
 font-weight: bold;
@@ -146,12 +148,12 @@ td img/*, td, th*/ {
 }
 tfoot tr td {
  font-weight: bold;
- background: #888;
- color: #fff;
+ background: #efefef;
+ color: #000;
 }
 tbody {
 }
-.hover tr:hover td {
+.hover tbody tr:hover td {
 background-color: #efefef;
 color: #000;
 }
@@ -433,7 +435,7 @@ textarea {
 border-radius: 4px;*/
  color: #444;/* Correct color not being inherited */
  display: block; /*nai aiaaaee iia aii?inii*/
-	font: normal 14px/1.4 Tahoma,sans-serif;
+font: 300 normal 12px/26px Arial, Helvetica, sans-serif;
  height: auto;
  margin: 8px 0;/* Address margins set differently in Firefox 4+, Safari, and Chrome. */
  min-height: 58px;
@@ -781,11 +783,11 @@ font-size: 20px;
 }
 
 .content-nav {
-
+  margin-bottom: 18px;
 }
 
 .content-main {
-width: 100%;
+  width: 100%;
 }
 
 .content-main-left {
@@ -860,17 +862,50 @@ float: right;
   padding: 0 8px;
   /*display: block;*/
   line-height: 28px;
-  margin: 0;
-  border-bottom: 1px solid #ddd;
+  margin: 8px 0;
+  /*border-bottom: 1px solid #ddd;*/
+  border-left: 3px solid #08c;
 }
 .content-title {
 	
 }
-.li-title {
-	font-size: 15px;
-	margin: 0;
+
+.li-title, .config-title {
+  font-size: 15px;
+  margin: 0;
+  color: #000;
+}
+.config-list {
+  margin: 0;
+  padding: 0;
+}
+.config-box {
+  margin: 0;
+  padding: 0 0 0 15px;
+  width: 100%;
+  zoom: 1;
+  overflow: hidden;
+}
+.config-box:hover {
+  background-color: #efefef;
 }
 
+.config-descr {
+  float: left;
+  width: 70%;
+  /*padding-bottom: 10000px;
+  margin-bottom: -10000px;*/
+  color: #666;
+  font-size: 10px;
+}
+
+.config-var {
+  float: right;
+  width: 30%;
+  text-align: right;
+  /*padding-bottom: 10000px;
+  margin-bottom: -10000px;*/
+}
 .file-editor-info{
 width: 100%;
 padding: 3px;
@@ -1205,15 +1240,23 @@ width: 200px;
 }
 
 .sysinfo_common {
-border-left: 4px solid #bef;
+border-left: 4px solid #08c;
 }
-
+.sysinfo_common .info {
+  color: #08c;
+}
 .sysmsg_common {
 border-left: 4px solid #afa;
+}
+.sysmsg_common .info {
+  color: #080;
 }
 
 .syserror_common {
  border-left: 4px solid #f88;
+}
+.syserror_common .info {
+  color: #800;
 }
 
 .sysmsg_common .info, .syserror_common .info {
@@ -1521,45 +1564,47 @@ padding: 8px 16px;
 
 
 #ngSticker {
-top: 50%!important;
-  left: 0!important;
+  top: 50%!important;
   right: 0!important;
-  position: absolute!important;
-  z-index: 9991;
+  left: 0!important;
+  position: fixed;
+  z-index: 99999;
   text-align: center;
 }
 
 .ngStickerClass {
-  padding: 15px;
+  width: 320px;
   max-width: 100%;
-  display: inline;
-max-width: 100%;
+  padding: 8px;
+  margin: 0 auto;
 }
 
 .ngStickerClassExitBTN {
-	background:url('/engine/skins/default/images/delete.gif') no-repeat;
-	width:16px;
-	height:16px;
-	float:right;
-	margin:-5px -5px 0 0;
-	cursor:pointer;
+  background: url('/engine/skins/default/images/delete.gif') no-repeat;
+  width: 16px;
+  height: 16px;
+  float: right;
+  margin: -12px -16px 0 0;
+  cursor: pointer;
 }
 
 
 .ngStickerClassClassic {
-	border:1px solid #A7CD10;
-	background-color:#E1FAB8;
-	border-radius:4px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
+  border: 1px solid #080;
+  background-color: #f8f8f8;
+  color: #080;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
 }
 
 .ngStickerClassError {
-	border:1px solid #E2365C;
-	background-color:#F7C8D2;
-	border-radius:4px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
+  border: 1px solid #800;
+  background-color: #f8f8f8;
+  color: #800;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
 }
 
 .ui-button {

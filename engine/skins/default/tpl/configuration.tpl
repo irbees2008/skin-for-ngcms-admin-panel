@@ -519,188 +519,184 @@ function ngCheckEmail() {
 		
 		<!-- ########################## IMAGES TAB ########################## -->
 		<div class="navtab" id="userTabs-imgfiles">
+			<h3 class="content-title">{{ lang['files'] }}</h3>
 			<table>
-			<tr>
-			<td colspan="2" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" alt="" />{{ lang['files'] }}</td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['files_url'] }}<br /><small>{{ lang['example'] }} http://server.com/uploads/files</small></td>
-			<td class="contentEntry2" valign="middle"><input class="folder" type="text" name="save_con[files_url]" value="{{ config['files_url'] }}" size="40" /></td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['files_dir'] }}<br /><small>{{ lang['example'] }} /home/servercom/public_html/uploads/files/</small></td>
-			<td class="contentEntry2" valign="middle"><input class="folder" type="text" name="save_con[files_dir]" value="{{ config['files_dir'] }}" size="40" /></td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['attach_url'] }}<br /><small>{{ lang['example'] }} http://server.com/uploads/dsn</small></td>
-			<td class="contentEntry2" valign="middle"><input class="folder" type="text" name="save_con[attach_url]" value="{{ config['attach_url'] }}" size="40" /></td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['attach_dir'] }}<br /><small>{{ lang['example'] }} /home/servercom/public_html/uploads/dsn/</small></td>
-			<td class="contentEntry2" valign="middle"><input class="folder" type="text" name="save_con[attach_dir]" value="{{ config['attach_dir'] }}" size="40" /></td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['files_ext'] }}<br /><small>{{ lang['files_ext_desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle"><input class="important" type="text" name="save_con[files_ext]" value="{{ config['files_ext'] }}" size="40" /></td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['files_max_size'] }}<br /><small>{{ lang['files_max_size_desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle"><input type="text" name="save_con[files_max_size]" value="{{ config['files_max_size'] }}" style="width: 40px" /></td>
-			</tr>
+				<tr>
+					<td class="contentEntry1">{{ lang['files_url'] }}<br /><small>{{ lang['example'] }} http://server.com/uploads/files</small></td>
+					<td class="contentEntry2" valign="middle"><input class="folder" type="text" name="save_con[files_url]" value="{{ config['files_url'] }}" size="40" /></td>
+				</tr>
+				<tr>
+					<td class="contentEntry1">{{ lang['files_dir'] }}<br /><small>{{ lang['example'] }} /home/servercom/public_html/uploads/files/</small></td>
+					<td class="contentEntry2" valign="middle"><input class="folder" type="text" name="save_con[files_dir]" value="{{ config['files_dir'] }}" size="40" /></td>
+				</tr>
+				<tr>
+					<td class="contentEntry1">{{ lang['attach_url'] }}<br /><small>{{ lang['example'] }} http://server.com/uploads/dsn</small></td>
+					<td class="contentEntry2" valign="middle"><input class="folder" type="text" name="save_con[attach_url]" value="{{ config['attach_url'] }}" size="40" /></td>
+				</tr>
+				<tr>
+					<td class="contentEntry1">{{ lang['attach_dir'] }}<br /><small>{{ lang['example'] }} /home/servercom/public_html/uploads/dsn/</small></td>
+					<td class="contentEntry2" valign="middle"><input class="folder" type="text" name="save_con[attach_dir]" value="{{ config['attach_dir'] }}" size="40" /></td>
+				</tr>
+				<tr>
+					<td class="contentEntry1">{{ lang['files_ext'] }}<br /><small>{{ lang['files_ext_desc'] }}</small></td>
+					<td class="contentEntry2" valign="middle"><input class="important" type="text" name="save_con[files_ext]" value="{{ config['files_ext'] }}" size="40" /></td>
+				</tr>
+				<tr>
+					<td class="contentEntry1">{{ lang['files_max_size'] }}<br /><small>{{ lang['files_max_size_desc'] }}</small></td>
+					<td class="contentEntry2" valign="middle"><input type="text" name="save_con[files_max_size]" value="{{ config['files_max_size'] }}" style="width: 40px" /></td>
+				</tr>
 			</table>
+			
+			<h3 class="content-title">{{ lang['img'] }}</h3>
 			<table>
-			<tr>
-			<td colspan="2" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" alt="" />{{ lang['img'] }}</td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['images_url'] }}<br /><small>{{ lang['example'] }} http://server.com/uploads/images</small></td>
-			<td class="contentEntry2" valign="middle"><input class="folder" type="text" name="save_con[images_url]" value="{{ config['images_url'] }}" style="width: 400px" /></td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['images_dir'] }}<br /><small>{{ lang['example'] }} /home/servercom/public_html/uploads/images/</small></td>
-			<td class="contentEntry2" valign="middle"><input class="folder" type="text" name="save_con[images_dir]" value="{{ config['images_dir'] }}" style="width: 400px" /></td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['images_ext'] }}<br /><small>{{ lang['images_ext_desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle"><input class="important" type="text" name="save_con[images_ext]" value="{{ config['images_ext'] }}" style="width: 400px" /></td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['images_max_size'] }}<br /><small>{{ lang['images_max_size_desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle"><input type="text" name="save_con[images_max_size]" value="{{ config['images_max_size'] }}" size="6" /></td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['images_dim_action'] }}<br /><small>{{ lang['images_dim_action#desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[images_dim_action]', 'value' : config['images_dim_action'], 'values' : { 0 : lang['images_dim_action#0'], 1 : lang['images_dim_action#1'] } }) }}</td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['images_max_dim'] }}<br /><small>{{ lang['images_max_dim#desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle"><input type="text" name="save_con[images_max_x]" value="{{ config['images_max_x'] }}" size="6" /> x <input type="text" name="save_con[images_max_y]" value="{{ config['images_max_y'] }}" size="6" /></td>
-			</tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['images_url'] }}<br /><small>{{ lang['example'] }} http://server.com/uploads/images</small></td>
+				<td class="contentEntry2" valign="middle"><input class="folder" type="text" name="save_con[images_url]" value="{{ config['images_url'] }}" style="width: 400px" /></td>
+				</tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['images_dir'] }}<br /><small>{{ lang['example'] }} /home/servercom/public_html/uploads/images/</small></td>
+				<td class="contentEntry2" valign="middle"><input class="folder" type="text" name="save_con[images_dir]" value="{{ config['images_dir'] }}" style="width: 400px" /></td>
+				</tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['images_ext'] }}<br /><small>{{ lang['images_ext_desc'] }}</small></td>
+				<td class="contentEntry2" valign="middle"><input class="important" type="text" name="save_con[images_ext]" value="{{ config['images_ext'] }}" style="width: 400px" /></td>
+				</tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['images_max_size'] }}<br /><small>{{ lang['images_max_size_desc'] }}</small></td>
+				<td class="contentEntry2" valign="middle"><input type="text" name="save_con[images_max_size]" value="{{ config['images_max_size'] }}" size="6" /></td>
+				</tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['images_dim_action'] }}<br /><small>{{ lang['images_dim_action#desc'] }}</small></td>
+				<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[images_dim_action]', 'value' : config['images_dim_action'], 'values' : { 0 : lang['images_dim_action#0'], 1 : lang['images_dim_action#1'] } }) }}</td>
+				</tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['images_max_dim'] }}<br /><small>{{ lang['images_max_dim#desc'] }}</small></td>
+				<td class="contentEntry2" valign="middle"><input type="text" name="save_con[images_max_x]" value="{{ config['images_max_x'] }}" size="6" /> x <input type="text" name="save_con[images_max_y]" value="{{ config['images_max_y'] }}" size="6" /></td>
+				</tr>
 
-			<!-- IMAGE transform control -->
-			<tr><td colspan="2" class="contentHead">{{ lang['img.thumb'] }}</td></tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['thumb_mode'] }}<br /><small>{{ lang['thumb_mode_desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[thumb_mode]', 'value' : config['thumb_mode'], 'values' : { 0 : lang['mode_demand'], 1 : lang['mode_forbid'], 2 : lang['mode_always'] } }) }}</td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['thumb_size'] }}<br /><small>{{ lang['thumb_size_desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle"><input type="text" name="save_con[thumb_size_x]" value="{{ config['thumb_size_x'] }}" size="6" /> x <input type="text" name="save_con[thumb_size_y]" value="{{ config['thumb_size_y'] }}" size="6" /></td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['thumb_quality'] }}<br /><small>{{ lang['thumb_quality_desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle"><input type="text" name="save_con[thumb_quality]" value="{{ config['thumb_quality'] }}" size="6" /></td>
-			</tr>
-			<tr><td colspan="2" class="contentHead">{{ lang['img.shadow'] }}</td></tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['shadow_mode'] }}<br /><small>{{ lang['shadow_mode_desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[shadow_mode]', 'value' : config['shadow_mode'], 'values' : { 0 : lang['mode_demand'], 1 : lang['mode_forbid'], 2 : lang['mode_always'] } }) }}</td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['shadow_place'] }}<br /><small>{{ lang['shadow_place_desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[shadow_place]', 'value' : config['shadow_place'], 'values' : { 0 : lang['mode_orig'], 1 : lang['mode_copy'], 2 : lang['mode_origcopy'] } }) }}</td>
-			</tr>
-			<tr><td colspan="2" class="contentHead">{{ lang['img.stamp'] }}</td></tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['stamp_mode'] }}<br /><small>{{ lang['stamp_mode_desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[stamp_mode]', 'value' : config['stamp_mode'], 'values' : { 0 : lang['mode_demand'], 1 : lang['mode_forbid'], 2 : lang['mode_always'] } }) }}</td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['stamp_place'] }}<br /><small>{{ lang['stamp_place_desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[stamp_place]', 'value' : config['stamp_place'], 'values' : { 0 : lang['mode_orig'], 1 : lang['mode_copy'], 2 : lang['mode_origcopy'] } }) }}</td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['wm_image'] }}<br /><small>{{ lang['wm_image_desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[wm_image]', 'value' : config['wm_image'], 'values' : list['wm_image'] }) }}</td>
-			</tr>
-			<tr>
-			<td class="contentEntry1">{{ lang['wm_image_transition'] }}<br /><small>{{ lang['wm_image_transition_desc'] }}</small></td>
-			<td class="contentEntry2" valign="middle"><input type="text" name="save_con[wm_image_transition]" value="{{ config['wm_image_transition'] }}" size="6" /></td>
-			</tr>
-			<!-- END: IMAGE transform control -->
+				<!-- IMAGE transform control -->
+				<tr><td colspan="2" class="contentHead">{{ lang['img.thumb'] }}</td></tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['thumb_mode'] }}<br /><small>{{ lang['thumb_mode_desc'] }}</small></td>
+				<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[thumb_mode]', 'value' : config['thumb_mode'], 'values' : { 0 : lang['mode_demand'], 1 : lang['mode_forbid'], 2 : lang['mode_always'] } }) }}</td>
+				</tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['thumb_size'] }}<br /><small>{{ lang['thumb_size_desc'] }}</small></td>
+				<td class="contentEntry2" valign="middle"><input type="text" name="save_con[thumb_size_x]" value="{{ config['thumb_size_x'] }}" size="6" /> x <input type="text" name="save_con[thumb_size_y]" value="{{ config['thumb_size_y'] }}" size="6" /></td>
+				</tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['thumb_quality'] }}<br /><small>{{ lang['thumb_quality_desc'] }}</small></td>
+				<td class="contentEntry2" valign="middle"><input type="text" name="save_con[thumb_quality]" value="{{ config['thumb_quality'] }}" size="6" /></td>
+				</tr>
+				<tr><td colspan="2" class="contentHead">{{ lang['img.shadow'] }}</td></tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['shadow_mode'] }}<br /><small>{{ lang['shadow_mode_desc'] }}</small></td>
+				<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[shadow_mode]', 'value' : config['shadow_mode'], 'values' : { 0 : lang['mode_demand'], 1 : lang['mode_forbid'], 2 : lang['mode_always'] } }) }}</td>
+				</tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['shadow_place'] }}<br /><small>{{ lang['shadow_place_desc'] }}</small></td>
+				<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[shadow_place]', 'value' : config['shadow_place'], 'values' : { 0 : lang['mode_orig'], 1 : lang['mode_copy'], 2 : lang['mode_origcopy'] } }) }}</td>
+				</tr>
+				<tr><td colspan="2" class="contentHead">{{ lang['img.stamp'] }}</td></tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['stamp_mode'] }}<br /><small>{{ lang['stamp_mode_desc'] }}</small></td>
+				<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[stamp_mode]', 'value' : config['stamp_mode'], 'values' : { 0 : lang['mode_demand'], 1 : lang['mode_forbid'], 2 : lang['mode_always'] } }) }}</td>
+				</tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['stamp_place'] }}<br /><small>{{ lang['stamp_place_desc'] }}</small></td>
+				<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[stamp_place]', 'value' : config['stamp_place'], 'values' : { 0 : lang['mode_orig'], 1 : lang['mode_copy'], 2 : lang['mode_origcopy'] } }) }}</td>
+				</tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['wm_image'] }}<br /><small>{{ lang['wm_image_desc'] }}</small></td>
+				<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[wm_image]', 'value' : config['wm_image'], 'values' : list['wm_image'] }) }}</td>
+				</tr>
+				<tr>
+				<td class="contentEntry1">{{ lang['wm_image_transition'] }}<br /><small>{{ lang['wm_image_transition_desc'] }}</small></td>
+				<td class="contentEntry2" valign="middle"><input type="text" name="save_con[wm_image_transition]" value="{{ config['wm_image_transition'] }}" size="6" /></td>
+				</tr>
+				<!-- END: IMAGE transform control -->
 			</table>
 		</div>
 		
 		<!-- ########################## AUTH TAB ########################## -->
 		<div class="navtab" id="userTabs-auth">
 			<h3 class="content-title">{{ lang['auth'] }}</h3>
-			<table class="hover odd">
-				<tr>
-					<td class="contentEntry1">
-						<h4 class="li-title">{{ lang['remember'] }}</h4>
-						<small>{{ lang['remember_desc'] }}</small>
-					</td>
-					<td class="contentEntry2" valign="middle">{{ mkSelectYN({'name' : 'save_con[remember]', 'value' : config['remember'] }) }}</td>
-				</tr>
-				<tr>
-					<td class="contentEntry1">
-						<h4 class="li-title">{{ lang['auth_module'] }}</h4>
-						<small>{{ lang['auth_module_desc'] }}</small>
-					</td>
-					<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[auth_module]', 'value' : config['auth_module'], 'values' : list['auth_module'] }) }}</td>
-				</tr>
-				<tr>
-					<td class="contentEntry1">
-						<h4 class="li-title">{{ lang['auth_db'] }}</h4>
-						<small>{{ lang['auth_db_desc'] }}</small>
-					</td>
-					<td class="contentEntry2" valign="middle">{{ mkSelect({'name' : 'save_con[auth_db]', 'value' : config['auth_db'], 'values' : list['auth_db'] }) }}</td>
-				</tr>
-			</table>
+			<ul class="config-list">
+				<li class="config-box clear">
+					<div class="config-descr">
+						<h4 class="config-title">{{ lang['remember'] }}</h4>
+						<span>{{ lang['remember_desc'] }}</span>
+					</div>
+					<div class="config-var">{{ mkSelectYN({'name' : 'save_con[remember]', 'value' : config['remember'] }) }}</div>
+				</li>
+				<li class="config-box clear">
+					<div class="config-descr">
+						<h4 class="config-title">{{ lang['auth_module'] }}</h4>
+						<span>{{ lang['auth_module_desc'] }}</span>
+					</div>
+					<div class="config-var">{{ mkSelect({'name' : 'save_con[auth_module]', 'value' : config['auth_module'], 'values' : list['auth_module'] }) }}</div>
+				</li>
+				<li class="config-box clear">
+					<div class="config-descr">
+						<h4 class="config-title">{{ lang['auth_db'] }}</h4>
+						<span>{{ lang['auth_db_desc'] }}</span>
+					</div>
+					<div class="config-var">{{ mkSelect({'name' : 'save_con[auth_db]', 'value' : config['auth_db'], 'values' : list['auth_db'] }) }}</div>
+				</li>
+			</ul>
 		</div>
 
 		<!-- ########################## CACHE TAB ########################## -->
 		<div class="navtab" id="userTabs-cache">
 			<h3 class="content-title">Memcached</h3>
-			<table class="hover odd">
-				<tr>
-					<td class="contentEntry1">
-						<h4 class="li-title">{{ lang['memcached_enabled'] }}</h4>
-						<small>{{ lang['memcached_enabled#desc'] }}</small>
-					</td>
-					<td class="contentEntry2">{{ mkSelectNY({'name' : 'save_con[use_memcached]', 'value' : config['use_memcached'] }) }}</td>
-				</tr>
-				<tr>
-					<td width="50%" class="contentEntry1">
-						<h4 class="li-title">{{ lang['memcached_ip'] }}</h4>
-						<small>{{ lang['example'] }} localhost</small>
-					</td>
-					<td width="50%" class="contentEntry2"><input class="important" type="text" name="save_con[memcached_ip]" value="{{ config['memcached_ip'] }}" id="memcached_ip" /></td>
-				</tr>
-				<tr>
-					<td width="50%" class="contentEntry1">
-						<h4 class="li-title">{{ lang['memcached_port'] }}</h4>
-						<small>{{ lang['example'] }} 11211</small>
-					</td>
-					<td width="50%" class="contentEntry2"><input class="important" type="text" name="save_con[memcached_port]" value="{{ config['memcached_port'] }}" id="memcached_port" /></td>
-				</tr>
-				<tr>
-					<td width="50%" class="contentEntry1">
-						<h4 class="li-title">{{ lang['memcached_prefix'] }}</h4>
-						<small>{{ lang['example'] }} ng</small>
-					</td>
-					<td width="50%" class="contentEntry2"><input class="important" type="text" name="save_con[memcached_prefix]" value="{{ config['memcached_prefix'] }}" id="memcached_prefix" /></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input class="fr" type="button" value="{{ lang['btn_checkMemcached'] }}" onclick="ngCheckMemcached(); return false;"/></td>
-				</tr>
-			</table>
+			<ul class="config-list">
+				<li class="config-box clear">
+					<div class="config-descr">
+						<h4 class="config-title">{{ lang['memcached_enabled'] }}</h4>
+						<span>{{ lang['memcached_enabled#desc'] }}</span>
+					</div>
+					<div class="config-var">{{ mkSelectNY({'name' : 'save_con[use_memcached]', 'value' : config['use_memcached'] }) }}</div>
+				</li>
+				<li class="config-box clear">
+					<div class="config-descr">
+						<h4 class="config-title">{{ lang['memcached_ip'] }}</h4>
+						<span>{{ lang['example'] }} localhost</span>
+					</div>
+					<div class="config-var"><input class="important" type="text" name="save_con[memcached_ip]" value="{{ config['memcached_ip'] }}" id="memcached_ip" /></div>
+				</li>
+				<li class="config-box clear">
+					<div class="config-descr">
+						<h4 class="config-title">{{ lang['memcached_port'] }}</h4>
+						<span>{{ lang['example'] }} 11211</span>
+					</div>
+					<div class="config-var"><input class="important" type="text" name="save_con[memcached_port]" value="{{ config['memcached_port'] }}" id="memcached_port" /></div>
+				</li>
+				<li class="config-box clear">
+					<div class="config-descr">
+						<h4 class="config-title">{{ lang['memcached_prefix'] }}</h4>
+						<span>{{ lang['example'] }} ng</span>
+					</div>
+					<div class="config-var"><input class="important" type="text" name="save_con[memcached_prefix]" value="{{ config['memcached_prefix'] }}" id="memcached_prefix" /></div>
+				</li>
+				<li class="config-box clear">
+					<input class="fr" type="button" value="{{ lang['btn_checkMemcached'] }}" onclick="ngCheckMemcached(); return false;"/></td>
+				</li>
+			</ul>
+
 		</div>
 			
 		<!-- ########################## MULTI TAB ########################## -->
 		<div class="navtab" id="userTabs-multi">
 			<h3 class="content-title">{{ lang['multi_info'] }}</h3>
-			<table>
-				<tr>
-					<td width="50%" class="contentEntry1">
-						<h4 class="li-title">{{ lang['mydomains'] }}</h4>
-						<small>{{ lang['mydomains_desc'] }}</small>
-					</td>
-					<td width="50%" class="contentEntry2" valign="middle">
-						<textarea name="save_con[mydomains]">{{ config['mydomains'] }}</textarea>
-					</td>
-				</tr>
-			</table>
+			<ul class="config-list">
+				<li class="config-box clear">
+					<div class="config-descr">
+						<h4 class="config-title">{{ lang['mydomains'] }}</h4>
+						<span>{{ lang['mydomains_desc'] }}</span>
+					</div>
+					<div class="config-var"><textarea name="save_con[mydomains]">{{ config['mydomains'] }}</textarea></div>
+				</li>
+			</ul>
 			
 			<h3 class="content-title">{{ lang['multisite'] }}</h3>
 			<table class="hover odd">
@@ -713,16 +709,29 @@ function ngCheckEmail() {
 					</tr>
 				</thead>
 				{% for MR in multiConfig %}
-					<tr class="contentEntry1"><td>{% if (MR['active']) %}On{% else %}Off{% endif %}</td><td>{{ MR['key'] }}</td><td>{% for domain in MR['domains'] %}{{ domain }}<br/>{% else %}- не указано -{% endfor %}</td><td>&nbsp;</td></tr>
+				<tbody>
+					<tr class="contentEntry1">
+						<td>{% if (MR['active']) %}On{% else %}Off{% endif %}</td>
+						<td>{{ MR['key'] }}</td>
+						<td>
+							{% for domain in MR['domains'] %}
+								{{ domain }}<br/>
+							{% else %}- не указано -{% endfor %}</td>
+						<td>&nbsp;</td>
+					</tr>
+				</tbody>
 				{% else %}
+				<tfoot>
 					<tr class="contentEntry1"><td colspan="4">- не используется -</td></tr>
+				</tfoot>
 				{% endfor %}
+				
 			</table>
 		</div>
 		
 	</div>
 
-	<div class="clear content-footer">
+	<div class="content-footer clear">
 		<input type="hidden" name="subaction" value="save" />
 		<input type="hidden" name="save" value="" />
 		<input class="fr" type="submit" value="{{ lang['save'] }}" />
