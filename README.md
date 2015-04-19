@@ -1,2 +1,2 @@
-# skin-for-ngcms-admin-panel
-Skin for NG CMS admin panel
+# Skin for NG CMS admin panel
+Тема оформления для админ панели NG CMS
