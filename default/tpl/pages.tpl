@@ -1,0 +1,1 @@
+<div class="adminNavPages clear">[prev-link]{l_prevpage}[/prev-link] {pages} [next-link]{l_nextpage}[/next-link]</div>

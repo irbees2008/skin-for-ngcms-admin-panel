@@ -1,0 +1,85 @@
+@charset "windows-1251";
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+  background: #dfdfdf;
+  font: normal 15px Tahoma, sans-serif;
+  
+}
+
+#loginForm {
+  width: 290px;
+  max-width: 100%;
+  padding: 24px 24px 0;
+  margin: 10% auto 0;
+  background: #fff;
+  /*border: 1px solid #CAD8DE;*/
+  color: #444;
+  /*box-shadow: rgb(136, 136, 136) 0px 0px 6px;*/
+}
+
+.field {
+  margin: 0 0 18px;
+}
+
+.field label {
+  display: block;
+  margin: 0 0 11px;
+  cursor: pointer;
+}
+
+input {
+  font: 12px Arial, Tahoma, sans-serif;
+  color: #444;
+  width: 100%;
+  padding: 9px 13px;
+  border: 1px solid #c8c8c8;
+  outline: none;
+}
+
+.field input:focus {
+  border-color: #08c;
+}
+
+.copyright, .copyright a {
+	text-align: center;
+	color: #888;
+	font-size: 12px;
+	margin-top: -16px;
+	margin-bottom: 20px;
+}
+.submit {
+  overflow: hidden;
+  margin: 30px -24px 0;
+  padding: 22px 24px;
+  background: #f8f8f8;
+  border-top: 1px solid #d8d8d8;
+  border-radius: 0 0 4px 4px;
+}
+
+.submit button {
+  float: right;
+  padding: 6px;
+  border: 1px solid transparent;
+  color: #FFF;
+  background-color: #08c;
+  cursor: pointer;
+  outline: none;
+  font-weight: normal;
+  font-size: 16px;
+  width: 100%;
+  text-align: center;
+}
+i.fa.fa-spinner,
+i.fa.fa-angle-double-right {
+  float: right;
+}
