@@ -1,172 +1,157 @@
 <h2 class="content-head">Статистика системы</h2>
 
-
-
-<table border="0" cellspacing="0" cellpadding="0" class="content" align="center">
-<tr>
-<td width="50%" style="padding-right:10px;" valign="top">
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
-<tr>
-<td colspan="2" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" alt="" />{{ lang['server'] }}</td>
-</tr>
-<tr>
-<td width="50%" class="contentEntry1">{{ lang['os'] }}</td>
-<td width="50%" class="contentEntry2">{{ php_os }}</td>
-</tr>
-<tr>
-<td width="50%" class="contentEntry1">{{ lang['php_version'] }} / {{ lang['mysql_version'] }}</td>
-<td width="50%" class="contentEntry2">{{ php_version }} / {{ mysql_version }}</td>
-</tr>
-<tr>
-<td width="50%" class="contentEntry1">{{ lang['gd_version'] }}</td>
-<td width="50%" class="contentEntry2">{{ gd_version }}</td>
-</tr>
-</table>
-</td>
-<td width="50%" style="padding-left:10px;" valign="top">
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
-<tr>
-<td colspan="2" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" alt="" />Next Generation CMS</td>
-</tr>
-<tr>
-<td width="50%" class="contentEntry1">{{ lang['current_version'] }}</td>
-<td width="50%" class="contentEntry2"><span style="font-weight: bold; color: #6cb7ef;">{{ currentVersion }}</span></td>
-</tr>
-<tr>
-<td width="50%" class="contentEntry1">{{ lang['last_version'] }}</td>
-<td width="50%" class="contentEntry2"><span id="syncLastVersion">loading..</span></td>
-</tr>
-<tr>
-<td width="50%" class="contentEntry1">{{ lang['svn_version'] }}</td>
-<td width="50%" class="contentEntry2"><span id="syncSVNVersion">loading..</span></td>
-</tr>
-</table>
-</td>
-</tr>
-<tr><td colspan="2">&nbsp;</td></tr>
-<tr>
-<td width="50%"  style="padding-right:10px;" valign="top">
-	<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<div class="content-main clear">
+	<div class="div-resp" style="font-size: 80%;">
+		<h3 class="content-title">{{ lang['server'] }}</h3>
+		<ul class="config-list">
+			<li class="config-box clear">
+				{{ lang['os'] }}
+				<span class="fr">{{ php_os }}</span>
+			</li>
+			<li class="config-box clear">
+				{{ lang['php_version'] }} / {{ lang['mysql_version'] }}
+				<span class="fr">{{ php_version }} / {{ mysql_version }}</span>
+			</li>
+			<li class="config-box clear">
+				{{ lang['gd_version'] }}
+				<span class="fr">{{ gd_version }}</span>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="div-resp" style="font-size: 80%;">
+		<h3 class="content-title">Next Generation CMS</h3>
+		<ul class="config-list">
+			<li class="config-box clear">
+				{{ lang['current_version'] }}
+				<span class="fr" style="font-weight: bold; color: #6cb7ef;">{{ currentVersion }}</span>
+			</li>
+			<li class="config-box clear">
+				{{ lang['last_version'] }}
+				<span class="fr" id="syncLastVersion">loading..</span>
+			</li>
+			<li class="config-box clear">
+				{{ lang['svn_version'] }}
+				<span class="fr" id="syncSVNVersion">loading..</span>
+			</li>
+		</ul>
+	<script type="text/javascript" language="JavaScript" src="{{versionNotifyURL }}"></script>
+	</div>
+	
+	<div class="div-resp" style="font-size: 80%;">
+		<h3 class="content-title">{{ lang['note'] }}</h3>
+		<form method="post" action="{{ php_self }}?mod=statistics">
+			<input type="hidden" name="action" value="save" />
+			<textarea name="note">{{ admin_note }}</textarea>
+			<input class="fr" type="submit" value="{{ lang['save_note'] }}" />
+		</form>
+	</div>
+	
+	<div class="div-resp" style="font-size: 80%;">
+		<h3 class="content-title">{{ lang['size'] }}</h3>
+		<ul class="config-list">
+			<li class="config-box clear">
+				{{ lang['allowed_size'] }}
+				<span class="fr">{{ allowed_size }}</span>
+			</li>
+			<li class="config-box clear">
+				{{ lang['mysql_size'] }}
+				<span class="fr">{{ mysql_size }}</span>
+			</li>
+		</ul>
+		<table>
+			<tr>
+				<td>{{ lang['group'] }}</td>
+				<td align="right">{{ lang['amount'] }}</td>
+				<td align="right">{{ lang['volume'] }}</td>
+				<td> &nbsp; {{ lang['permissions'] }}</td>
+			</tr>
+			<tr>
+				<td>{{ lang['group_images'] }}</td>
+				<td align="right">{{ image_amount }}</td>
+				<td align="right">{{ image_size }}</td>
+				<td> &nbsp; {{ image_perm }}</td>
+			</tr>
+			<tr>
+			<td>{{ lang['group_files'] }}</td><td align="right">{{ file_amount }}</td><td align="right">{{ file_size }}</td><td> &nbsp; {{ file_perm }}</td></tr>
+			<tr>
+			<td>{{ lang['group_photos'] }}</td><td align="right">{{ photo_amount }}</td><td align="right">{{ photo_size }}</td><td>&nbsp; {{ photo_perm }}</td></tr>
+			<tr><td>{{ lang['group_avatars'] }}</td><td align="right">{{ avatar_amount }}</td><td align="right">{{ avatar_size }}</td><td> &nbsp; {{ avatar_perm }}</td></tr>
+			<tr><td>{{ lang['group_backup'] }}</td><td align="right">{{ backup_amount }}</td><td align="right">{{ backup_size }}</td><td> &nbsp; {{ backup_perm }}</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="div-resp" style="font-size: 80%;">
+		<h3 class="content-title">{{ lang['system'] }}</h3>
+		<ul class="config-list">
+			<li class="config-box clear">
+				{{ lang['all_cats'] }}
+				<span class="fr">{{ categories }}</span>
+			</li>
+			<li class="config-box clear">
+				{{ lang['all_news'] }}
+				<span class="fr"><a href="?mod=news&status=1">{{ news_draft }}</a> / <a href="?mod=news&status=2">{{ news_unapp }}</a> / <a href="?mod=news&status=3">{{ news }}</a></span>
+			</li>
+			<li class="config-box clear">
+				{{ lang['all_comments'] }}
+				<span class="fr">{{ comments }}</span>
+			</li>
+			<li class="config-box clear">
+				{{ lang['all_users'] }}
+				<span class="fr">{{ users }}</span>
+			</li>
+			<li class="config-box clear">
+				{{ lang['all_users_unact'] }}
+				<span class="fr">{{ users_unact }}</span>
+			</li>
+			<li class="config-box clear">
+				{{ lang['all_images'] }}
+				<span class="fr">{{ images }}</span>
+			</li>
+			<li class="config-box clear">
+				{{ lang['all_files'] }}
+				<span class="fr">{{ files }}</span>
+			</li>
+		</ul>
+	</div>
+	
+		 
+	<table>
 		<tr>
-			<td colspan="4" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" alt="" />{{ lang['size'] }}</td>
-		</tr>
-		<tr>
-			<td class="contentEntry1">{{ lang['group'] }}</td>
-			<td class="contentEntry1" align="right">{{ lang['amount'] }}</td>
-			<td class="contentEntry1"align="right">{{ lang['volume'] }}</td>
-			<td class="contentEntry1"> &nbsp; {{ lang['permissions'] }}</td>
-		</tr>
-		<tr>
-			<td class="contentEntry1">{{ lang['group_images'] }}</td>
-			<td class="contentEntry1"align="right">{{ image_amount }}</td>
-			<td class="contentEntry1"align="right">{{ image_size }}</td>
-			<td class="contentEntry1"> &nbsp; {{ image_perm }}</td>
-		</tr>
-		<tr>
-		<td class="contentEntry1">{{ lang['group_files'] }}</td><td class="contentEntry1"align="right">{{ file_amount }}</td><td class="contentEntry1"align="right">{{ file_size }}</td><td class="contentEntry1"> &nbsp; {{ file_perm }}</td></tr>
-		<tr>
-		<td class="contentEntry1">{{ lang['group_photos'] }}</td><td class="contentEntry1" align="right">{{ photo_amount }}</td><td class="contentEntry1" align="right">{{ photo_size }}</td><td class="contentEntry1">&nbsp; {{ photo_perm }}</td></tr>
-		<tr><td class="contentEntry1">{{ lang['group_avatars'] }}</td><td class="contentEntry1" align="right">{{ avatar_amount }}</td><td class="contentEntry1" align="right">{{ avatar_size }}</td><td class="contentEntry1"> &nbsp; {{ avatar_perm }}</td></tr>
-		<tr><td class="contentEntry1">{{ lang['group_backup'] }}</td><td class="contentEntry1" align="right">{{ backup_amount }}</td><td class="contentEntry1" align="right">{{ backup_size }}</td><td class="contentEntry1"> &nbsp; {{ backup_perm }}</td>
+			<td width="50%" style="padding-left:10px;" valign="top">
+			{% if (flags.confError) %}
+				<!-- Configuration errors -->
+				 <table border="0" width="100%" cellspacing="0" cellpadding="0">
+					 <tr>
+						 <td colspan="2" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" alt="" /><font color="red">{{ lang['pconfig.error'] }}</font></td>
+					</tr>
+					<tr>
+						<td>
+							<table width="100%">
+								<thead>
+								<tr>
+									<td>{{ lang['perror.parameter'] }}</td><td>{{ lang['perror.shouldbe'] }}</td><td>{{ lang['perror.set'] }}</td>
+								</tr>
+								</thead>
+								<tr><td>Register Globals</td><td>Отключено</td><td>{{ flags.register_globals }}</td></tr>
+								<tr><td>Magic Quotes GPC</td><td>Отключено</td><td>{{ flags.magic_quotes_gpc }}</td></tr>
+								<tr><td>Magic Quotes Runtime</td><td>Отключено</td><td>{{ flags.magic_quotes_runtime }}</td></tr>
+								<tr><td>Magic Quotes Sybase</td><td>Отключено</td><td>{{ flags.magic_quotes_sybase }}</td></tr>
+							</table>
+							<br/>
+							&nbsp;<a style="cursor: pointer; color: red;" onclick="document.getElementById('perror_resolve').style.display='block';">{{ lang['perror.howto'] }}</a><br/>
+							<div id="perror_resolve" style="display: none;">
+							{{ lang['perror.descr'] }}
+							</div>
+						 </td>
+					 </tr>
+				 </table>
+			{% endif %}
+			</td>
 		</tr>
 	</table>
-
-<script type="text/javascript" language="JavaScript" src="{{versionNotifyURL }}"></script>
-
-<br/><br/>
-
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
-<tr>
-<td colspan="2" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" alt="" />{{ lang['size'] }}</td>
-</tr>
-<tr>
-<td width="50%" class="contentEntry1">{{ lang['allowed_size'] }}</td>
-<td width="50%" class="contentEntry2">{{ allowed_size }}</td>
-</tr>
-<tr>
-<td width="50%" class="contentEntry1">{{ lang['mysql_size'] }}</td>
-<td width="50%" class="contentEntry2">{{ mysql_size }}</td>
-</tr>
-</table>
-</td>
-
-<td width="50%" style="padding-left:10px;" valign="top">
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
-<tr>
-<td colspan="2" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" alt="" />{{ lang['system'] }}</td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['all_cats'] }}</td>
-<td width="30%" class="contentEntry2">{{ categories }}</td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['all_news'] }}</td>
-<td width="30%" class="contentEntry2"><a href="?mod=news&status=1">{{ news_draft }}</a> / <a href="?mod=news&status=2">{{ news_unapp }}</a> / <a href="?mod=news&status=3">{{ news }}</a></td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['all_comments'] }}</td>
-<td width="30%" class="contentEntry2">{{ comments }}</td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['all_users'] }}</td>
-<td width="30%" class="contentEntry2">{{ users }}</td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['all_users_unact'] }}</td>
-<td width="30%" class="contentEntry2">{{ users_unact }}</td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['all_images'] }}</td>
-<td width="30%" class="contentEntry2">{{ images }}</td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['all_files'] }}</td>
-<td width="30%" class="contentEntry2">{{ files }}</td>
-</tr>
-</table>
-</td>
-</tr>
-<tr><td colspan="2">&nbsp;</td></tr>
-
-<tr>
-<td width="50%" style="padding-right:10px;" valign="top">
- <table>
-  <tr><td class="contentHead">{{ lang['note'] }}</td></tr>
-  <tr>
-   <td>
-    <form method="post" action="{{ php_self }}?mod=statistics">
-     <input type="hidden" name="action" value="save" />
-     <textarea name="note">{{ admin_note }}</textarea>
-     <input class="fr" type="submit" value="{{ lang['save_note'] }}" />
-    </form>
-   </td>
-  </tr>
- </table>
-</td>
-<td width="50%" style="padding-left:10px;" valign="top">
-{% if (flags.confError) %}
-<!-- Configuration errors -->
- <table border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr><td colspan="2" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8" alt="" /><font color="red">{{ lang['pconfig.error'] }}</font></td></tr>
-  <tr><td>
-<table width="100%">
-<thead><tr><td>{{ lang['perror.parameter'] }}</td><td>{{ lang['perror.shouldbe'] }}</td><td>{{ lang['perror.set'] }}</td></thead>
-<tr><td>Register Globals</td><td>Отключено</td><td>{{ flags.register_globals }}</td></tr>
-<tr><td>Magic Quotes GPC</td><td>Отключено</td><td>{{ flags.magic_quotes_gpc }}</td></tr>
-<tr><td>Magic Quotes Runtime</td><td>Отключено</td><td>{{ flags.magic_quotes_runtime }}</td></tr>
-<tr><td>Magic Quotes Sybase</td><td>Отключено</td><td>{{ flags.magic_quotes_sybase }}</td></tr>
-</table>
-<br/>
-&nbsp;<a style="cursor: pointer; color: red;" onclick="document.getElementById('perror_resolve').style.display='block';">{{ lang['perror.howto'] }}</a><br/>
-<div id="perror_resolve" style="display: none;">
-{{ lang['perror.descr'] }}
 </div>
-  </td></tr>
- </table>
-{% endif %}
-</td>
-</tr>
-</table>
 
 <style>
 #modalmsgDialog { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: none;}

@@ -736,7 +736,7 @@ position: relative;
 }
 
 .div-resp {
- margin-top: 8px;
+ /*margin-top: 8px;*/
  float: left;
  padding-right: 2%;
 }
