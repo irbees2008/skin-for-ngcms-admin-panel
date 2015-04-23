@@ -13,7 +13,7 @@
 	<!-- /Navigation bar -->
 
 	<div class="tabs-content" id="maincontent">
-		<table class="hover">
+		<table class="table-resp table-extras">
 			<thead>
 				<tr>
 					<th>{{ lang['id'] }}</th>

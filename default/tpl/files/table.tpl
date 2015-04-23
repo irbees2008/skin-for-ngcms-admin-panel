@@ -53,16 +53,16 @@ function setStatus(mode) {
 		<form action="{php_self}?mod=files" method="post" name="delform" id="delform">
 			<input type="hidden" name="area" value="{area}" />
 			<input type="hidden" name="subaction" value="" />
-			<table class="hover odd" id="entries">
+			<table class="table-resp table-files" id="entries">
 				<thead>
 				<tr>
 					<th><input class="check" type="checkbox" name="master_box" title="{l_select_all}" onclick="check_uncheck_all(delform)" /></th>
 					<th>ID</th>
 					<th>{l_name}</th>
-					<th>{l_action}</th>
 					<th>{l_category}</th>
 					<th>{l_author}</th>
 					<th>{l_size}</th>
+					<th>{l_action}</th>
 				</tr>
 				</thead>
 					{entries}

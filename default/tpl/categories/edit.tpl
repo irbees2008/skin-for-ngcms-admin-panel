@@ -1,90 +1,138 @@
-<form method="post" action="{{ php_self }}?mod=categories" enctype="multipart/form-data">
-<input type="hidden" name="token" value="{{ token }}"/>
-
 <h2 class="content-head">{{ lang['editing'] }} "{{ name }}"</h2>
 
-<table>
-<tr>
-<td width="100%" colspan="5" class="contentHead"></td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1"><label for="cat_show">{{ lang['show_main'] }}</label></td>
-<td width="30%" class="contentEntry2"><input type="checkbox" id="cat_show" name="cat_show" value="1" class="check" {% if flags.showInMenu %}checked="checked" {% endif %}/></td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['show.link'] }}</td>
-<td width="30%" class="contentEntry2"><select name="show_link">{{ show_link }}</select></td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['title'] }}</td>
-<td width="30%" class="contentEntry2"><input value="{{ name }}" type=text size="40" name="name" /></td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['alt_name'] }}</td>
-<td width="30%" class="contentEntry2"><input value="{{ alt }}" type=text size="40" name="alt" /></td>
-</tr>
-{% if flags.haveMeta %}
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['cat_desc'] }}</td>
-<td width="30%" class="contentEntry2"><input type="text" size="40" name="description" value="{{ description }}" /></td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['cat_keys'] }}</td>
-<td width="30%" class="contentEntry2"><input type="text" size="40" name="keywords" value="{{ keywords }}" /></td>
-</tr>
-{% endif %}
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['cat_number'] }}</td>
-<td width="30%" class="contentEntry2"><input type="text" size="4" name="number" value="{{ number }}" /></td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['cat_tpl'] }}</td>
-<td width="30%" class="contentEntry2"><select name="tpl">{{ tpl_list }}</select></td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['template_mode'] }}</td>
-<td width="30%" class="contentEntry2"><select name="template_mode">{{ template_mode }}</select></td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['parent'] }}</td>
-<td width="30%" class="contentEntry2">{{ parent }}</td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['icon'] }}<br/><small>URL картинки, используемой в качестве иконки категории</small></td>
-<td width="30%" class="contentEntry2"><input type="text" size="40" name="icon" value="{{ icon }}" maxlength="255" /></td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">Прикрепленная иконка<br/><small>Вы можете прикрепить изображение-иконку непосредственно к категории.<br/>Данное поле имеет приоритет.</small></td>
-<td width="30%" class="contentEntry2">
-{% if flags.haveAttach %}<div id="previewImage"><img src="{{ attach_url }}"/>
-<br/>
-<input type="checkbox" name="image_del" value="1"> <label for="image_del">удалить иконку</label></div>
-<br/>{% endif %}
-<input type="file" size="40" name="image" />
-</td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['alt_url'] }}</td>
-<td width="30%" class="contentEntry2"><input value="{{ alt_url }}" type=text size="40" name="alt_url" /></td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1">{{ lang['orderby'] }}</td>
-<td width="30%" class="contentEntry2">{{ orderlist }}</td>
-</tr>
-<tr>
-<td width="70%" class="contentEntry1" valign="top">{{ lang['category.info'] }}<br/><small>{{ lang['category.info#desc'] }}</small></td>
-<td width="30%" class="contentEntry2"><textarea id="info" name="info" cols="70" rows="5">{{ info }}</textarea></td>
-</tr>
-{{ extend }}
-<tr>
-<td width="100%" colspan="2">&nbsp;</td>
-</tr>
-<tr align="center">
-<td width="100%" colspan="2" class="contentEdit">{% if flags.canModify %}
-<input type="submit" value="{{ lang['save'] }}" class="button" /> <input type="button" class="button" value="{{ lang['cancel'] }}" onclick="document.location='admin.php?mod=categories';" />
-<input type="hidden" name="action" value="doedit" />
-<input type="hidden" name="catid" value="{{ catid }}" />{% endif %}
-</td>
-</tr>
-</table>
+<form method="post" action="{{ php_self }}?mod=categories" enctype="multipart/form-data">
+	<input type="hidden" name="token" value="{{ token }}"/>
+
+	<ul class="config-list">
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title"><label for="cat_show">{{ lang['show_main'] }}</label></h4>
+				<p></p>
+			</div>
+			<div class="config-var"><input type="checkbox" id="cat_show" name="cat_show" value="1" class="check" {% if flags.showInMenu %}checked="checked" {% endif %}/></div>
+		</li>
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">{{ lang['show.link'] }}</h4>
+				<p></p>
+			</div>
+			<div class="config-var"><select name="show_link">{{ show_link }}</select></div>
+		</li>
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">{{ lang['title'] }}</h4>
+				<p></p>
+			</div>
+			<div class="config-var"><input type="text" name="name" value="{{ name }}" /></div>
+		</li>
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">{{ lang['alt_name'] }}</h4>
+				<p></p>
+			</div>
+			<div class="config-var"><input type="text" name="alt" value="{{ alt }}" /></div>
+		</li>
+		{% if flags.haveMeta %}
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">{{ lang['cat_desc'] }}</h4>
+				<p></p>
+			</div>
+			<div class="config-var"><input type="text" name="description" value="{{ description }}" /></div>
+		</li>
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">{{ lang['cat_keys'] }}</h4>
+				<p></p>
+			</div>
+			<div class="config-var"><input type="text" name="keywords" value="{{ keywords }}" /></div>
+		</li>
+		{% endif %}
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">{{ lang['cat_number'] }}</h4>
+				<p></p>
+			</div>
+			<div class="config-var"><input type="number" name="number" value="{{ number }}" /></div>
+		</li>
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">{{ lang['cat_tpl'] }}</h4>
+				<p></p>
+			</div>
+			<div class="config-var"><select name="tpl">{{ tpl_list }}</select></div>
+		</li>
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">{{ lang['template_mode'] }}</h4>
+				<p></p>
+			</div>
+			<div class="config-var"><select name="template_mode">{{ template_mode }}</select></div>
+		</li>
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">{{ lang['parent'] }}</h4>
+				<p></p>
+			</div>
+			<div class="config-var">{{ parent }}</div>
+		</li>
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">{{ lang['icon'] }}</h4>
+				<p>URL картинки, используемой в качестве иконки категории</p>
+			</div>
+			<div class="config-var"><input type="text" name="icon" value="{{ icon }}" maxlength="255" /></div>
+		</li>
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">Прикрепленная иконка</h4>
+				<p>Вы можете прикрепить изображение-иконку непосредственно к категории.<br/>Данное поле имеет приоритет.</p>
+			</div>
+			<div class="config-var">
+			{% if flags.haveAttach %}<div id="previewImage"><img class="w_100" src="{{ attach_url }}"/></div>
+			<div class="input-group w_100">
+				<span class="input-group-check">
+					<input type="checkbox" name="image_del" value="1">
+				</span>
+				<input type="text" value="удалить иконку" disabled />
+			</div>
+			{% endif %}
+			<div class="button button-fileinput">
+				<span id="spanfile1"><i class="fa fa-plus"></i> Add files...</span> <span id="spansize1"></span>
+				<input type="file" name="image" onchange="validateFile(this, 1);">
+			</div>
+			</div>
+		</li>
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">{{ lang['alt_url'] }}</h4>
+				<p></p>
+			</div>
+			<div class="config-var"><input type="text" name="alt_url" value="{{ alt_url }}" /></div>
+		</li>
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">{{ lang['orderby'] }}</h4>
+				<p></p>
+			</div>
+			<div class="config-var">{{ orderlist }}</div>
+		</li>
+		<li class="config-box clear">
+			<div class="config-descr">
+				<h4 class="config-title">{{ lang['category.info'] }}</h4>
+				<p>{{ lang['category.info#desc'] }}</p>
+			</div>
+			<div class="config-var"><textarea name="info" id="info">{{ info }}</textarea></div>
+		</li>
+		<table>{{ extend }}</table>
+
+	{% if flags.canModify %}
+	<div class="clear">
+		<input class="fr button-success" type="submit" value="{{ lang['save'] }}" />
+		<input class="fr" type="button" value="{{ lang['cancel'] }}" onclick="document.location='admin.php?mod=categories';" />
+		
+		<input type="hidden" name="action" value="doedit" />
+		<input type="hidden" name="catid" value="{{ catid }}" />
+	</div>
+	{% endif %}
 </form>

@@ -26,7 +26,6 @@
 		<!-- MAIN CONTENT -->
 		<div class="tabs-content clear" id="maincontent">
 			<label class="lable-title" for="newsTitle">{{ lang.editnews['title'] }}</label>
-			<span><br>Как правило заголовок новости или статьи должен состоять из</span>
 			<input class="w_100" type="text" id="newsTitle" name="title" value="{{ title }}" tabindex="1" placeholder="Введите заголовок новости. Поле является обязательным" />
 
 			{% if (approve == 1) %}
@@ -173,7 +172,7 @@
 				
 				<li class="content-sidebar-list-item"><label><input type="checkbox" name="flag_RAW" value="1" {% if (flags.raw) %}checked="checked"{% endif %} class="check" id="flag_RAW" {% if (flags['html.disabled']) %}disabled{% endif %} /> {{ lang.editnews['flag_raw'] }}</label> {% if (flags['raw.disabled']) %}[<font color="red">{{ lang.editnews['flags_lost'] }}</font>]{% endif %}</li>
 				
-				<li class="content-sidebar-list-item"><label><input type="checkbox" name="setViews" value="1" class="check" id="setViews" {% if (flags['setviews.disabled']) %}disabled{% endif %} /> {{ lang.editnews['set_views'] }}:</label> <input type="text" size="4" name="views" value="{{ views }}"  {% if (flags['setviews.disabled']) %}disabled{% endif %}/></li>
+				<li class="content-sidebar-list-item"><label><input type="checkbox" name="setViews" value="1" class="check" id="setViews" {% if (flags['setviews.disabled']) %}disabled{% endif %} onclick="$(this).parent().next().toggle();" /> {{ lang.editnews['set_views'] }}:</label> <input type="text" class="d-none w_100" name="views" value="{{ views }}"  {% if (flags['setviews.disabled']) %}disabled{% endif %}/></li>
 				
 				{% if (pluginIsActive('comments')) %}
 					<li class="content-sidebar-list-item clear">
@@ -265,23 +264,6 @@
 
 <script language="javascript" type="text/javascript">
 <!--
-function validateFile(fileInput, setRow) {
-	var fileObj, oSize, setRow;
-	if (!fileInput.value) {
-		document.getElementById('spanfile'+ setRow).innerHTML = '<i class="fa fa-plus"></i> Add files...';
-		document.getElementById('spansize'+ setRow).innerHTML = '';
-		return false;
-	}
-    if ( typeof ActiveXObject == "function" ) { // IE
-        fileObj = (new ActiveXObject("Scripting.FileSystemObject")).getFile(fileInput.value);
-    } else {
-        fileObj = fileInput.files[0];
-    }
-	document.getElementById('spanfile'+ setRow).innerHTML = fileInput.value.replace(/.*\\(.*)/, '$1').replace(/.*\/(.*)/, '$1');
-	document.getElementById('spansize'+ setRow).innerHTML = formatSize(fileObj.size);
-	return true;
-}
-
 function attachAddRow() {
 	var tbl = document.getElementById('attachFilelist');
 	var lastRow = tbl.rows.length;

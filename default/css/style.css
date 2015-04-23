@@ -79,60 +79,7 @@ p {
 	margin: 2px 0 8px 0;
 }
 
-table { 
- border-collapse: collapse;
- border-spacing: 0;
- width: 100%;
- border: 0;
- border-bottom: 1px solid #c8c8c8;
- margin: 8px 0;
- cursor: default;
- font-size: 88%;
-}
 
-caption {/*примен¤етс¤ только внутри table*/
- display: table-caption;
- text-align: right;
- font-weight: bold;
- padding: 0 0 2px 0;
- font-size: 88%;
-}
-thead {
-  border-top: 1px solid #ddd;
-}
-th {
-font-weight: bold;
-background: #cfcfcf;
-color: #444;
-  font-size: 14px;
-}
-td, th {
- text-align: left;
- padding: 4px;
-}
-td img/*, td, th*/ {
- vertical-align: top;
-}
-tfoot tr td {
- font-weight: bold;
- background: #efefef;
- color: #000;
-}
-tbody {
-}
-.hover tbody tr:hover td {
-background-color: #cfcfcf;
-color: #000;
-}
-.odd tr:nth-child(odd) {
- background: #efefef;
-}
-.vatop td {
-	vertical-align: top;
-}
-.table-fixed {
-  table-layout: fixed;
-}
 label {
  display: inline-block;
  *display: inline;
@@ -301,7 +248,8 @@ input[type="submit"].button-success:hover {
   overflow: hidden;
   position: relative;
   line-height: 26px;
-}
+  text-align: center;
+  }
 .button-fileinput input[type="file"] {
   margin: 0;
   cursor: pointer;
@@ -537,6 +485,7 @@ text-decoration: none;
 	height: 100%;
 	position: fixed;
   padding-bottom: 50px;
+  left: 0;
 }
 .navbar-nav,
 .navbar-nav li,
@@ -638,105 +587,26 @@ position: relative;
 	left: 188px;
 }
 
-
 @media (max-width: 960px) {
 	.navbar-toggle {display:block;}
 
-	.navbar-nav.slide-in {
-		-moz-animation: slidein 300ms forwards;
-		-o-animation: slidein 300ms forwards;
-		-webkit-animation: slidein 300ms forwards;
-		animation: slidein 300ms forwards;
-		-webkit-transform-style: preserve-3d;
-		transform-style: preserve-3d;
-	}
-	.navbar-nav {
-		left: -188px;
-		-moz-animation: slideout 300ms forwards;
-		-o-animation: slideout 300ms forwards;
-		-webkit-animation: slideout 300ms forwards;
-		animation: slideout 300ms forwards;
-		-webkit-transform-style: preserve-3d;
-		transform-style: preserve-3d;
-	}
+	.footer {margin: 0 5px;}
+	
+	.navbar-nav {left: -188px;}
+	.navbar-nav.slide-in {left: 0;}
+
 	.side-body {
 		position: relative;
 		min-height: 100%;
 		height: auto !important;
 		height: 100%;
 		margin: 0 5px -40px 5px;
-		padding: 60px 5px 60px 5px;
-		-moz-animation: bodyslideout 300ms forwards;
-		-o-animation: bodyslideout 300ms forwards;
-		-webkit-animation: bodyslideout 300ms forwards;
-		animation: bodyslideout 300ms forwards;
-		-webkit-transform-style: preserve-3d;
-		transform-style: preserve-3d;
+		padding: 60px 5px;
 	}
-	.footer {
-		margin: 0 5px;
-	}
-	.body-slide-in {
-		-moz-animation: bodyslidein 300ms forwards;
-		-o-animation: bodyslidein 300ms forwards;
-		-webkit-animation: bodyslidein 300ms forwards;
-		animation: bodyslidein 300ms forwards;
-		-webkit-transform-style: preserve-3d;
-		transform-style: preserve-3d;
-	}
-	
-	@-moz-keyframes slidein {
-	0% {left: -188px;}
-	100% {left: 0;}
-	}
-	@-webkit-keyframes slidein {
-	0% {left: -188px;}
-	100% {left: 0;}
-	}
-	@keyframes slidein {
-	0% {left: -188px;}
-	100% {left: 0;}
-	}
-	@-moz-keyframes slideout {
-	0% {left: 0;}
-	100% {left: -188px;}
-	}
-	@-webkit-keyframes slideout {
-	0% {left: 0;}
-	100% {left: -188px;}
-	}
-	@keyframes slideout {
-	0% {left: 0;}
-	100% {left: -188px;}
-	}
-	@-moz-keyframes bodyslidein {
-	0% {left: 0;}
-	100% {left: 188px;}
-	}
-	@-webkit-keyframes bodyslidein {
-	0% {left: 0;}
-	100% {left: 188px;}
-	}
-	@keyframes bodyslidein {
-	0% {left: 0;}
-	100% {left: 188px;}
-	}
-	@-moz-keyframes bodyslideout {
-	0% {left: 188px;}
-	100% {left: 0;}
-	}
-	@-webkit-keyframes bodyslideout {
-	0% {left: 188px;}
-	100% {left: 0;}
-	}
-	@keyframes bodyslideout {
-	0% {left: 188px;}
-	100% {left: 0;}
-	}
+	.body-slide-in {margin-left: 193px; margin-right: -193px;}
 }
 
 .div-resp {
- /*margin-top: 8px;*/
  float: left;
  padding-right: 2%;
 }
@@ -991,8 +861,9 @@ i.fa.fa-question:hover {
   margin: 0 0 8px;
   padding: 4px 0 4px 8px;
   width: 100%;
-  zoom: 1;
   overflow: hidden;
+  border-bottom: 1px solid #f8f8f8;
+  min-height: 46px;
 }
 
 h4.config-title {
@@ -1016,9 +887,13 @@ h4.config-title {
   width: 32%;
 }
 
-.config-var input,
+.contentEntry2 input:not([type="file"]),
+.contentEntry2 select,
+.contentEntry2 textarea,
+.config-var input:not([type="file"]),
 .config-var select,
-.config-var textarea  {
+.config-var textarea,
+.button-fileinput {
   width: 100%;
   margin: 0;
 }
@@ -1207,7 +1082,9 @@ text-decoration: none;
   font-weight: bold;
   cursor: pointer;
 }
-.sysinfo_common, .sysmsg_common, .syserror_common {
+.sysinfo_common,
+.sysmsg_common,
+.syserror_common {
   margin-bottom: 18px;
   padding: 18px;
   background: #f8f8f8;
@@ -1228,7 +1105,6 @@ border-left: 4px solid #afa;
 .sysmsg_common .info {
   color: #080;
 }
-
 .syserror_common {
  border-left: 4px solid #f88;
 }
@@ -1236,7 +1112,9 @@ border-left: 4px solid #afa;
   color: #800;
 }
 
-.sysmsg_common .info, .syserror_common .info {
+.sysinfo_common .info,
+.sysmsg_common .info,
+.syserror_common .info {
   padding: 18px 0 0 0;
   font-weight: normal;
   font-size: 90%;
@@ -1486,11 +1364,8 @@ padding: 8px 16px;
 }
 
 /* *************** Табы ****************** */
-.content.tabs {
-  position: relative;
-}
 .tabs {
-  /*width: 100%;*/
+  position: relative;
   margin: 0 0 30px;
 }
 .tabs-title {
@@ -1596,6 +1471,9 @@ padding: 8px 16px;
   color: #08c;
 }
 /* ===================== INPORTANT Должно быть в конце =================================*/
+.d-none {
+  display: none;
+}
 /* Floating & Alignment */
 .fl { float: left; }
 .fr { float: right; }
@@ -1766,3 +1644,121 @@ input.important,
 input.password,
 input.email,
 input.home {border-right: 1px solid #800!important;}
+
+
+
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	border: 0;
+	margin: 8px 0;
+}
+caption {
+	display: table-caption;
+	text-align: right;
+	font-weight: bold;
+	padding: 0 0 2px 0;
+}
+tr {
+	border-bottom: 1px solid #f8f8f8;
+}
+
+.table-resp tr:nth-of-type(odd) { 
+	background: #eee; 
+}
+th { 
+	background: #444;
+	color: white; 
+	font-weight: bold; 
+}
+td, th { 
+	padding: 6px;
+	text-align: left;
+}
+tfoot td {
+	font-weight: bold;
+	background: #efefef;
+	color: #000;
+}
+td img {
+	vertical-align: top;
+}
+
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	.table-resp,
+	.table-resp thead,
+	.table-resp tbody,
+	.table-resp th,
+	.table-resp td,
+	.table-resp tr {
+		display: block;
+	}
+
+	.table-resp thead {
+		display: none;
+	}
+
+	.table-resp td {
+		position: relative;
+		padding-left: 50%;
+	}
+
+	.table-resp td:before { 
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+
+	.table-categories td:nth-of-type(1):before {content: "ID";}
+	.table-categories td:nth-of-type(2):before {content: "Заголовок";}
+	.table-categories td:nth-of-type(3):before {content: "Альтернативное имя";}
+	.table-categories td:nth-of-type(4):before {content: "Меню";}
+	.table-categories td:nth-of-type(5):before {content: "Шаблон";}
+	.table-categories td:nth-of-type(6):before {content: "Новостей";}
+	.table-categories td:nth-of-type(7):before {content: "Действие";}
+	
+	.table-extras td:nth-of-type(1):before {content: "Код";}
+	.table-extras td:nth-of-type(2):before {content: "Название";}
+	.table-extras td:nth-of-type(3):before {content: "Тип";}
+	.table-extras td:nth-of-type(4):before {content: "Версия";}
+	.table-extras td:nth-of-type(5):before {content: "Информация";}
+	.table-extras td:nth-of-type(6):before {content: "Описание";}
+	.table-extras td:nth-of-type(7):before {content: "Автор";}
+	.table-extras td:nth-of-type(8):before {content: "Действие";}
+	
+	.table-files td:nth-of-type(1):before {content: "Отметить";}
+	.table-files td:nth-of-type(2):before {content: "ID";}
+	.table-files td:nth-of-type(3):before {content: "Имя";}
+	.table-files td:nth-of-type(4):before {content: "Категория";}
+	.table-files td:nth-of-type(5):before {content: "Автор";}
+	.table-files td:nth-of-type(6):before {content: "Размер";}
+	.table-files td:nth-of-type(7):before {content: "Действие";}
+	
+	.table-images td:nth-of-type(1):before {content: "Отметить";}
+	.table-images td:nth-of-type(2):before {content: "ID";}
+	.table-images td:nth-of-type(3):before {content: "Имя";}
+	.table-images td:nth-of-type(4):before {content: "Просмотр";}
+	.table-images td:nth-of-type(5):before {content: "Вставка";}
+	.table-images td:nth-of-type(6):before {content: "Категория";}
+	.table-images td:nth-of-type(7):before {content: "Автор";}
+	.table-images td:nth-of-type(8):before {content: "Размер";}
+	.table-images td:nth-of-type(9):before {content: "Действие";}
+	
+	.table-ugroup td:nth-of-type(1):before {content: "#";}
+	.table-ugroup td:nth-of-type(2):before {content: "Идентификатор";}
+	.table-ugroup td:nth-of-type(3):before {content: "Название";}
+	.table-ugroup td:nth-of-type(4):before {content: "Пользователей в группе";}
+	.table-ugroup td:nth-of-type(5):before {content: "Действие";}
+
+	.table-ipban td:nth-of-type(1):before {content: "IP";}
+	.table-ipban td:nth-of-type(2):before {content: "Счетчик";}
+	.table-ipban td:nth-of-type(3):before {content: "Тип";}
+	.table-ipban td:nth-of-type(4):before {content: "Причина";}
+	.table-ipban td:nth-of-type(5):before {content: "Разблокировать";}
+}

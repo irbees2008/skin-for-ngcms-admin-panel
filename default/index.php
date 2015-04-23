@@ -80,7 +80,7 @@ $skin_header = <<<HTML
 					<li><a href="$PHP_SELF?mod=news&action=add">Добавить новость</a></li>
 				</ul>
 			</li>
-			<li><a href="$PHP_SELF?mod=categories"$h_active_categories><i class="fa fa-folder-open-o"></i> Категории<i class="fa fa-angle-right fr"></i></a>
+			<li><a href="$PHP_SELF?mod=categories"$h_active_categories><i class="fa fa-folder-open-o"></i> Категории новостей<i class="fa fa-angle-right fr"></i></a>
 				<ul> 
 					<li><a href="$PHP_SELF?mod=categories">Все категории</a></li>
 					<li><a href="$PHP_SELF?mod=categories&action=add">Добавить категорию</a></li>

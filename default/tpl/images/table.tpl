@@ -58,19 +58,18 @@ function setStatus(mode) {
 		<form action="{php_self}?mod=images" method="post" name="imagedelete" id="delform">
 			<input type="hidden" name="subaction" value="" />
 			<input type="hidden" name="area" value="{area}" />
-			<table class="hover" id="entries">
+			<table class="table-resp table-images" id="entries">
 				<thead>
 				<tr>
 					<th><input class="check" type="checkbox" name="master_box" title="{l_select_all}" onclick="javascript:check_uncheck_all(imagedelete)" /></th>
 					<th>ID</th>
 					<th>{l_name}</th>
-					[preview]<th>{l_show_preview}</th>[/preview]
 					<th>{l_header.view}</th>
 					<th>{l_header.insert}</th>
-					<th>{l_action}</th>
 					<th>{l_category}</th>
 					<th>{l_author}</th>
 					<th>{l_size}</th>
+					<th>{l_action}</th>
 				</tr>
 				</thead>
 				{entries}

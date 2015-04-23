@@ -1,6 +1,6 @@
 <h2 class="content-head">Статистика системы</h2>
 
-<div class="content-main clear">
+<div class="content-main-left">
 	<div class="div-resp" style="font-size: 80%;">
 		<h3 class="content-title">{{ lang['server'] }}</h3>
 		<ul class="config-list">
@@ -38,15 +38,7 @@
 	<script type="text/javascript" language="JavaScript" src="{{versionNotifyURL }}"></script>
 	</div>
 	
-	<div class="div-resp" style="font-size: 80%;">
-		<h3 class="content-title">{{ lang['note'] }}</h3>
-		<form method="post" action="{{ php_self }}?mod=statistics">
-			<input type="hidden" name="action" value="save" />
-			<textarea name="note">{{ admin_note }}</textarea>
-			<input class="fr" type="submit" value="{{ lang['save_note'] }}" />
-		</form>
-	</div>
-	
+
 	<div class="div-resp" style="font-size: 80%;">
 		<h3 class="content-title">{{ lang['size'] }}</h3>
 		<ul class="config-list">
@@ -82,7 +74,7 @@
 		</table>
 	</div>
 	
-	<div class="div-resp" style="font-size: 80%;">
+	<div class="div-resp w_50" style="font-size: 80%;">
 		<h3 class="content-title">{{ lang['system'] }}</h3>
 		<ul class="config-list">
 			<li class="config-box clear">
@@ -152,7 +144,14 @@
 		</tr>
 	</table>
 </div>
-
+<div class="content-sidebar-right">
+		<h3 class="content-title">{{ lang['note'] }}</h3>
+		<form method="post" action="{{ php_self }}?mod=statistics">
+			<input type="hidden" name="action" value="save" />
+			<textarea name="note">{{ admin_note }}</textarea>
+			<input class="fr" type="submit" value="{{ lang['save_note'] }}" />
+		</form>
+</div>
 <style>
 #modalmsgDialog { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: none;}
 #modalmsgWindow { margin: 5px; padding: 5px; border: 1px solid #CCCCCC; background-color: #F0F0F0; width: 400px; position: absolute; left: 40%; top: 40%; }

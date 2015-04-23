@@ -3,7 +3,7 @@
 <script type="text/javascript" src="{{ home }}/lib/ajax.js"></script>
 <script type="text/javascript" src="{{ home }}/lib/libsuggest.js"></script>
 <!-- Main content form -->
-<div class="content tabs clear">
+<div class="tabs clear">
 	<!-- Navigation bar -->
 	<ul class="tabs-title clear">
 		<li>{{ lang.addnews['bar.maincontent'] }}</li>
@@ -18,14 +18,7 @@
 	<div class="content-main-left">
 		<!-- MAIN CONTENT -->
 		<div class="tabs-content" id="maincontent">
-			<label class="lable-title" for="newsTitle">{{ lang.addnews['title'] }} <i class="fa fa-question"></i></label>
-			<div class="lable-title-question">Информация ...</div>
-						<script type="text/javascript">
-				$('.fa-question').click(function () {
-					$(this).parent().next().toggle();
-				});
-				//alert("Привет");
-			</script>
+			<label class="lable-title" for="newsTitle">{{ lang.addnews['title'] }}</label>
 			<input class="w_100" type="text" id="newsTitle" name="title" value="" tabindex="1" placeholder="Введите заголовок новости. Поле является обязательным"/>
 
 			<label class="lable-title" for="">Текст новости</label>
@@ -201,23 +194,7 @@ for (i in jev) {
 
 <script language="javascript" type="text/javascript">
 <!--
-function validateFile(fileInput, setRow) {
-	var fileObj, oSize, setRow;
-	if (!fileInput.value) {
-		document.getElementById('spanfile'+ setRow).innerHTML = '<i class="fa fa-plus"></i> Add files...';
-		document.getElementById('spansize'+ setRow).innerHTML = '';
-		return false;
-	}
-    if ( typeof ActiveXObject == "function" ) { // IE
-        fileObj = (new ActiveXObject("Scripting.FileSystemObject")).getFile(fileInput.value);
-    } else {
-        fileObj = fileInput.files[0];
-    }
-	document.getElementById('spanfile'+ setRow).innerHTML = fileInput.value.replace(/.*\\(.*)/, '$1').replace(/.*\/(.*)/, '$1');
-	document.getElementById('spansize'+ setRow).innerHTML = formatSize(fileObj.size);
-	return true;
-}
-	
+
 function attachAddRow() {
 	var tbl = document.getElementById('attachFilelist');
 	var lastRow = tbl.rows.length;

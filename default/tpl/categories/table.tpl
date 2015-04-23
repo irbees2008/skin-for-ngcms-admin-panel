@@ -3,8 +3,8 @@
 <script type="text/javascript" src="{{ admin_url }}/includes/js/ajax.js"></script>
 <script type="text/javascript" src="{{ admin_url }}/includes/js/admin.js"></script>
 
-<div class="content tabs clear" id="list">
-	<table class="hover">
+<div class="clear" id="list">
+	<table class="table-resp table-categories">
 		<thead>
 			<tr>
 				<th>ID</th>

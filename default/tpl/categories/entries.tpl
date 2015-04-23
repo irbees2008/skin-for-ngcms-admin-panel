@@ -1,7 +1,7 @@
 {% for entry in entries %}
 <tr>
 	<td>{{ entry.id }}</td>
-	<td>
+	<td class="clear">
 		<div class="fl">{{ entry.level }}</div>
 		<div class="fl">
 			{% if (flags.canView) %}<a href="admin.php?mod=categories&amp;action=edit&amp;catid={{ entry.id }}" title="ID: {{ entry.id }}">{{ entry.name }}</a>{% else %}{{ entry.name }}{% endif %}

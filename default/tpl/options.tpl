@@ -105,8 +105,10 @@
   </div>
   
   <div class="tabs-content active">
+  
   <!-- Настройки админ. панели -->
-	<ul>
+  <div class="content-main clear">
+	<ul class="div-resp fl">
 		<li>
 			<h4 class="li-title">Изменение цветовой схемы</h4>
 			<ul>
@@ -116,5 +118,32 @@
 			</ul>
 		</li>
 	</ul>
+	<ul class="div-resp fl">
+		<li>
+			<h4 class="li-title">Особенности темы</h4>
+			<ul>
+				<li>1 Табы запоминают последнюю позицию</li>
+				<li>2 Используется дополнительный языковой файл</li>
+				<li>3 Адаптивная верстка</li>
+				<li>4 ...</li>
+			</ul>
+		</li>
+	</ul>
+	<ul class="div-resp fl">
+		<li>
+			<h4 class="li-title">Баги темы</h4>
+			<ul>
+				<li>1 Не организованная CSS</li>
+				<li>2 Адаптивные таблицы не имеют языковой альтернативы. Необходимо создать подключение в зависимости от языка внешней CSS.</li>
+				<li>3 Элементы checkbox и radio используют псевдоэлемент :before, что запрещено ....</li>
+				<li>4 ...</li>
+			</ul>
+		</li>
+	</ul>
+	</div>
+	
+	<div class="content-footer clear">
+		Краткая информация о теме админ. панели.
+	</div>
   </div>
 </div>

@@ -9,7 +9,7 @@ $(document).ready(function(){
 		}
 	}); 
 	$('#scrollup').click(function(){
-		$("html, body").animate({ scrollTop: 0 }, 600);
+		$("html, body").animate({ scrollTop: 0 }, 888);
 		return false;
 	});
 	
@@ -118,4 +118,73 @@ function formatSize($file_size){
         $file_size = $file_size + " б";
     }
     return $file_size;
+}
+// считаем разрешение экрана
+function findDimensions(){
+	var width = 0, height = 0;
+	if(window.innerWidth){
+		width = window.innerWidth;
+		height = window.innerHeight;
+	}
+	else if(document.body && document.body.clientWidth){
+		width = document.body.clientWidth;
+		height = document.body.clientHeight;
+	}
+	if(document.documentElement && document.documentElement.clientWidth){
+		width = document.documentElement.clientWidth;
+		height = document.documentElement.clientHeight;
+	}
+	var ret=new Array();
+		ret['width']=width;
+		ret['height']=height;
+		return ret;
+}
+
+// Всплывающее изображение
+function openImgPopup(text) {
+	var monitor = findDimensions();
+	$('#photo_popup').remove();
+	$('#photo_popup_container').remove();
+	html = '<div class="darkScreen" id="photo_popup" onclick="closeImgPopup();"></div>' +
+			'<div class="popupNew" id="photo_popup_container" onclick="closeImgPopup();">' +
+			 '<div class="popup-body">' +
+			 '<img src="' + text + '" />' +
+			'</div></div>';
+	$("body").prepend(html);
+	$("#photo_popup_container img").css({'max-height':(monitor['height'] - 100)});
+	$("#photo_popup_container img").css({'max-width':(monitor['width'] - 50)});
+	$("#photo_popup").fadeIn();
+	$("#photo_popup_container").fadeIn();
+	return false;
+}
+// Закрытие всплывающего окна изображения
+function closeImgPopup() {
+	$("#photo_popup").fadeOut();
+	$("#photo_popup_container").fadeOut();
+}
+
+/*
+Для input type="file"
+HTML
+<div class="button button-fileinput">
+	<span id="spanfile1"><i class="fa fa-plus"></i> Add files...</span> <span id="spansize1"></span>
+	<input type="file" name="image" id="image-con" onchange="validateFile(this, 1);">
+</div>
+*/
+
+function validateFile(fileInput, setRow) {
+	var fileObj, oSize, setRow;
+	if (!fileInput.value) {
+		document.getElementById('spanfile'+ setRow).innerHTML = '<i class="fa fa-plus"></i> Add files...';
+		document.getElementById('spansize'+ setRow).innerHTML = '';
+		return false;
+	}
+    if ( typeof ActiveXObject == "function" ) { // IE
+        fileObj = (new ActiveXObject("Scripting.FileSystemObject")).getFile(fileInput.value);
+    } else {
+        fileObj = fileInput.files[0];
+    }
+	document.getElementById('spanfile'+ setRow).innerHTML = fileInput.value.replace(/.*\\(.*)/, '$1').replace(/.*\/(.*)/, '$1');
+	document.getElementById('spansize'+ setRow).innerHTML = formatSize(fileObj.size);
+	return true;
 }
