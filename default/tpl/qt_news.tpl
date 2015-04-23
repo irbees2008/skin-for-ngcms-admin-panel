@@ -229,7 +229,7 @@ function get_image_list(id, npp, page) {
 					var height = $('.img-height', tr).text();
 					var size = $('.img-size', tr).text();
 					//itxt += '<li><img width="140" src="' + hrf +'" title="' + title + '" onclick="openImgPopup(\''+ hrf + '\'); return false;" /></li>';
-					itxt += '<li><a class="img-link" href="#" onclick="insert_image(\'[img=&#34;' + hrf + '&#34; width=&#34;' + width + '&#34; height=&#34;' + height + '&#34; align=&#34;left&#34;]' + title + ' (' + size + ')' + '[/img]\', \'' + currentInputAreaID + '\');"><img src="' + hrf +'" alt="' + title + '"  /><div class="img-descr"><span>' + title + '<br />' + width + 'x' + height + '<br />' + size +'</span></div></a></li>';
+					itxt += '<li><a class="img-link" href="#" onclick="insert_image(\'[img=&#34;' + hrf + '&#34; width=&#34;' + width + '&#34; height=&#34;' + height + '&#34; align=&#34;left&#34;]' + title + ' (' + size + ')' + '[/img]\', \'' + currentInputAreaID + '\');$(this).children(\'.img-descr\').children(\'span\').html(\'<b>Изображение вставлено</b>\');"><img src="' + hrf +'" alt="' + title + '" /><div class="img-descr"><span>' + title + '<br />' + width + 'x' + height + '<br />' + size +'</span></div></a></li>';
 				});
 
 				//alert(snum + ' -- ' + npp);
