@@ -26,7 +26,7 @@ if(selectedOption == 'additional') {document.getElementById('additional').style.
 </tr>
 <tr>
 <td width="50%" valign="top" class="contentEntry1"><textarea id="content" name="content" rows="10" cols="70">{answer}</textarea></td>
-<td width="50%" valign="top" class="contentEntry1">{quicktags}<br />{smilies}</td>
+<td width="50%" valign="top" class="contentEntry1">{quicktags}<br /><div id="smilies" class="smile-box">{{ smilies }}</div></td>
 </tr>
 <tr>
 <td width="100%" colspan="2" class="contentHead"><img src="{skins_url}/images/nav.gif" hspace="8" />{l_comment}</td>

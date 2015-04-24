@@ -23,7 +23,7 @@ var currentInputAreaID = 'content';
 
 			<label class="lable-title" for="content">Текст статьи</label>
 			{{ quicktags }}
-			<div id="smilies">{{ smilies }}</div>
+			<div id="smilies" class="smile-box">{{ smilies }}</div>
 			
 			<textarea name="content" id="content" placeholder="Полный текст статьи" tabindex="2">{{ data.content }}</textarea>
 			

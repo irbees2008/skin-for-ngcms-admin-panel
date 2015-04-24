@@ -29,7 +29,7 @@ $(document).ready(function(){
 	
 	$('.navbutton').click(function(){
 		$('.navbutton').each(function () {
-			$('.navbutton').removeClass('active')
+			$('.navbutton').removeClass('active');
 		});
 		$(this).addClass('active');
 	});
@@ -48,7 +48,8 @@ $(document).ready(function(){
 	$('ul.tabs-title').each(function(i) {
 		var storage = localStorage.getItem('tab' +document.getElementById('skin_module_name').value+ i);
 		if (storage) {
-		  $(this).find('li').removeClass('active').eq(storage).addClass('active')
+		  $(this)
+			.find('li').removeClass('active').eq(storage).addClass('active')
 			.closest('div.tabs').find('div.tabs-content').removeClass('active').eq(storage).addClass('active');
 		} else {
 			$('.tabs-title li').removeClass('active');

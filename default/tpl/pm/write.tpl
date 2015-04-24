@@ -10,7 +10,7 @@
 		
 		<label class="lable-title" for="content">{l_content}</label>
 		{quicktags}
-		<div id="smilies">{smilies}</div>
+		<div id="smilies" class="smile-box">{{ smilies }}</div>
 		<textarea name="content" id="content" tabindex="3" maxlength="3000" placeholder="Наберите текст сообщения" /></textarea>
 	</div>
 	

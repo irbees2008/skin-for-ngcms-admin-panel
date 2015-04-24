@@ -22,25 +22,26 @@
 			<input class="w_100" type="text" id="newsTitle" name="title" value="" tabindex="1" placeholder="Введите заголовок новости. Поле является обязательным"/>
 
 			<label class="lable-title" for="">Текст новости</label>
-			{{ quicktags }}
-			<div id="smilies">{{ smilies }}</div>
+			<div id="fullwidth">
+				{{ quicktags }}
+				<div id="smilies" class="smile-box">{{ smilies }}</div>
 
-			{% if (flags.edit_split) %}
-				<div id="container.content.short" class="contentActive">
-					<textarea placeholder="Краткое описание новости" onclick="changeActive('short');" onfocus="changeActive('short');" name="ng_news_content_short" id="ng_news_content_short" tabindex="2"></textarea>
-				</div>
-				{% if (flags.extended_more) %}
-					<label class="lable-title" for="content_delimiter">{{ lang.addnews['editor.divider'] }}</label>
-					<input class="w_100" type="text" name="content_delimiter" id="content_delimiter" value="" tabindex="2"/>
-				{% endif %}
-				<div id="container.content.full" class="contentInactive">
-					<textarea placeholder="Полный текст новости" onclick="changeActive('full');" onfocus="changeActive('full');" name="ng_news_content_full" id="ng_news_content_full" tabindex="2"></textarea>
-				</div>
+				{% if (flags.edit_split) %}
+					<div id="container_content_short" class="contentActive">
+						<textarea onclick="changeActive('short');" onfocus="changeActive('short');" name="ng_news_content_short" id="ng_news_content_short" tabindex="2" placeholder="Краткое описание новости" ></textarea>
+					</div>
+					{% if (flags.extended_more) %}
+						<input class="w_100" type="text" name="content_delimiter" id="content_delimiter" value="" tabindex="2" placeholder="{{ lang.addnews['editor.divider'] }}" />
+					{% endif %}
+					<div id="container_content_full" class="contentInactive">
+						<textarea name="ng_news_content_full" id="ng_news_content_full" onclick="changeActive('full');" onfocus="changeActive('full');" tabindex="2" placeholder="Текст полной новости"></textarea>
+					</div>
 				{% else %}
-				<div id="container.content" class="contentActive">
-					<textarea placeholder="Полный текст новости" name="ng_news_content" id="ng_news_content" tabindex="2"></textarea>
-				</div>
-			{% endif %}
+					<div id="container_content" class="contentActive">
+						<textarea name="ng_news_content" id="ng_news_content" tabindex="2" placeholder="Текст полной новости"></textarea>
+					</div>
+				{% endif %}
+			</div>
 
 			{% if not flags['altname.disabled'] %}
 				<label class="lable-title" for="alt_name">{{ lang.addnews['alt_name'] }}</label>
@@ -243,6 +244,20 @@ function attachAddRow() {
 // Add first row
 var attachAbsoluteRowID = 0;
 
+// горячие клавиши
+document.onkeydown = function(e) {
+	e = e || event;
+
+	if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
+	var form = document.getElementById("postForm");
+		form.submit();
+		return false;
+	}
+	if (e.keyCode == 122) {
+		$('#fullwidth').toggleClass('news-content-full');
+		return false;
+	}
+}
 -->
 </script>
 
@@ -277,12 +292,12 @@ function preview(){
 
 function changeActive(name) {
  if (name == 'full') {
-	document.getElementById('container.content.full').className  = 'contentActive';
-	document.getElementById('container.content.short').className = 'contentInactive';
+	document.getElementById('container_content_full').className  = 'contentActive';
+	document.getElementById('container_content_short').className = 'contentInactive';
 	currentInputAreaID = 'ng_news_content_full';
  } else {
-	document.getElementById('container.content.short').className = 'contentActive';
-	document.getElementById('container.content.full').className  = 'contentInactive';
+	document.getElementById('container_content_short').className = 'contentActive';
+	document.getElementById('container_content_full').className  = 'contentInactive';
 	currentInputAreaID = 'ng_news_content_short';
  }
 }

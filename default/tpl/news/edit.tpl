@@ -37,22 +37,21 @@
 			<label class="lable-title" for="">Текст новости</label>
 			<div id="fullwidth">
 				{{ quicktags }}
-				<div id="smilies">{{ smilies }}</div>
+				<div id="smilies" class="smile-box">{{ smilies }}</div>
 
 				{% if (flags.edit_split) %}
-					<div id="container.content.short" class="contentActive">
-						<textarea placeholder="Краткое описание новости" onclick="changeActive('short');" onfocus="changeActive('short');" name="ng_news_content_short" id="ng_news_content_short" tabindex="2">{{ content.short }}</textarea>
+					<div id="container_content_short" class="contentActive">
+						<textarea onclick="changeActive('short');" onfocus="changeActive('short');" name="ng_news_content_short" id="ng_news_content_short" tabindex="2" placeholder="Краткое описание новости">{{ content.short }}</textarea>
 					</div>
 					{% if (flags.extended_more) %}
-						<label class="lable-title" for="content_delimiter">{{ lang.editnews['editor.divider'] }}</label>
-						<input sclass="w_100" type="text" name="content_delimiter" id="content_delimiter" value="{{ content.delimiter }}" tabindex="2"/>
+						<input class="w_100" type="text" name="content_delimiter" id="content_delimiter" value="{{ content.delimiter }}" tabindex="2"placeholder="{{ lang.editnews['editor.divider'] }}" />
 					{% endif %}
-					<div id="container.content.full" class="contentInactive">
-						<textarea onclick="changeActive('full');" onfocus="changeActive('full');" name="ng_news_content_full" id="ng_news_content_full" placeholder="Полный текст новости" tabindex="2">{{ content.full }}</textarea>
+					<div id="container_content_full" class="contentInactive">
+						<textarea name="ng_news_content_full" id="ng_news_content_full" onclick="changeActive('full');" onfocus="changeActive('full');" tabindex="2" placeholder="Текст полной новости">{{ content.full }}</textarea>
 					</div>
 				{% else %}
-					<div id="container.content" class="contentActive">
-						<textarea name="ng_news_content" id="ng_news_content" tabindex="2" placeholder="Полный текст новости" >{{ content.short }}</textarea>
+					<div id="container_content" class="contentActive">
+						<textarea name="ng_news_content" id="ng_news_content" tabindex="2" placeholder="Текст полной новости" >{{ content.short }}</textarea>
 					</div>
 				{% endif %}
 			</div>
@@ -312,28 +311,12 @@ document.onkeydown = function(e) {
 	if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
 	var form = document.getElementById("postForm");
 		form.submit();
-    return false;
-  }
-	/*if (e.keyCode == 122) {
-		$("#fullwidth").css("z-index", "9990");
-		$("#fullwidth").css("width", "100%");
-		$("#fullwidth").css("height", "100%");
-		$("#fullwidth").css("position", "fixed");
-		$("#fullwidth").css("left", "0");
-		$("#fullwidth").css("right", "0");
-		$("#fullwidth").css("top", "0");
-		$("#fullwidth").css("bottom", "0");
-	{% if (flags.edit_split) %}
-		$("#container.content.short").css("height", "50%");
-		$("#container.content.short textarea").css("height", "50%");
-		$("#container.content.full").css("height", "50%");
-		$("#container.content.full textarea").css("height", "50%");
-	{% else %}
-		$("#container.content").css("height", "100%");
-		$("#container.content textarea").css("height", "100%");
-	{% endif %}
-  return false;
-  }*/
+		return false;
+	}
+	if (e.keyCode == 122) {
+		$('#fullwidth').toggleClass('news-content-full');
+		return false;
+	}
 }
 -->
 </script>
@@ -363,12 +346,12 @@ function preview(){
 
 function changeActive(name) {
  if (name == 'full') {
-	document.getElementById('container.content.full').className  = 'contentActive';
-	document.getElementById('container.content.short').className = 'contentInactive';
+	document.getElementById('container_content_full').className  = 'contentActive';
+	document.getElementById('container_content_short').className = 'contentInactive';
 	currentInputAreaID = 'ng_news_content_full';
  } else {
-	document.getElementById('container.content.short').className = 'contentActive';
-	document.getElementById('container.content.full').className  = 'contentInactive';
+	document.getElementById('container_content_short').className = 'contentActive';
+	document.getElementById('container_content_full').className  = 'contentInactive';
 	currentInputAreaID = 'ng_news_content_short';
  }
 }
