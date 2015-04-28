@@ -88,17 +88,9 @@ function setStatus(mode) {
 					</div>
 				</div>
 				[/status]
-				{pagesss}
 			</div>
-			
-			<!--script type="text/javascript">
-			$(document).ready(function(){
-				$("#entries").click(function(){                        
-					$('#entries td:nth-child(1)').css('display','none');
-				});
-			});
-			</script-->
 		</form>
+		{pagesss}
 	</div>
 		
 	[status]

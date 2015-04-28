@@ -81,10 +81,9 @@ function setStatus(mode) {
 					</div>
 				</div>
 				[/status]
-				{pagesss}
 			</div>
-			
 		</form>
+		{pagesss}
 	</div>
 	
 	[status]

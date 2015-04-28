@@ -68,7 +68,118 @@ $(document).ready(function(){
     localStorage.setItem('tab' +document.getElementById('skin_module_name').value+ ulIndex, $(this).index());
   });
   // // // -- Табы
+
+	  /* Вставка тегов */
+	$('.tags_url').on('click', function(){
+		showPopupDiv('popup_url', 'Введите адрес ссылки', '<label class="w_100">Адрес ссылки:<input class="w_100" id="popup1" type="email" /></label><label class="w_100">Текст ссылки:<input class="w_100" id="popup2" type="text" /></label>', '<span onclick="insertext(\'[url=\' + $(\'#popup1\').val() + \']\' + $(\'#popup2\').val() + \'\',\'[/url]\', currentInputAreaID); hidePopupDiv();">Вставить</span>');
+	});
+	$('.tags_email').on('click', function(){
+		showPopupDiv('popup_url', 'Введите адрес электронной почты', '<label class="w_100">Электронная почта:<input class="w_100" id="popup1" type="email" /></label><label class="w_100">Текст ссылки:<input class="w_100" id="popup2" type="text" /></label>', '<span onclick="insertext(\'[email=\' + $(\'#popup1\').val() + \']\' + $(\'#popup2\').val() + \'\',\'[/email]\', currentInputAreaID); hidePopupDiv();">Вставить</span>');
+	});
+	$('.tags_img').on('click', function(){
+		showPopupDiv('popup_url', 'Введите ссылку на изображение', '<label class="w_100">Адрес ссылки:<input class="w_100" id="popup1" type="url" /></label><label class="w_100">Текст изображения:<input class="w_100" id="popup2" type="text" /></label>', '<span onclick="insertext(\'[img=\' + $(\'#popup1\').val() + \']\' + $(\'#popup2\').val() + \'\',\'[/img]\', currentInputAreaID); hidePopupDiv();">Вставить</span>');
+	});
+
 });
+  /* **************** ВСТАВКА изображений ****************** */
+function insert_image(text, area) {
+	var form = document.forms['form'];
+	try {
+	 var xarea = document.forms['DATA_tmp_storage'].area.value;
+	 if (xarea != '') area = xarea;
+	} catch(err) {;}
+	var control = document.getElementById(area);
+	                  
+	//control.focus();
+
+	// IE
+	if (document.selection && document.selection.createRange){
+		sel = document.selection.createRange();
+		sel.text = text = sel.text;
+	} else
+	// Mozilla
+	if (control.selectionStart || control.selectionStart == "0"){
+		var startPos = control.selectionStart;
+		var endPos = control.selectionEnd;
+
+		control.value = control.value.substring(0, startPos) + text + control.value.substring(startPos, control.value.length);
+		//control.selectionStart = msgfield.selectionEnd = endPos + open.length + close.length;
+	} else {
+		control.value += text;
+	}
+	control.focus();
+}
+/* Получение списка изображений */
+function get_image_list(id, npp, page) {
+	$.post('/engine/admin.php?mod=images&action=list&npp=' + npp + '&page=' + page, function (r) {
+		var qw = $('.img-src a', r).attr('href');
+		if (!qw) {
+			showPopupDiv(id, 'Выберите изображение для вставки', '<b>Нет загруженных изображений!</b>', '<span class="" title="Закрыть" onclick="hidePopupDiv();">Закрыть</span>');
+			return;
+		} else {
+			setTimeout(function () {
+				var popup_body = '';
+				var snum = '0';
+				$(".img-src a", r).each(function () {
+					snum++;
+					var hrf = $(this).attr('href');
+					var tr = $(this).closest('tr');
+					var title = $('.img-title', tr).text();
+					var width = $('.img-width', tr).text();
+					var height = $('.img-height', tr).text();
+					var size = $('.img-size', tr).text();
+					//itxt += '<li><img width="140" src="' + hrf +'" title="' + title + '" onclick="openImgPopup(\''+ hrf + '\'); return false;" /></li>';
+					if (size=='-') {
+						popup_body += '<li class="is-broken img-link"><a href="' + hrf + '" target="_blank">' + title + '</a><div class="img-descr"><span>Изображение не найдено!</span></div></li>';
+					} else {
+						popup_body += '<li class="is-loading img-link">\
+						<a href="javascript:;" onclick="\
+							insert_image(\'[img=&#34;' + hrf + '&#34; width=&#34;' + width + '&#34; height=&#34;' + height + '&#34; align=&#34;left&#34;]' + title + ' (' + size + ')' + '[/img]\', \'' + currentInputAreaID + '\');\
+							$(this).closest(\'li\').children(\'.img-descr\').children(\'span\').html(\'<b>Изображение вставлено</b>\');">Вставить</a>\
+						<img src="\
+							' + hrf +'" alt="' + title + '" \
+							onload="\
+							$(this).closest(\'li\').removeClass(\'is-loading\');\
+							$(this).css(\'opacity\',\'1\').fadeIn();" \
+						/>\
+						<div class="img-descr">\
+							<span>\
+							' + title + '<br />' + width + 'x' + height + '<br />' + size +'</span>\
+							</div>\
+						</li>';
+					}
+				});
+				
+				showPopupDiv(id, 'Выберите изображение для вставки', '<ul class="clear list-image">' + popup_body + '</ul>', '<span class="img-back" title="Стрелочка влево">Назад</span><span class="img-next" title="Стрелочка вправо">Далее</span>');
+				
+				if (page<2) {$('.img-back').hide();} else {var page_back = page - 1; $('.img-back').attr('onclick','hidePopupDiv();get_image_list(\'' + id + '\', ' + npp + ', ' + page_back + ');');}
+
+				if (snum<npp || page==0) {$('.img-next').hide();} else {page++; $('.img-next').attr('onclick','hidePopupDiv();get_image_list(\'' + id + '\', ' + npp + ', ' + page + ');');}
+				
+			}, 101);
+		}
+	});
+}
+/* Модальное окно */
+function hidePopupDiv(){
+	$('.div_popup')
+	.fadeOut()
+	.remove();
+	$('#boxesModal').remove();
+}
+function showPopupDiv(id, title, body, footer) {
+	$('#boxesModal').remove();
+	var $modal = $('<div class="darkScreen" id="boxesModal" onclick="hidePopupDiv()"></div>');
+	$("body").prepend($modal);
+	$modal.css({'zIndex':9903, 'cursor' : 'pointer'}).fadeIn();
+
+	$("body").append('<div id="'+id+'" class="div_popup" \
+		style="top: ' + ($("body").scrollTop() + 50) + 'px;">\
+		<div class="popup-close" title="Закрыть окно" onclick="hidePopupDiv();"><i class="fa fa-times"></i></div>\
+		<div class="popup-title">' + title + '</div>\
+		<div class="popup-body">' + body + '</div>\
+		<div class="popup-footer">' + footer + '</div>').fadeIn();
+}
 
 //Изменение вкладок
 	function ChangeOption(optn) {
@@ -163,6 +274,7 @@ function closeImgPopup() {
 	$("#photo_popup").fadeOut();
 	$("#photo_popup_container").fadeOut();
 }
+
 
 /*
 Для input type="file"

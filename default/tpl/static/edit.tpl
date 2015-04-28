@@ -4,7 +4,7 @@
 var currentInputAreaID = 'content';
 </script>
 
-<form name="DATA_tmp_storage" action="" id="DATA_tmp_storage"><input type="hidden" name="area" value="" /></form>
+<form name="DATA_tmp_storage" action="" id="DATA_tmp_storage"><input type="hidden" name="area" value="content" /></form>
 
 <div class="content clear">
 	<form name="form" id="postForm" method="post" action="{{ php_self }}?mod=static" target="_self">
@@ -22,11 +22,11 @@ var currentInputAreaID = 'content';
 			{% endif %}
 
 			<label class="lable-title" for="content">Текст статьи</label>
-			{{ quicktags }}
-			<div id="smilies" class="smile-box">{{ smilies }}</div>
-			
-			<textarea name="content" id="content" placeholder="Полный текст статьи" tabindex="2">{{ data.content }}</textarea>
-			
+			<div id="fullwidth">
+				{{ quicktags }}
+				<div id="smilies" class="smile-box clear">{{ smilies }}</div>
+				<textarea name="content" id="content" class="static-content" placeholder="Полный текст статьи" tabindex="2">{{ data.content }}</textarea>
+			</div>
 			<label class="lable-title" for="alt_name">{{ lang['alt_name'] }}</label>
 			<input class="w_100" type="text" name="alt_name" id="alt_name" value="{{ data.alt_name }}" tabindex="3" />
 			

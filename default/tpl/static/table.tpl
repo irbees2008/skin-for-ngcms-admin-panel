@@ -76,10 +76,6 @@
 			</div>
 		</div>
 		{% endif %}
-			
-		{{ pagesss }}
 	</div>
-
-		
-		
+{{ pagesss }}
 </form>

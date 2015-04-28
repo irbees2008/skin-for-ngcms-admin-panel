@@ -24,7 +24,7 @@
 			<label class="lable-title" for="">Текст новости</label>
 			<div id="fullwidth">
 				{{ quicktags }}
-				<div id="smilies" class="smile-box">{{ smilies }}</div>
+				<div id="smilies" class="smile-box clear">{{ smilies }}</div>
 
 				{% if (flags.edit_split) %}
 					<div id="container_content_short" class="contentActive">
@@ -148,7 +148,7 @@
 
 	{% if (pluginIsActive('xfields')) %}{{ plugin.xfields.general }}{% endif %}
 
-	<div class="clear content-footer-left">
+	<div class="content-footer-left clear">
 		<input type="hidden" name="mod" value="news" />
 		<input type="hidden" name="action" value="add" />
 		<input type="hidden" name="subaction" value="submit" />

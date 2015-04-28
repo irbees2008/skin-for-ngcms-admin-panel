@@ -2,7 +2,24 @@
 // Protect against hack attempts
 if (!defined('NGCMS')) die ('HAL');
 
-@require_once root.'skins/default/inc/functions.php';
+// Load skin language
+function LoadLang_askin($what, $area = '') {
+	global $config;
+	$filename = root.'skins/default/lang/'.$config['default_lang'].'/skin.ini';
+	
+	if (!$content = parse_ini_file($filename, true)) {
+		$filename = root.'skins/default/lang/english/skin.ini';
+		$content = parse_ini_file($filename, true);
+	}
+	if (!is_array($lang_askin)) { $lang_askin = array(); }
+	if ($area) {
+		$lang_askin[$area] = $content;
+	} else {
+		$lang_askin = array_merge($lang_askin, $content);
+	}
+	return $lang_askin;
+}
+$lang = array_merge (LoadLang('index', 'admin'), LoadLang_askin());
 
 if (is_array($userROW)) {
 	$newpm = $mysql->result("SELECT count(pmid) FROM ".prefix."_users_pm WHERE to_id = ".db_squote($userROW['id'])." AND viewed = '0'");

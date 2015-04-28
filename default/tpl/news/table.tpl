@@ -242,9 +242,8 @@ function filter_attach_DateEdit(id) {
 			</div>
 		</div>
 		{% endif %}
-		{{ pagesss }}
 	</div>
-
+{{ pagesss }}
 </form>
 
 <script language="javascript" type="text/javascript">

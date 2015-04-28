@@ -106,8 +106,8 @@
 					</div>
 				</div>
 				{% endif %}
-				{{ pagination }}
 			</div>
+			{{ pagination }}
 		</form>
 		<!-- Mass actions form: END -->
 	</div>

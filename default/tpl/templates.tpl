@@ -33,13 +33,8 @@ background-color: #111;
 <script type="text/javascript">
 $(document).ready( function() {
 	$('.menu-toggle').click(function(){
-		if ($("#fileTreeSelector").css("display") == "none") {
-			$("#fileTreeSelector").css("display", "block");
-			$(".CodeMirror").css("display", "none");
-		}else{
-			$("#fileTreeSelector").css("display", "none");
-			$(".CodeMirror").css("display", "block");
-		}
+			$("#fileTreeSelector").toggle();
+			$(".CodeMirror").toggle();
 	});
 });
 </script>
@@ -62,9 +57,9 @@ function _creattpl(){
 		return;
 	}else{
 		ngShowLoading();
-		/*var sc=document.createElement("SCRIPT");
-		sc.src='{{ skins_url }}/index.php?creattpl='+ngTemplateName+'/'+creattpl;
-		document.body.appendChild(sc);*/
+		var sc=document.createElement("SCRIPT");
+		sc.src='{{ skins_url }}/inc/functions.php?creattpl='+ngTemplateName+'/'+creattpl;
+		document.body.appendChild(sc);
 		
 	}
 }
@@ -131,8 +126,8 @@ submitTemplateSelector();
 	
 </div>
 	<div id="fileEditorButtonLine" class="content-footer-right clear">
-		<!--input class="fl" type="button" value="Создать файл" onclick="_creattpl()"/>
-		<input style="display: none;" class="fl button-del-tpl" type="button" value="Удалить файл" onclick="_deltpl()"/-->
+		<input class="fl" type="button" value="Создать файл" onclick="_creattpl()"/>
+		<input style="display: none;" class="fl button-del-tpl" type="button" value="Удалить файл" onclick="_deltpl()"/>
 		<input class="button-success fr" title="Ctrl+S" type="button" value="Сохранить файл" onclick="submitTemplateEdit();" />
 	</div>
 	

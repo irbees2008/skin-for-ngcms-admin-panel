@@ -37,7 +37,7 @@
 			<label class="lable-title" for="">Текст новости</label>
 			<div id="fullwidth">
 				{{ quicktags }}
-				<div id="smilies" class="smile-box">{{ smilies }}</div>
+				<div id="smilies" class="smile-box clear">{{ smilies }}</div>
 
 				{% if (flags.edit_split) %}
 					<div id="container_content_short" class="contentActive">
