@@ -1,5 +1,5 @@
 <h2 class="content-head">{{ lang.editnews['editnews_title'] }} "{{ title }}"</h2>
-
+<style>table input[type="text"], table input:not([type]), table select {width: 100%!important}</style>
 <script type="text/javascript" src="{{ home }}/lib/ajax.js"></script>
 <script type="text/javascript" src="{{ home }}/lib/libsuggest.js"></script>
 <!-- Main content form -->
