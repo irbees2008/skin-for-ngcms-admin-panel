@@ -480,7 +480,6 @@ font: 300 normal 12px/1.4 Arial, Helvetica, sans-serif;
 	position: fixed;
 	top: 0;
 	height: 100%;
-	/*background-color: #34495e;*/
 }
 .navbar a:hover {
 text-decoration: none;
@@ -500,20 +499,11 @@ text-decoration: none;
 	padding: 0;
 	width: 188px; 
 	list-style: none;
-	background: #34495e;
 }
 .navbar-nav li:hover li a {
-	/*background-color: #34495e;*/
 	color: #bbb;
 }
 
-.navbar a:hover,
-.navbar-nav li:hover a,
-.navbar-nav li:hover li a:hover,
-.navbar-nav li:hover li:hover a {
-	background-color: #2C3E50;
-	color: #fff;
-}
 .navbar-nav li {
 	float: left; 
 	display: inline;
@@ -534,9 +524,6 @@ text-decoration: none;
 .navbar-header {
 	width: 100%;
 	position: fixed;
-	/*z-index: 9990;*/
-	/*background: #34495e;*/
-	color:#bbb;
 }
 
 .navbar-brand {

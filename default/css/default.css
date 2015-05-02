@@ -1,11 +1,13 @@
 .navbar,
 .navbar-header,
+.navbar-brand,
 .navbar-nav,
 .navbar-nav li,
 .navbar-nav ul,
+.navbar-nav a,
 .navbar-nav li:hover li a {
-	background: #222;
-	color: #bbb;
+  color: #bbb;
+  background: #222;
 }
 
 .navbar a:hover,

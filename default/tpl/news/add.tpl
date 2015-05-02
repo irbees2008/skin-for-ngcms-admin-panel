@@ -126,17 +126,22 @@
 		<div class="content-sidebar-box">
 			<h3 class="content-sidebar-title">{{ lang['editor.configuration'] }}</h3>
 			<ul class="content-sidebar-list">
-				<li class="content-sidebar-list-item"><label><input type="checkbox" name="mainpage" value="1" class="check" id="mainpage" {% if (flags.mainpage) %}checked="checked" {% endif %}{% if flags['mainpage.disabled'] %}disabled {% endif %}  /> {{ lang.addnews['mainpage'] }}</label></li>
-				<li class="content-sidebar-list-item"><label><input type="checkbox" name="pinned" value="1" class="check" id="pinned" {% if (flags.pinned) %}checked="checked" {% endif %}{% if flags['pinned.disabled'] %}disabled {% endif %}  /> {{ lang.addnews['add_pinned'] }}</label></li>
-				<li class="content-sidebar-list-item"><label><input type="checkbox" name="catpinned" value="1" class="check" id="catpinned" {% if (flags.catpinned) %}checked="checked" {% endif %}{% if flags['catpinned.disabled'] %}disabled {% endif %}  /> {{ lang.addnews['add_catpinned'] }}</label></li>
-				<li class="content-sidebar-list-item"><label><input type="checkbox" name="favorite" value="1" class="check" id="favorite" {% if (flags.favorite) %}checked="checked" {% endif %}{% if flags['favorite.disabled'] %}disabled {% endif %}  /> {{ lang.addnews['add_favorite'] }}</label></li>
-				<li class="content-sidebar-list-item"><label><input name="flag_HTML" type="checkbox" class="check" id="flag_HTML" value="1" {% if (flags['html.disabled']) %}disabled {% endif %} {% if (flags['html']) %}checked="checked"{% endif %}/> {{ lang.addnews['flag_html'] }}</label></li>
-				<li class="content-sidebar-list-item"><label><input type="checkbox" name="flag_RAW" value="1" class="check" id="flag_RAW" {% if (flags['html.disabled']) %}disabled {% endif %} {% if (flags['raw']) %}checked="checked"{% endif %}/> {{ lang.addnews['flag_raw'] }}</label></li>
+				<li class="content-sidebar-list-item"><label><input type="checkbox" name="mainpage" id="mainpage" value="1" {% if (flags.mainpage) %}checked="checked" {% endif %}{% if flags['mainpage.disabled'] %}disabled {% endif %}  /> {{ lang.addnews['mainpage'] }}</label></li>
+				
+				<li class="content-sidebar-list-item"><label><input type="checkbox" name="pinned" id="pinned" value="1" {% if (flags.pinned) %}checked="checked" {% endif %}{% if flags['pinned.disabled'] %}disabled {% endif %}  /> {{ lang.addnews['add_pinned'] }}</label></li>
+				
+				<li class="content-sidebar-list-item"><label><input type="checkbox" name="catpinned" id="catpinned" value="1" {% if (flags.catpinned) %}checked="checked" {% endif %}{% if flags['catpinned.disabled'] %}disabled {% endif %}  /> {{ lang.addnews['add_catpinned'] }}</label></li>
+				
+				<li class="content-sidebar-list-item"><label><input type="checkbox" name="favorite" id="favorite" value="1" {% if (flags.favorite) %}checked="checked" {% endif %}{% if flags['favorite.disabled'] %}disabled {% endif %}  /> {{ lang.addnews['add_favorite'] }}</label></li>
+				
+				<li class="content-sidebar-list-item"><label><input type="checkbox" name="flag_HTML" id="flag_HTML" value="1" {% if (flags['html.disabled']) %}disabled {% endif %} {% if (flags['html']) %}checked="checked"{% endif %}/> {{ lang.addnews['flag_html'] }}</label></li>
+				
+				<li class="content-sidebar-list-item"><label><input type="checkbox" name="flag_RAW" id="flag_RAW" value="1" {% if (flags['html.disabled']) %}disabled {% endif %} {% if (flags['raw']) %}checked="checked"{% endif %}/> {{ lang.addnews['flag_raw'] }}</label></li>
 				{% if (pluginIsActive('comments')) %}
 					<li class="content-sidebar-list-item">
 					<hr />
 					{{ lang['comments:mode.header'] }}:
-					<select name="allow_com">
+					<select name="allow_com" class="w_100">
 					<option value="0"{{ plugin.comments['acom:0'] }}>{{ lang['comments:mode.disallow'] }}
 					<option value="1"{{ plugin.comments['acom:1'] }}>{{ lang['comments:mode.allow'] }}
 					<option value="2"{{ plugin.comments['acom:2'] }}>{{ lang['comments:mode.default'] }}
@@ -154,10 +159,10 @@
 		<input type="hidden" name="subaction" value="submit" />
 		<input type="hidden" name="approve" id="approve" value="0"/>
 
-		<input type="button" value="{{ lang.addnews['preview'] }}" class="button fl" onclick="return preview();" />
-		<input type="submit" value="{{ lang['draft'] }}" class="button fl" onclick="return approveMode(-1);" />
-		{% if flags['can_publish'] %}<input type="submit" value="{{ lang.addnews['approve'] }}" class="button fr" onclick="return approveMode(1);" />{% endif %}
-		<input type="submit" value="{{ lang['pending'] }}" class="button fr" onclick="return approveMode(0);" />
+		<input type="button" value="{{ lang.addnews['preview'] }}" class="fl" onclick="return preview();" />
+		<input type="submit" value="{{ lang['draft'] }}" class="fl" onclick="return approveMode(-1);" />
+		{% if flags['can_publish'] %}<input type="submit" value="{{ lang.addnews['approve'] }}" class="save-doc fr" onclick="return approveMode(1);" />{% endif %}
+		<input type="submit" value="{{ lang['pending'] }}" class="fr" onclick="return approveMode(0);" />
 	</div>
 	
 </form>
@@ -249,8 +254,8 @@ document.onkeydown = function(e) {
 	e = e || event;
 
 	if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
-	var form = document.getElementById("postForm");
-		form.submit();
+	//var form = document.getElementById("postForm");form.submit();
+		$('.save-doc').click();
 		return false;
 	}
 	if (e.keyCode == 122) {
