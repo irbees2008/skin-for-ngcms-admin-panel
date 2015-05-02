@@ -56,7 +56,11 @@ color : #666;
 line-height: 140%;
 }
 
-h1, h2, h3, h4 { font-family: Tahoma, Arial, Helvetica, sans-serif;   font-weight: normal; margin: 0 0 10px 0; line-height: 30px;   text-rendering: optimizelegibility; }
+h1, h2, h3, h4 {
+  font-weight: normal;
+  margin: .8em 0;
+  line-height: 1em;
+}
 h1 {font-size: 28px}
 h2 {font-size: 24px}
 h3 {font-size: 22px}
@@ -726,7 +730,7 @@ position: relative;
 }
 
 .content-head {
-font-size: 20px;
+
 }
 
 .content-nav {
