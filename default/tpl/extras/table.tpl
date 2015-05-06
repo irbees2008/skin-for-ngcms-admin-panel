@@ -20,7 +20,6 @@
 					<th>{{ lang['title'] }}</th>
 					<th>{{ lang['type'] }}</th>
 					<th>{{ lang['version'] }}</th>
-					<th>&nbsp;</th>
 					<th>{{ lang['description'] }}</th>
 					<th>{{ lang['author'] }}</th>
 					<th>{{ lang['action'] }}</th>
@@ -32,8 +31,7 @@
 				<td>{{ entry.id }} {{ entry.new }}</td>
 				<td>{{ entry.url }}</td>
 				<td>{{ entry.type }}</td>
-				<td>{{ entry.version }}</td>
-				<td nowrap>{{ entry.readme }} {{ entry.history }}</td>
+				<td nowrap class="ar">{{ entry.version }}&nbsp;<a href="/engine/includes/showinfo.php?mode=plugin&amp;item=readme&amp;plugin={{ entry.id }}" target="_blank" title="Документация по плагину"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;<a href="/engine/includes/showinfo.php?mode=plugin&amp;item=history&amp;plugin={{ entry.id }}" target="_blank" title="История изменений плагина"><i class="fa fa-history"></i></a></td>
 				<td>{{ entry.description }}</td>
 				<td>{{ entry.author_url }}</td>
 				<td nowrap>{{ entry.link }} {{ entry.install }}</td>
@@ -49,15 +47,13 @@ $(document).ready(function(){
 	var newSelection = "";
 
 	function tabsSwitch(tabs) {
-	ngShowLoading();
-		$("#maincontent").fadeTo(1, 0);
+		//$("#maincontent").fadeOut(1);
 		$(".tabs-title li").removeClass("active");
 		tabs.addClass("active");
 		newSelection = tabs.attr("data-filter");
-		$(".all").not("."+newSelection).slideUp();
-		$("."+newSelection).slideDown();
-		$("#maincontent").fadeTo(1000, 1);
-	ngHideLoading();
+		$("."+newSelection).show(1);
+		$(".all").not("."+newSelection).hide(1);
+		$("#maincontent").fadeIn(1);
 	}
 
 	$('.tabs-title').each(function(i) {

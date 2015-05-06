@@ -4,13 +4,14 @@
 <div class="div-resp clear">
 	<form action="{{ php_self }}" method="get" name="options_bar">
 		<input type="hidden" name="mod" value="static" />
-		<div class="input-group">
-			<label for="per_page">{{ lang['per_page'] }}</label>
+		<label for="per_page">{{ lang['per_page'] }}
+			<div class="input-group">
 			<input type="text" id="per_page" name="per_page" value="{{ per_page }}" />
 			<span>
 				<button type="submit">{{ lang['do_show'] }}</button>
 			</span>
 		</div>
+		</label>
 	</form>
 </div>
 
