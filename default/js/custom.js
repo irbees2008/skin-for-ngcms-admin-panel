@@ -41,9 +41,6 @@ $(document).ready(function(){
 	$('.navtab').css('display', 'none');
 	$('.navtab:first').css('display', 'block');
 	
-	//
-	$('.content-sidebar-title').click(function(){$(this).next().toggle()});
-	
 	// // // Табы
 	$('ul.tabs-title').each(function(i) {
 		var storage = localStorage.getItem('tab' +document.getElementById('skin_module_name').value+ i);
@@ -58,16 +55,35 @@ $(document).ready(function(){
 			$('.tabs-content:first').addClass('active');
 		}
 	});
-
-  $('ul.tabs-title').on('click', 'li', function() {
-    $(this)
-      .addClass('active').siblings().removeClass('active')
-      .closest('div.tabs').find('div.tabs-content').removeClass('active').eq($(this).index()).addClass('active');
-    var ulIndex = $('ul.tabs-title').index($(this).parents('ul.tabs-title'));
-    localStorage.removeItem('tab' +document.getElementById('skin_module_name').value+ ulIndex);
-    localStorage.setItem('tab' +document.getElementById('skin_module_name').value+ ulIndex, $(this).index());
-  });
-  // // // -- Табы
+	$('ul.tabs-title').on('click', 'li', function() {
+		$(this)
+		.addClass('active').siblings().removeClass('active')
+		.closest('div.tabs').find('div.tabs-content').removeClass('active').eq($(this).index()).addClass('active');
+		var ulIndex = $('ul.tabs-title').index($(this).parents('ul.tabs-title'));
+		localStorage.removeItem('tab' +document.getElementById('skin_module_name').value+ ulIndex);
+		localStorage.setItem('tab' +document.getElementById('skin_module_name').value+ ulIndex, $(this).index());
+	});
+	// // // -- Табы
+	
+		
+	// // // Положения боксов
+	//$('.content-sidebar-title').click(function(){$(this).next().toggle()});
+	$('.content-sidebar-title').next().each(function(i) {
+	var storage = localStorage.getItem('sidebar' +document.getElementById('skin_module_name').value+ i);
+		if (storage) {
+			//alert(storage);
+			$(this).css('display', storage);
+		} else {
+			$(this).css('display', '');
+		}
+	});
+	$('.content-sidebar-title').on('click', function() {
+		$(this).next().toggle();
+		var ulIndex = $('.content-sidebar-title').next().index($(this).next());
+		//alert(ulIndex);
+		localStorage.removeItem('sidebar' +document.getElementById('skin_module_name').value + ulIndex);
+		localStorage.setItem('sidebar' +document.getElementById('skin_module_name').value + ulIndex, $(this).next().css('display'));
+	});
 
 	  /* Вставка тегов */
 	$('.tags_url').on('click', function(){

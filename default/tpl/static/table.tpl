@@ -63,7 +63,6 @@
 		{% if (perm.modify) %}
 		<div class="div-resp clear">
 			<div class="input-group">
-				<label for=""></label>
 				<select name="action">
 					<option value="">-- {{ lang['action'] }} --</option>
 					<option value="do_mass_delete">{{ lang['delete'] }}</option>

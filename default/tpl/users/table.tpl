@@ -83,7 +83,6 @@
 				{% if flags.canModify %}
 				<div class="div-resp clear">
 					<div class="input-group">
-						<label for="">{l_move}</label>
 						<select name="action" onchange="updateAction();" onclick="updateAction();">
 							<option value="">-- {{ lang['action'] }} --</option>
 							<option value="massActivate">{{ lang['activate'] }}</option>

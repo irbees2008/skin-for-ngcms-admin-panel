@@ -1,9 +1,5 @@
 <h2 class="content-head">{l_images_title}</h2>
 
-<!-- Preload uploadify engine -->
-<script type="text/javascript" src="{admin_url}/includes/js/swfobject.js"></script>
-<script type="text/javascript" src="{admin_url}/includes/js/jquery.uploadify.v2.1.4.min.js"></script>
-
 <!-- Main scripts -->
 <script type="text/javascript">
 var flagRequireReload = 0;
@@ -24,16 +20,12 @@ function setStatus(mode) {
 	</ul>
 	<!-- /Navigation bar -->
 	
-	
-	<div class="tabs-content clear">
-		
+	<div class="tabs-content">
 		<div class="clear" id="list">
 		<form action="{php_self}" method="get" name="options_bar">
 			<input type="hidden" name="mod" value="images" />
 			<input type="hidden" name="action" value="list" />
 			<input type="hidden" name="area" value="{area}" />
-				
-				
 			<dl class="fl">
 				<dt><label class="fl" for="author">{l_author}</label></dt>
 				<dd><select name="author" id="author"><option value="">- {l_all} -</option>{authorlist}</select></dd>
@@ -56,12 +48,12 @@ function setStatus(mode) {
 		</div>
 			
 		<form action="{php_self}?mod=images" method="post" name="imagedelete" id="delform">
-			<input type="hidden" name="subaction" value="" />
 			<input type="hidden" name="area" value="{area}" />
+			<input type="hidden" name="subaction" value="" />
 			<table class="table-resp table-images" id="entries">
 				<thead>
 				<tr>
-					<th><input class="check" type="checkbox" name="master_box" title="{l_select_all}" onclick="javascript:check_uncheck_all(imagedelete)" /></th>
+					<th><input class="check" type="checkbox" name="master_box" title="{l_select_all}" onclick="check_uncheck_all(imagedelete)" /></th>
 					<th>ID</th>
 					<th>{l_name}</th>
 					<th>{l_header.view}</th>
@@ -72,15 +64,14 @@ function setStatus(mode) {
 					<th>{l_action}</th>
 				</tr>
 				</thead>
-				{entries}
+					{entries}
 			</table>
 
 			<div class="content-footer clear">
 				[status]
 				<input type="submit" class="fr button-danger" onclick="setStatus('delete');" value="{l_delete}" />
-				<div class="div-resp clear">
+				<div class="div-resp">
 					<div class="input-group">
-						<label for=""></label>
 						{dirlist}
 						<span>
 							<button type="submit" onclick="setStatus('move');">{l_move}</button>
@@ -98,22 +89,23 @@ function setStatus(mode) {
 		<div class="div-resp">
 			<h3 class="content-title">{l_addnewcat}</h3>
 			<form action="{php_self}?mod=images" method="post" name="newcat">
-				<input type="hidden" name="subaction" value="newcat" />
 				<input type="hidden" name="area" value="{area}" />
+				<input type="hidden" name="subaction" value="newcat" />
 				
 				<div class="input-group">
-					<input type="text" name="newfolder" />
+					<input type="text" name="newfolder" required />
 					<span>
 						<button type="submit">Применить</button>
 					</span>
 				</div>
 			</form>
 		</div>
+		
 		<div class="div-resp">
 			<h3 class="content-title">{l_delcat}</h3>
-			<form action='{php_self}?mod=images' method='post' name='delcat'>
-				<input type="hidden" name="subaction" value="delcat" />
+			<form action="{php_self}?mod=images" method="post" name="delcat">
 				<input type="hidden" name="area" value="{area}" />
+				<input type="hidden" name="subaction" value="delcat" />
 				
 				<div class="input-group">
 					{dirlist}
@@ -126,212 +118,190 @@ function setStatus(mode) {
 	</div>
 	[/status]
 
-	<div class="tabs-content">
-		<table id="uploadnew">
-		<tr>
-		<td width="50%" valign="top" class="contentEntry1">
-		<table border="0" cellspacing="0" cellpadding="0" class="content" align="center">
-		<tr>
-		<td class="contentHead"><img src="{skins_url}/images/nav.gif" hspace="8" alt="" />{l_upload_img}</td>
-		</tr>
-		<tr>
-		<td>
-		<form action="{php_self}?mod=images" method="post" enctype="multipart/form-data" name="sn">
-		<input type="hidden" name="subaction" value="upload" />
-		<input type="hidden" name="area" value="{area}" />
-		<br />{dirlistS}&nbsp;
-		<span id="showRemoveAddButtoms">
-		<input type="button" class="button" value='{l_delone}' onClick="RemoveImages();return false;" />&nbsp;
-		<input type="button" class="button" value='{l_onemore}' onClick="AddImages();return false;" /><br /><br />
-		</span>
-		<script language="javascript" type="text/javascript">
-		function AddImages() {
-			var tbl = document.getElementById('imageup');
-			var lastRow = tbl.rows.length;
-			var iteration = lastRow+1;
-			var row = tbl.insertRow(lastRow);
-			var cellRight = row.insertCell(0);
-			cellRight.innerHTML = '<span>'+iteration+': <'+'/'+'span>';
-			cellRight = row.insertCell(1);
+	<div class="tabs-content" id="uploadnew">
+		<div class="div-resp">
+			<h3 class="content-title">{l_upload_img}</h3>
+			<form action="{php_self}?mod=images" method="post" enctype="multipart/form-data" name="sn">
+				<input type="hidden" name="area" value="{area}" />
+				<input type="hidden" name="subaction" value="upload" />
+				
+				<div class="input-group">
+					<span class="input-group-check">
+						<i class="fa fa-folder-open-o"></i>
+					</span>
+					{dirlistS}
+				</div>
+				<div class="input-group">
+					<span class="input-group-check"><input type="checkbox" name="replace" id="flagReplace" value="1"/></span>
+					<label for="flagReplace">{l_do_replace}</label>
+				</div>
+				<div class="input-group">
+					<span class="input-group-check"><input type="checkbox" name="rand" id="flagRand" value="1"/></span>
+					<label for="flagRand">{l_do_rand}</label>
+				</div>
+				<div class="input-group">
+					<span class="input-group-check"><input type="checkbox" name="thumb" id="flagThumb" value="1" {thumb_mode}{thumb_checked}/></span>
+					<label for="flagThumb">{l_do_preview}</label>
+				</div>
+				<div class="input-group">
+					<span class="input-group-check"><input type="checkbox" name="shadow" value="1" id="flagShadow" {shadow_mode}{shadow_checked} /></span>
+					<label for="flagShadow">{l_do_shadow}</label>
+				</div>
+				<div class="input-group">
+					<span class="input-group-check"><input type="checkbox" name="stamp" value="1" id="flagStamp" {stamp_mode}{stamp_checked} /></span>
+					<label for="flagStamp">{l_do_wmimage}</label>
+				</div>
+<div id="preview"></div>
+				<table id="imageup" class="upload">
+					<tr id="row">
+						<td>
+							<div class="input-group">
+								<span class="input-group-check">1</span>
+								<div class="button button-fileinput">
+									<span id="spanfile0"><i class="fa fa-plus"></i> Add files...</span>
+									<span id="spansize0"></span>
+									<input type="file" name="userfile[]" id="userfile[0]" onchange="checkImage(this, 0);" multiple />
+								</div>
+								<code></code>
+							</div>
+						</td>
+					</tr>
+				</table>
 
-			var el = document.createElement('input');
-			el.setAttribute('type', 'file');
-			el.setAttribute('name', 'userfile[' + iteration + ']');
-			el.setAttribute('size', '60');
-			el.setAttribute('value', iteration);
-			cellRight.appendChild(el);
-		}
-		function RemoveImages() {
-			var tbl = document.getElementById('imageup');
-			var lastRow = tbl.rows.length;
-			if (lastRow > 1){
-				tbl.deleteRow(lastRow - 1);
-			}
-		}
-		</script>
-		<table id="imageup" class="upload">
-		<tr id="row">
-		<td>1: </td><td><input type="file" size="60" id="fileUploadInput" name="userfile[0]" /></td>
-		</tr>
-		</table>
+				<div class="clear" id="showRemoveAddButtoms">
+					<button class="button-danger fl" type="button" onClick="RemoveImages();return false;" >-</button>
+					<button class="button-success fl" type="button" onClick="AddImages();return false;" >+</button>
+					<button class="fr" type="submit"><i class="fa fa-upload"></i></button>
+				</div>
+			</form>
 
-		<div class="list">
-		  <input type="checkbox" name="replace" value="1" id="flagReplace" class='check' />
-		  <label for="flagReplace">{l_do_replace}</label><br />
-		  <input type="checkbox" name="rand" value="1" id="flagRand" class='check' />
-		  <label for="flagRand">{l_do_rand}</label><br />
-		  <input type="checkbox" name="thumb" value="1" id="flagThumb" class='check' {thumb_mode}{thumb_checked}/>
-		  <label for="flagThumb">{l_do_preview}</label><br />
-		  <input type="checkbox" name="shadow" value="1" id="flagShadow" class='check' {shadow_mode}{shadow_checked} />
-		  <label for="flagShadow">{l_do_shadow}</label><br />
-		  <input type="checkbox" name="stamp" value="1" id="flagStamp" class='check' {stamp_mode}{stamp_checked} />
-		  <label for="flagStamp">{l_do_wmimage}</label>
-		</div></td>
-		</tr>
-		<tr align="center">
-		<td width="100%" class="contentEdit" align="center" valign="top">
-		<input type="submit" value='{l_upload}' class="button" onclick="uploadifyDoUpload(); return false;" />
-		</td>
-		</tr>
-		</table>
-		</form>
+			<script language="javascript" type="text/javascript">
+				function checkImage(where, idnumber) {
+					/*var preview = document.getElementById('preview');
+						preview.innerHTML = '';
+						[].forEach.call(this.files, function(file) {
+							if (file.type.match(/image.)) {    /image. поменять на /image.звездочка/
+								var reader = new FileReader();
+								reader.onload = function(event) {
+									var img = document.createElement('img');
+									img.src = event.target.result;
+									img.style.cssText = 'vertical-align: top; width: 88px; height: 50px;';
+									preview.appendChild(img);
+								};
+								reader.readAsDataURL(file);
+							}
+						});*/
 
-		<!-- BEGIN: Init UPLOADIFY engine -->
-		<script type="text/javascript">
-		$(document).ready(function() {
-			$('#fileUploadInput').uploadify({
-				'uploader'  : '{admin_url}/includes/js/uploadify.swf',
-				'script'    : '{admin_url}/rpc.php?methodName=admin.files.upload',
-				'cancelImg' : '{skins_url}/images/up_cancel.png',
-				'folder'    : '',
-				'fileExt'   : '{listExt}',
-				'fileDesc'  : '{descExt}',
-				'sizeLimit'	: {maxSize},
-				'auto'      : false,
-				'multi'     : true,
-				'buttonText'  : 'Select files ...',
-				'width'		: 200,
-				'removeCompleted' : true,
-				'onInit' : function() { document.getElementById('showRemoveAddButtoms').style.display= 'none'; },
-				'onComplete' : function(ev, ID, fileObj, res, data) {
-					// Response should be in JSON format
-					var resData;
-					var resStatus = 0;
-					try {
-						resData = eval('('+res+')');
-						if (typeof(resData['status']))
-							resStatus = 1;
-					} catch (err) { alert('Error parsing JSON output. Result: '+res); }
-
-					if (!resStatus) {
-						alert('Upload resp: '+res);
-						return false;
-					}
-
-					flagRequireReload = 1;
-
-					// If upload fails
-					if (resData['status'] < 1) {
-						$('#' + $(ev.target).attr('id') + ID).append('<div class="msg">('+resData['errorCode']+') '+resData['errorText']+'</div>');
-						if (typeof(resData['errorDescription']) !== 'undefined') {
-							$('#' + $(ev.target).attr('id') + ID).append('<div class="msgInfo">'+resData['errorDescription']+'</div>');
+				$(where).closest('.input-group').children('code').html('');
+					if (where.files.length>1) {
+						var htext = '';
+						var hsize = '';
+						for (var i = 0; i < where.files.length; i++) {
+							htext += where.files[i].name+'<i class="fr">'+formatSize(where.files[i].size)+'</i><br />';
+							hsize = Number(where.files[i].size) + Number(hsize);
 						}
-						$('#' + $(ev.target).attr('id') + ID).css('border', '2px solid red');
-						return false;
-					} else {
-						$('#' + $(ev.target).attr('id') + ID).append('<div>'+resData['errorText']+'</div>');
-						$('#' + $(ev.target).attr('id') + ID).fadeOut(5000);
+						$(where).closest('.input-group').children('code').html(htext);
+						$(where).closest('.button-fileinput').children('span').eq(0).html('<b>Выбрано файлов: '+where.files.length+'</b>');
+						$(where).closest('.button-fileinput').children('span').eq(1).html('<i class="fr">'+formatSize(hsize)+'</i>');
 					}
-					return true;
-				},
-			});
-		});
+					if (where.files.length==1) {
+						validateFile(where, idnumber);
+					}
+					if (where.files.length==0) {
+						$(where).closest('.button-fileinput').children('span').eq(0).html('<i class="fa fa-plus"></i> Add files...');
+						$(where).closest('.button-fileinput').children('span').eq(1).html('');
+					}
+					
+				}
+				function AddImages() {
+					var tbl = document.getElementById('imageup');
+					var lastRow = tbl.rows.length;
+					var iteration = lastRow+1;
+					var row = tbl.insertRow(lastRow);
+					var cellRight = row.insertCell(0);
+					cellRight.innerHTML = '<div class="input-group"><span class="input-group-check">'+ iteration +'</span>\
+					<div class="button button-fileinput"><span id="spanfile' + lastRow + '"><i class="fa fa-plus"></i> Add files...</span><span id="spansize' + lastRow + '"></span><input type="file" name="userfile[]" id="userfile[' + lastRow + ']" onchange="checkImage(this, ' + lastRow + ');" multiple /></div><code></code></div>';
+				}
+				function RemoveImages() {
+					var tbl = document.getElementById('imageup');
+					var lastRow = tbl.rows.length;
+					if (lastRow > 1){
+						tbl.deleteRow(lastRow - 1);
+					}
+				}
+			</script>
+		</div>
+		
+		<div class="div-resp">
+			<!-- UPLOAD_FILE_URL -->
+			<h3 class="content-title">{l_upload_img_url}</h3>
+			<form action="{php_self}?mod=images" method="post" name="snup">
+				<input type="hidden" name="subaction" value="uploadurl" />
+				<input type="hidden" name="area" value="{area}" />
+				
+				<div class="input-group">
+					<span class="input-group-check">
+						<i class="fa fa-folder-open-o"></i>
+					</span>
+					{dirlist}
+				</div>
+				<div class="input-group">
+					<span class="input-group-check"><input type="checkbox" name="replace" id="replace2" value="1"/></span>
+					<label for="replace2">{l_do_replace}</label>
+				</div>
+				<div class="input-group">
+					<span class="input-group-check"><input type="checkbox" name="rand" id="rand2" value="1"/></span>
+					<label for="rand2">{l_do_rand}</label>
+				</div>
+				<div class="input-group">
+					<span class="input-group-check"><input type="checkbox" name="thumb" id="thumb2" value="1" {thumb_mode}{thumb_checked}/></span>
+					<label for="thumb2">{l_do_preview}</label>
+				</div>
+				<div class="input-group">
+					<span class="input-group-check"><input type="checkbox" name="shadow" id="shadow2" value="1" {shadow_mode}{shadow_checked} /></span>
+					<label for="shadow2">{l_do_shadow}</label>
+				</div>
+				<div class="input-group">
+					<span class="input-group-check"><input type="checkbox" name="stamp" id="stamp2" value="1" {stamp_mode}{stamp_checked} /></span>
+					<label for="stamp2">{l_do_wmimage}</label>
+				</div>
+				<table class="upload" id="imageup2">
+					<tr id="row">
+						<td>
+							<div class="input-group">
+								<span class="input-group-check">1</span>
+								<input type="url" name="userurl[0]" required />
+							</div>
+						</td>
+					</tr>
+				</table>
 
-		function uploadifyDoUpload() {
-			// Prepare script data
-
-			var scriptData = new Array();
-			scriptData['ngAuthCookie']	= '{authcookie}';
-			scriptData['uploadType']	= 'image';
-			scriptData['category']		= document.getElementById('categorySelect').value;
-			scriptData['rand']			= document.getElementById('flagRand').checked?1:0;
-			scriptData['replace']		= document.getElementById('flagReplace').checked?1:0;
-			scriptData['thumb']			= document.getElementById('flagThumb').checked?1:0;
-			scriptData['stamp']			= document.getElementById('flagStamp').checked?1:0;
-			scriptData['shadow']		= document.getElementById('flagShadow').checked?1:0;
-
-			$('#fileUploadInput').uploadifySettings('scriptData',scriptData,true);
-			$('#fileUploadInput').uploadifyUpload();
-		}
-		</script>
-		<!-- END: Init UPLOADIFY engine -->
-		</td>
-
-		<td width="50%" class="contentEntry1" valign="top">
-		<form action="{php_self}?mod=images" method="post" name="snup">
-		<table border="0" cellspacing="0" cellpadding="0" class="content" align="center">
-		<tr>
-		<td class="contentHead"><img src="{skins_url}/images/nav.gif" hspace="8" alt="" />{l_upload_img_url}</td>
-		</tr>
-		<tr>
-		<td>
-		<input type="hidden" name="subaction" value="uploadurl" />
-		<input type="hidden" name="area" value="{area}" />
-		<br />{dirlist}&nbsp;
-		<input type="button" class="button" value='{l_delone}' onClick="RemoveImages2();return false;" />&nbsp;
-		<input type="button" class="button" value='{l_onemore}' onClick="AddImages2();return false;" /><br /><br />
-		<script language="javascript" type="text/javascript">
-		function AddImages2() {
-			var tbl = document.getElementById('imageup2');
-			var lastRow = tbl.rows.length;
-			var iteration = lastRow+1;
-			var row = tbl.insertRow(lastRow);
-
-			var cellRight = row.insertCell(0);
-			cellRight.innerHTML = '<span">'+iteration+': <'+'/'+'span>';
-
-			cellRight = row.insertCell(1);
-
-			var el = document.createElement('input');
-			el.setAttribute('type', 'text');
-			el.setAttribute('name', 'userurl[' + iteration + ']');
-			el.setAttribute('size', '60');
-			cellRight.appendChild(el);
-		}
-		function RemoveImages2() {
-			var tbl = document.getElementById('imageup2');
-			var lastRow = tbl.rows.length;
-			if (lastRow > 1){
-				tbl.deleteRow(lastRow - 1);
-			}
-		}
-		</script>
-		<table id="imageup2" class="upload">
-		<tr id="row">
-		<td>1: </td><td><input type="text" size="60" name="userurl[0]" /></td>
-		</tr>
-		</table>
-
-		<div class="list">
-		  <input type="checkbox" name="replace" value='replace' id=replace2 class='check' />
-		  <label for=replace2>{l_do_replace}</label><br />
-		  <input type="checkbox" name="rand" value='rand' id=rand2 class='check' />
-		  <label for=rand2>{l_do_rand}</label><br />
-		  <input type="checkbox" name="thumb" value='thumb' id=thumb2 class='check'  {thumb_mode}{thumb_checked} />
-		  <label for=thumb2>{l_do_preview}</label><br />
-		  <input type="checkbox" name="shadow" value='shadow' id=shadow2 class='check' {shadow_mode}{shadow_checked} /><label for=shadow2>{l_do_shadow}</label><br />
-		  <input type="checkbox" name="stamp" value='stamp' id=stamp2 class='check' {stamp_mode}{stamp_checked} /><label for=stamp2>{l_do_wmimage}</label>
-		</div></td>
-		</tr>
-		<tr align="center">
-		<td width="100%" class="contentEdit" align="center" valign="top">
-		<input type="submit" value='{l_upload}' class="button" />
-		</td>
-		</tr>
-		</table>
-		</form>
-		</td>
-		</tr>
-		</table>
+				<div class="clear">
+					<button class="button-danger fl" type="button" onClick="RemoveImages2();return false;" >-</button>
+					<button class="button-success fl" type="button" onClick="AddImages2();return false;" >+</button>
+					<button class="fr" type="submit"><i class="fa fa-upload"></i></button>
+				</div>
+				
+				<script language="javascript" type="text/javascript">
+					function AddImages2() {
+						var tbl = document.getElementById('imageup2');
+						var lastRow = tbl.rows.length;
+						var iteration = lastRow+1;
+						var row = tbl.insertRow(lastRow);
+						var cellRight = row.insertCell(0);
+						cellRight.innerHTML = '<div class="input-group"><span class="input-group-check">'+ iteration +'</span><input type="url" name="userurl[' + lastRow + ']" required /></div>';
+					}
+					function RemoveImages2() {
+						var tbl = document.getElementById('imageup2');
+						var lastRow = tbl.rows.length;
+						if (lastRow > 1){
+							tbl.deleteRow(lastRow - 1);
+						}
+					}
+				</script>
+			</form>
+		</div>
+		<div class="clear"></div>
+		<div class="sysinfo_common">Информация<div class="info" id="mfs"></div></div><script type="text/javascript">$('#mfs').html('Максимальный размер изображения: ' + formatSize({maxSize})+'<br />Допустимые расширения изображений: {listExt}');</script>
 	</div>
 </div>

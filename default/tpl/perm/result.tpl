@@ -4,7 +4,7 @@
 		<div class="syserror_common">Результат выполнения:<div class="info"> ОШИБКА</div></div>
 	{% endif %}
 
-<h2 class="content-head">Управление правами доступа</h2>
+<h2 class="content-head"><a href="?mod=perm">Управление правами доступа</a></h2>
 <h3 class="content-title">Список выполняемых изменений:</h3>
 
 <div class="pconf">

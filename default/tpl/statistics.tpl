@@ -4,7 +4,7 @@
 .statistic-box, .content-sidebar-right {background: #fff; border: 1px solid #ddd; box-shadow: 0 0 4px #ccc; padding: 0 1.5em 2em;}
 .statistic-box ul {margin: 0; padding: 0;}
 .statistic-box span {float: right;}
-.content-sidebar-right textarea {min-height: 283px;}
+.content-sidebar-right textarea {min-height: 301px;}
 @media only screen and (max-width: 768px), (min-device-width: 480px) and (max-device-width: 768px)  {.statistic-box { width: 100%; argin-right: 0;}}
 #modalmsgDialog { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: none;}
 #modalmsgWindow { margin: 5px; padding: 5px; border: 1px solid #ccc; background-color: #F0F0F0; width: 400px; position: absolute; left: 40%; top: 40%; }

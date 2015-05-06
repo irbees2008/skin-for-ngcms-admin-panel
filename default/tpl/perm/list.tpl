@@ -1,50 +1,22 @@
 <h2 class="content-head">”правление правами доступа</h2>
 
-<script type="text/javascript">
-var permDefault = {{ DEFAULT_JSON }};
-
-function onUpdatePerm(name) {
- var f = document.getElementById('permSubmit');
- var v = permDefault[name];
-
- if (f[name].value != v) {
- 	f[name].className = 'pChanged';
- } else {
- 	f[name].className = '';
- }
- //alert(f[name].value);
-}
-
-function onUpdateSubmit() {
- return true;
-
- var f = document.getElementById('permSubmit');
- for (var i = 0; i < f.elements.length; i++) {
- 	if (f.elements[i].value != permDefault[f.elements[i].name]) {
-		alert(f.elements[i].name+': '+permDefault[f.elements[i].name]+ ' => '+f.elements[i].value);
-	}
- 	if (i > 10) { break; }
- }
-}
-</script>
-
 <form id="permSubmit" name="permSubmit" method="POST">
 	<input type="hidden" name="save" value="1"/>
 	<input type="hidden" name="token" value="{{ token }}"/>
 
-	<div class="content clear" id="userTabs">
+	<div class="tabs clear">
 		<!-- Navigation bar -->
-		<div class="content-nav clear">
+		<ul class="tabs-title clear">
 			{% for group in GRP %}
-				<input class="navbutton" type="button" onclick="ChangeOption('userTabs-{{ group.id }}');" value="{{ group.title }}" />
+				<li>{{ group.title }}</li>
 			{% endfor %}
-		</div>
+		</ul>
+		<!-- /Navigation bar -->
 		
-
 		<!-- Group content header -->
 		{% for group in GRP %}
 			<!-- Content for group [{{ group.id }}] {{ group.title }} -->
-			<div class="navtab" id="userTabs-{{ group.id }}">
+			<div class="tabs-content" id="userTabs-{{ group.id }}">
 				<p>”правление правами группы пользователей: <b>{{ group.title }}</b></p>
 
 				{% for block in CONFIG %}
@@ -84,9 +56,35 @@ function onUpdateSubmit() {
 		{% endfor %}
 	</div>
 
-
 	<div class="content-footer clear">
 		<input class="button-success fr" type="submit" value="—охранить изменени€" onclick="return onUpdateSubmit();" />
 	</div>
-
 </form>
+
+<script type="text/javascript">
+var permDefault = {{ DEFAULT_JSON }};
+
+function onUpdatePerm(name) {
+ var f = document.getElementById('permSubmit');
+ var v = permDefault[name];
+
+ if (f[name].value != v) {
+ 	f[name].className = 'pChanged';
+ } else {
+ 	f[name].className = '';
+ }
+ //alert(f[name].value);
+}
+
+function onUpdateSubmit() {
+ return true;
+
+ var f = document.getElementById('permSubmit');
+ for (var i = 0; i < f.elements.length; i++) {
+ 	if (f.elements[i].value != permDefault[f.elements[i].name]) {
+		alert(f.elements[i].name+': '+permDefault[f.elements[i].name]+ ' => '+f.elements[i].value);
+	}
+ 	if (i > 10) { break; }
+ }
+}
+</script>

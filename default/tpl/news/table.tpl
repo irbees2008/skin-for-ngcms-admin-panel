@@ -220,7 +220,6 @@ function filter_attach_DateEdit(id) {
 		{% if flags.allow_modify %}
 		<div class="div-resp clear">
 			<div class="input-group">
-				<label for=""></label>
 				<select name="subaction" id="subaction">
 					<option value="">-- {{ lang.editnews['action'] }} --</option>
 					<option value="mass_approve">{{ lang.editnews['approve'] }}</option>
