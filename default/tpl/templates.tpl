@@ -30,6 +30,84 @@ background-color: #111;
 }
 
 </style>
+<div class="tabs clear">
+	<!-- Navigation bar -->
+	<ul class="tabs-title clear">
+		
+		<li class="active drop-down-enter">
+			<span>Шаблоны сайта</span>
+			<span class="fa fa-caret-down"></span>
+			<div class="drop-down">
+			{% for st in siteTemplates %}
+				<span onclick="submitTemplateSelector('template', '{{ st.name }}');$('.drop-down').hide();">{{ st.name }} ({{ st.title }})</span>
+			{% endfor %}
+	</div>
+		</li>
+		<li>
+			<span onclick="submitTemplateSelector('plugin', '{{ st.name }}');">Шаблоны плагинов</span>
+		</li>
+		<li onclick="window.open('http://templates.ngcms.ru/'); $(this).removeClass();">{{ lang['download_templates'] }}</li>
+	</ul>
+
+<script type="text/javascript">$('.drop-down-enter').hover(function () {$('.drop-down').show();}, function () {$('.drop-down').hide();} );$('.drop-down').hover(function () {$('.drop-down').show();}, function () {$('.drop-down').hide();} )</script>
+	<style type="text/css">
+	.fa-caret-down {margin-left: 18px;}
+.drop-down {
+  display: none;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  left: 0;
+  border: 1px solid #c8c8c8;
+  border-bottom: 0;
+  position: absolute;
+  z-index: 2000;
+}
+.drop-down span {
+  border-bottom: 1px solid #c8c8c8;
+  padding: 0px 6px;
+  cursor: pointer;
+  display: block;
+  color: #444;
+}
+.drop-down span:hover {
+  color: #800;
+}
+</style>
+	<!-- /Navigation bar -->
+
+	<div style="background-color: #E0E0A0;" class="clear">
+		<span style="padding: 4px 8px;" class="menu-toggle fr" onclick="/*$('#fileTreeSelector').css('width','100%');$('#fileEditorSelector').css('width','100%');*/"><i class="fa fa-list"></i></span>
+		<!--span style="padding: 4px 8px;" class="menu-toggle fr" onclick="$('.CodeMirror').addClass('CodeMirror-fullscreen')"><i class="fa fa-arrows-alt"></i></span-->
+		<div style="padding: 4px 0;">Редактирование шаблона <span id="templateNameArea">сайта: <b>default</b></span></div>
+		
+	</div>
+	<div id="fileEditorInfo" class="file-editor-info">Файл не выбран</div>
+	
+<div class="content clear">
+	<!-- BLOCK TEMPLATES -->
+
+
+	<div id="fileEditorContainer" class="content-main-right" style="height: 500px; padding: 0;">
+		<div id="imageViewContainer" style="display: none; height: 100%; vertical-align: middle;"></div>
+		<textarea id="fileEditorSelector" wrap="off" style="height: 100%; margin: 0; border-radius: 0;">*** EDITOR ***</textarea>
+		
+	</div>
+
+	<div id="fileTreeSelector" class="fileTreeSelector content-sidebar-left" onclick="alert(ngFileName);">TEST CONTENT</div>
+	
+</div>
+</div>
+	<div id="fileEditorButtonLine" class="content-footer-right clear">
+		<input class="fl" type="button" value="Создать файл" onclick="_creattpl()"/>
+		<input style="display: none;" class="fl button-del-tpl" type="button" value="Удалить файл" onclick="_deltpl()"/>
+		<input class="button-success fr" title="Ctrl+S" type="button" value="Сохранить файл" onclick="submitTemplateEdit();" />
+	</div>
+	
+<link rel="stylesheet" href="{{ home }}/lib/codemirror/codemirror.css">
+<script type="text/javascript" src="{{ home }}/lib/codemirror/codemirror.js"></script>
+
+
 <script type="text/javascript">
 $(document).ready( function() {
 	$('.menu-toggle').click(function(){
@@ -37,11 +115,6 @@ $(document).ready( function() {
 			$(".CodeMirror").toggle();
 	});
 });
-</script>
-
-
-
-<script>
 
 function _creattpl(){
 //alert('{{ skins_url }}/inc/functions.php');
@@ -86,53 +159,6 @@ submitTemplateSelector();
 }
 
 </script>
-
-		<div class="content-nav clear">
-			<form name="selectForm" id="selectForm">
-				<dl class="fl"><dt>
-					<input class="navbutton active" type="button" onclick="$('#selectTypeTemplate').attr('checked', 'checked');submitTemplateSelector();" value="Шаблоны сайта" />
-				</dt><dd>
-					<select onchange="$('#selectTypeTemplate').attr('checked', 'checked');submitTemplateSelector();" name="selectTemplate" id="selectTemplate">{% for st in siteTemplates %}<option value="{{ st.name }}">{{ st.name }} ({{ st.title }})</option>{% endfor %}</select>
-				</dd></dl>
-				<dl class="fl"><dt>
-					<input class="navbutton" type="button" onclick="$('#selectTypePlugin').attr('checked', 'checked');submitTemplateSelector();" value="Шаблоны плагинов" />
-				</dt><dd>
-					<input class="navbutton" type="button"  onclick="window.open('http://templates.ngcms.ru/')" value="{{ lang['download_templates'] }}" />
-				</dd></dl>
-				<div style="display: none;">
-					<input id="selectTypeTemplate" type="radio" name="selectType" value="template" checked="checked" />
-					<input id="selectTypePlugin" type="radio" name="selectType" value="plugin" />
-				</div>
-			</form>
-		</div>
-	<div style="background-color: #E0E0A0;" class="clear">
-		<span style="padding: 4px 8px;" class="menu-toggle fr" onclick="/*$('#fileTreeSelector').css('width','100%');$('#fileEditorSelector').css('width','100%');*/"><i class="fa fa-list"></i></span>
-		<!--span style="padding: 4px 8px;" class="menu-toggle fr" onclick="$('.CodeMirror').addClass('CodeMirror-fullscreen')"><i class="fa fa-arrows-alt"></i></span-->
-		<div style="padding: 4px 0;">Редактирование шаблона <span id="templateNameArea">сайта: <b>default</b></span></div>
-		
-	</div>
-	<div id="fileEditorInfo" class="file-editor-info">&nbsp;</div>
-<div class="content clear">
-	<!-- BLOCK TEMPLATES -->
-
-
-	<div id="fileEditorContainer" class="content-main-right" style="height: 500px; padding: 0;">
-		<div id="imageViewContainer" style="display: none; height: 100%; vertical-align: middle;"></div>
-		<textarea id="fileEditorSelector" wrap="off" style="height: 100%; margin: 0; border-radius: 0;">*** EDITOR ***</textarea>
-		
-	</div>
-
-	<div id="fileTreeSelector" class="fileTreeSelector content-sidebar-left" onclick="alert(ngFileName);">TEST CONTENT</div>
-	
-</div>
-	<div id="fileEditorButtonLine" class="content-footer-right clear">
-		<input class="fl" type="button" value="Создать файл" onclick="_creattpl()"/>
-		<input style="display: none;" class="fl button-del-tpl" type="button" value="Удалить файл" onclick="_deltpl()"/>
-		<input class="button-success fr" title="Ctrl+S" type="button" value="Сохранить файл" onclick="submitTemplateEdit();" />
-	</div>
-	
-<link rel="stylesheet" href="{{ home }}/lib/codemirror/codemirror.css">
-<script type="text/javascript" src="{{ home }}/lib/codemirror/codemirror.js"></script>
 
 <script type="text/javascript" src="{{ home_url }}/lib/ngFileTree.js"></script>
 <link rel="stylesheet" href="{{ home_url }}/lib/ngFileTree.css" type="text/css" media="screen" />
@@ -217,9 +243,9 @@ var ngFileTreeFunc = function(file) {
 		}, "text").error(function() { ngHideLoading(); ngNotifyWindow('HTTP error during request', 'ERROR'); $(".button-del-tpl").css("display", "none"); });
 }
 
-function submitTemplateSelector() {
-	var selectMode		= $('input[name=selectType]:checked', '#selectForm').val();
-	var selectTemplate	= $('[name=selectTemplate]', '#selectForm').val();
+function submitTemplateSelector(selectMode, selectTemplate) {
+	/*var selectMode		= $('input[name=selectType]:checked', '#selectForm').val();
+	var selectTemplate	= $('[name=selectTemplate]', '#selectForm').val();*/
 
 	$('#fileEditorInfo').html('');
 	$('#imageViewContainer').html('');

@@ -3,47 +3,55 @@
 <script type="text/javascript" src="{{ admin_url }}/includes/js/ajax.js"></script>
 <script type="text/javascript" src="{{ admin_url }}/includes/js/admin.js"></script>
 <form method="post" action="{{ php_self }}?mod=rewrite" name="rewriteForm" id="rewriteForm">
-<span id="temp.data" style="position: absolute; display: none;"></span>
-<span id="DEBUG"></span>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class="content" align="center">
+	<span id="temp.data" style="position: absolute; display: none;"></span>
+	<span id="DEBUG"></span>
+	<table class="hover odd">
+		<thead>
+			<tr>
+				<th>&nbsp;</th>
+				<th width="20">ID</th>
+				<th width="60">{{ lang['hdr.plugin'] }}</th>
+				<th width="80">{{ lang['hdr.action'] }}</th>
+				<th>{{ lang['hdr.description'] }}</th>
+				<th>URL</th>
+				<th>{{ lang['hdr.flags'] }}</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+	<tbody id="cfg.body">
+	</tbody>
+	<!-- ROW FOR EDITING / ADDING -->
 
-<thead>
-<tr class="contHead"><td>&nbsp;</td><td width="20">#</td><td width="60">{{ lang['hdr.plugin'] }}</td><td width="80">{{ lang['hdr.action'] }}</td><td>{{ lang['hdr.description'] }}</td><td>URL</td><td>{{ lang['hdr.flags'] }}</td><td>&nbsp;</td></tr>
-</thead>
-<tbody id="cfg.body">
-</tbody>
-<!-- ROW FOR EDITING / ADDING -->
-
-<tr id="row.editRow" valign="top" class="rewriteEditLine">
- <td width="1px">&nbsp;</td>
- <td id="row.id" width="24px" >*</td>
- <td id="row.pluginName">*&nbsp;</td>
- <td id="row.cmd">&nbsp;</td>
- <td id="row.description">&nbsp;</td>
- <td id="row.url"><input type="text"  id="ed.regex" style="width: 90%;"/><br/>
- 	{{ lang['tbl.available_vars'] }}:<br/><span id="ed.varlist"></span>
- </td>
- <td id="row.flags"><input id="ed.flagPrimary" type="checkbox"/> <input id="ed.flagFailContinue" type="checkbox"/> <input id="ed.flagDisabled" type="checkbox"/></td>
- <td nowrap><input type="button" onclick="reSubmitEdit();" id="ed.button" value="Add" class="button"  style="padding: 2px 2px;" /> <input type="button" id="ed.bcancel" onclick="reCancelEdit();" class="button" style="padding: 2px 2px;" value="Cancel"/></td>
-</tr>
-<tr id="row.editRow2" valign="top" class="rewriteEditLine">
-<td colspan="4">&nbsp;</td>
-<td colspan="2">
-<!--
-Переопределение значений переменных:
-<table width="100%">
-<tr><td>altname</td><td width="20"><input type="checkbox"></td><td><input type="text"/></td></tr>
-</table>
--->
-</td>
-<td colspan="2">&nbsp;</td>
-</tr>
+	<tr id="row.editRow" valign="top" class="rewriteEditLine">
+	 <td width="1px">&nbsp;</td>
+	 <td id="row.id" width="24px" >*</td>
+	 <td id="row.pluginName">*&nbsp;</td>
+	 <td id="row.cmd">&nbsp;</td>
+	 <td id="row.description">&nbsp;</td>
+	 <td id="row.url"><input type="text"  id="ed.regex" style="width: 90%;"/><br/>
+		{{ lang['tbl.available_vars'] }}:<br/><span id="ed.varlist"></span>
+	 </td>
+	 <td id="row.flags"><input id="ed.flagPrimary" type="checkbox"/> <input id="ed.flagFailContinue" type="checkbox"/> <input id="ed.flagDisabled" type="checkbox"/></td>
+	 <td nowrap><input type="button" onclick="reSubmitEdit();" id="ed.button" value="Add" class="button"  style="padding: 2px 2px;" /> <input type="button" id="ed.bcancel" onclick="reCancelEdit();" class="button" style="padding: 2px 2px;" value="Cancel"/></td>
+	</tr>
+	<tr id="row.editRow2" valign="top" class="rewriteEditLine">
+	<td colspan="4">&nbsp;</td>
+	<td colspan="2">
+	<!--
+	Переопределение значений переменных:
+	<table width="100%">
+	<tr><td>altname</td><td width="20"><input type="checkbox"></td><td><input type="text"/></td></tr>
+	</table>
+	-->
+	</td>
+	<td colspan="2">&nbsp;</td>
+	</tr>
 
 
-</table>
+	</table>
 
-<input type="button" value="SAVE" onclick="reServerSubmit();" class="button"/>
-
+	<input type="button" value="SAVE" onclick="reServerSubmit();" class="button"/>
+</form>
 <script type="text/javascript" language="javascript">
 <!--
 // Connect to configuration data

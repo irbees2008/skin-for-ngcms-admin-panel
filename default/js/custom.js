@@ -42,8 +42,10 @@ $(document).ready(function(){
 	$('.navtab:first').css('display', 'block');
 	
 	// // // Табы
+	var module = document.getElementById('skin_module_name').value;
 	$('ul.tabs-title').each(function(i) {
-		var storage = localStorage.getItem('tab' +document.getElementById('skin_module_name').value+ i);
+		if (module=='templates') {return false;}
+		var storage = localStorage.getItem('tab' +module+ i);
 		if (storage) {
 		  $(this)
 			.find('li').removeClass('active').eq(storage).addClass('active')
@@ -59,9 +61,10 @@ $(document).ready(function(){
 		$(this)
 		.addClass('active').siblings().removeClass('active')
 		.closest('div.tabs').find('div.tabs-content').removeClass('active').eq($(this).index()).addClass('active');
+		if (module=='templates') {return false;}
 		var ulIndex = $('ul.tabs-title').index($(this).parents('ul.tabs-title'));
-		localStorage.removeItem('tab' +document.getElementById('skin_module_name').value+ ulIndex);
-		localStorage.setItem('tab' +document.getElementById('skin_module_name').value+ ulIndex, $(this).index());
+		localStorage.removeItem('tab' +module+ ulIndex);
+		localStorage.setItem('tab' +module+ ulIndex, $(this).index());
 	});
 	// // // -- Табы
 	
@@ -69,7 +72,7 @@ $(document).ready(function(){
 	// // // Положения боксов
 	//$('.content-sidebar-title').click(function(){$(this).next().toggle()});
 	$('.content-sidebar-title').next().each(function(i) {
-	var storage = localStorage.getItem('sidebar' +document.getElementById('skin_module_name').value+ i);
+	var storage = localStorage.getItem('sidebar' +module+ i);
 		if (storage) {
 			//alert(storage);
 			$(this).css('display', storage);
@@ -81,8 +84,8 @@ $(document).ready(function(){
 		$(this).next().toggle();
 		var ulIndex = $('.content-sidebar-title').next().index($(this).next());
 		//alert(ulIndex);
-		localStorage.removeItem('sidebar' +document.getElementById('skin_module_name').value + ulIndex);
-		localStorage.setItem('sidebar' +document.getElementById('skin_module_name').value + ulIndex, $(this).next().css('display'));
+		localStorage.removeItem('sidebar' +module + ulIndex);
+		localStorage.setItem('sidebar' +module + ulIndex, $(this).next().css('display'));
 	});
 
 	  /* Вставка тегов */

@@ -7,4 +7,3 @@
 <td>{size}</td>
 <td nowrap>{rename} {insert_file}</td>
 </tr>
-

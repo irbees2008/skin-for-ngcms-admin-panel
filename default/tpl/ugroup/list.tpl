@@ -19,7 +19,7 @@
 			<td>{{ entry.identity }}</td>
 			<td>{{ entry.name }}</td>
 			<td>{{ entry.count }}</td>
-			<td>{% if (entry.flags.canEdit) %}[ <a href="?mod=ugroup&action=editForm&id={{entry.id}}">Edit</a> ]{% endif %}{% if (entry.flags.canDelete) %}[ <a href="?mod=ugroup&action=delete&id={{entry.id}}&token={{ token }}">Delete</a> ]{% endif %}</td>
+			<td>{% if (entry.flags.canEdit) %}<a href="?mod=ugroup&action=editForm&id={{entry.id}}"><i class="fa fa-1_4x fa-pencil-square-o"></i></a> {% endif %}{% if (entry.flags.canDelete) %}<a href="?mod=ugroup&action=delete&id={{entry.id}}&token={{ token }}"><i class="fa fa-1_4x fa-trash-o"></i></a>{% endif %}</td>
 		</tr>
 		{% endfor %}
 	</tbody>

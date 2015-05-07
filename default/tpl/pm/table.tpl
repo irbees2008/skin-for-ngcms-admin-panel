@@ -12,7 +12,9 @@
 					<th>{l_pmdate}</th>
 				</tr>
 			</thead>
+			<tbody>
 				{entries}
+			</tbody>
 		</table>
 		
 		<div class="content-footer">

@@ -21,7 +21,7 @@
 	<table class="hover odd">
 		<thead>
 		<tr>
-			<th>{% if (perm.modify) %}<input class="check" type="checkbox" name="master_box" title="{{ lang['select_all'] }}" onclick="javascript:check_uncheck_all(static)" />{% endif %}</th>
+			<th>{% if (perm.modify) %}<input class="check" type="checkbox" name="master_box" title="{{ lang['select_all'] }}" onclick="check_uncheck_all(static)" />{% endif %}</th>
 			<th><!--{{ lang['status'] }}--></th>
 			<th></th>
 			<th>{{ lang['title'] }}</th>
