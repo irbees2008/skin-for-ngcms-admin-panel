@@ -83,9 +83,18 @@
 									</div>
 								{% else %}
 								{% endif %}
+								<script>function counter(el)
+{var wrapper = document.createElement('DIV');
+wrapper.innerHTML = el.value;
+var len = (wrapper.textContent || wrapper.innerText).length;
+document.getElementById('count').innerHTML = len + ' | ' + el.value.length;
+document.getElementById('kb').innerHTML = (len/1024).toFixed(2);
+}
+</script>
 								{% if (flags.edit_split) %}
 									<div id="container.content.short" class="contentActive">
-										<textarea onclick="changeActive('short');" onfocus="changeActive('short');" name="ng_news_content_short" {% if (isBBCode) %}class="{{ attributBB }} form-control"{% else %}id="ng_news_content_short" class="form-control"{% endif %} rows="6" tabindex="3">{{ content.short }}</textarea>
+										<textarea onclick="changeActive('short');" onfocus="changeActive('short');" name="ng_news_content_short" {% if (isBBCode) %}class="{{ attributBB }} form-control"{% else %}id="ng_news_content_short" class="form-control"{% endif %} rows="6" tabindex="3" onkeyup="counter(this);" onchange="counter(this);">{{ content.short }}</textarea>
+										<BR/>Вы ввели: <span id='count'>0</span> символов. <span id='kb'>0</span>Kb
 									</div>
 									{% if (flags.extended_more) %}
 										<div class="form-group">
@@ -96,11 +105,13 @@
 										</div>
 									{% endif %}
 									<div id="container.content.full" class="contentInactive">
-										<textarea onclick="changeActive('full');" onfocus="changeActive('full');" name="ng_news_content_full" {% if (isBBCode) %}class="{{ attributBB }} form-control"{% else %}id="ng_news_content_full" class="form-control"{% endif %} rows="10" tabindex="5">{{ content.full }}</textarea>
+										<textarea onclick="changeActive('full');" onfocus="changeActive('full');" name="ng_news_content_full" {% if (isBBCode) %}class="{{ attributBB }} form-control"{% else %}id="ng_news_content_full" class="form-control"{% endif %} rows="10" tabindex="5" onkeyup="counter(this);" onchange="counter(this);">{{ content.full }}</textarea>
+										<BR/>Вы ввели: <span id='count'>0</span> символов. <span id='kb'>0</span>Kb
 									</div>
 								{% else %}
 									<div id="container.content" class="contentActive">
-									<textarea name="ng_news_content" {% if (isBBCode) %}class="{{ attributBB }} form-control"{% else %}id="ng_news_content" class="form-control"{% endif %} rows="10" tabindex="5">{{ content.short }}</textarea>
+									<textarea name="ng_news_content" {% if (isBBCode) %}class="{{ attributBB }} form-control"{% else %}id="ng_news_content" class="form-control"{% endif %} rows="10" tabindex="5" onkeyup="counter(this);" onchange="counter(this);">{{ content.short }}</textarea>
+									<BR/>Вы ввели: <span id='count'>0</span> символов. <span id='kb'>0</span>Kb
 									</div>
 								{% endif %}
 							</div>
