@@ -1,4 +1,18 @@
-<h2 class="content-head"><a href="admin.php?mod=extras" title="{l_extras}">{l_extras}</a></h2>
-<h3 class="content-title"><a href="?mod=extra-config&plugin={plugin}">{plugin}</a></h3>
+<!-- Navigation bar -->
+<ul class="breadcrumb">
+	<li><a href="admin.php">{l_home}</a></li>
+	<li><a href="admin.php?mod=extras">{l_extras}</a></li>
+	<li class="active"><a href="admin.php?mod=extra-config&plugin={plugin}">{plugin}</a></li>
+</ul>
 
-<div class="content clear">{l_commited}</div>
+<!-- Info content -->
+<div class="page-main">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>{plugin}</h3>
+		</div>
+		<div class="panel-body">
+			{l_commited}
+		</div>
+	</div>
+</div>

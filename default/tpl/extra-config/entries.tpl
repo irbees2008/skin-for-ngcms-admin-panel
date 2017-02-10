@@ -1,7 +1,11 @@
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{title}</h4>
-				<p>[descr]{descr}[/descr]{error}</p>
-			</div>
-			<div class="config-var">{input}</div>
-		</li>
+<div class="form-group">
+	<div class="row">
+		<div class="col-sm-8">
+			{title}
+			[descr]<small>{descr}</small>[/descr]{error}
+		</div>
+		<div class="col-sm-4">
+			{input}
+		</div>
+	</div>
+</div>

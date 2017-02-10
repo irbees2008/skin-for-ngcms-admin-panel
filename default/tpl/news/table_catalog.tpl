@@ -1,9 +1,9 @@
-<script type="text/javascript" src="{{ admin_url }}/includes/js/ajax.js"></script>
-<script type="text/javascript" src="{{ admin_url }}/includes/js/admin.js"></script>
-<script type="text/javascript" src="{{ admin_url }}/includes/js/libsuggest.js"></script>
+<script type="text/javascript" src="{{ scriptLibrary }}/ajax.js"></script>
+<script type="text/javascript" src="{{ scriptLibrary }}/admin.js"></script>
+<script type="text/javascript" src="{{ scriptLibrary }}/libsuggest.js"></script>
 <!-- DEBUG WINDOW <div id="debugWin" style="overflow: auto; position: absolute; top: 160px; left: 230px; width: 400px; height: 400px; background: white; 4px double black; padding: 2px; margin: 2px;">DEBUG WINDOW</div> -->
 
-<form action="{{ php_self }}?mod=news" method="post" name="options_bar">
+<form action="admin.php?mod=news" method="post" name="options_bar">
 <table width="1000" border="0" cellspacing="0" cellpadding="0" class="editfilter">
    <tr>
     <td valign="top" width="100%">
@@ -15,7 +15,7 @@
 <!-- Конец блока фильтрации -->
 
 <br />
-<form action="{{ php_self }}?mod=news" method="post" name="editnews">
+<form action="admin.php?mod=news" method="post" name="editnews">
 <table cellspacing="0" cellpadding="0" border="0">
 <tr><td valign="top">
 <table width="250" cellspacing="0" cellpadding="0" border="0" style="margin-right: 2px;">
@@ -44,7 +44,7 @@
 {% for entry in entries %}
 <tr align="left">
 	<td width="16" class="contentEntry1" cellspacing=0 cellpadding=0 style="padding:0; margin:0;">{% if entry.flags.mainpage %}<img src="{{ skins_url }}/images/mainpage.png" border="0" width="16" height="16" title="Main"/> {% endif %}</td>
-	<td class="contentEntry1"><a href="{{ php_self }}?mod=news&amp;action=edit&amp;id={{ entry.newsid }}">{{ entry.title }}</a><br/><small>{% if entry.flags.status %}<a href="{{ entry.link }}">{{ entry.link }}</a>{% else %}нет ссылки{% endif %}</small></td>
+	<td class="contentEntry1"><a href="admin.php?mod=news&amp;action=edit&amp;id={{ entry.newsid }}">{{ entry.title }}</a><br/><small>{% if entry.flags.status %}<a href="{{ entry.link }}">{{ entry.link }}</a>{% else %}нет ссылки{% endif %}</small></td>
 	<td class="contentEntry1">{% if entry.flags.status %}<img src="{{ skins_url }}/images/yes.png" alt="{{ lang.approved }}" />{% else %}<img src="{{ skins_url }}/images/no.png" alt="{{ lang.unapproved }}" />{% endif %} </td>
 	<td class="contentEntry1"><input name="selected_news[]" value="{{ entry.newsid }}" class="check" type="checkbox" /></td>
 </tr>

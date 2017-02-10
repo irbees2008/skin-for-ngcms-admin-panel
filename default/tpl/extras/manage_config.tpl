@@ -1,6 +1,17 @@
-<h2 class="content-head">{{ lang['extras'] }} &#8594; {{ lang['manage_vars'] }}</h2>
+<!-- Navigation bar -->
+<div class="navigation">
+	<div class="row">
+		<div class="col col-md-12">
+			<ul class="breadcrumb">
+				<li><a href="admin.php">{{ lang['home'] }}</a></li>
+				<a href="admin.php?mod=configuration">{{ lang['extras'] }}</a>
+				<li class="active">{{ lang['manage_vars'] }}</li>
+			</ul>
+		</div>
+	</div>
+</div>
 
-<form method="post" action="?mod=extras&manageConfig=1">
+<form method="post" action="admin.php?mod=extras&manageConfig=1">
 <input type="hidden" name="token" value="{{ token }}"/>
 <input type="hidden" name="mod" value="extras"/>
 <input type="hidden" name="manageConfig" value="1"/>
@@ -13,7 +24,7 @@
 
 <script type="text/javascript" language="javascript">
 function loadData() {
-$.post('/engine/rpc.php', { json : 1, methodName : 'admin.extras.getPluginConfig', rndval: new Date().getTime(), params : json_encode({ token : '{{ token }}' }) }, function(data) {
+$.post('{{ admin_url }}/rpc.php', { json : 1, methodName : 'admin.extras.getPluginConfig', rndval: new Date().getTime(), params : json_encode({ token : '{{ token }}' }) }, function(data) {
 	ngHideLoading();
 	// Try to decode incoming data
 	try {

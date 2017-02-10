@@ -1,67 +1,77 @@
-<h2 class="content-head">Управление правами доступа</h2>
+<!-- Navigation bar -->
+<ul class="breadcrumb">
+	<li><a href="admin.php">{{ lang['home'] }}</a></li>
+	<li><a href="admin.php?mod=users">{{ lang['users'] }}</a></li>
+	<li class="active">{{ lang['permissions'] }}</li>
+</ul>
 
-<form id="permSubmit" name="permSubmit" method="POST">
-	<input type="hidden" name="save" value="1"/>
-	<input type="hidden" name="token" value="{{ token }}"/>
+<!-- Info content -->
+<div class="page-main">
+	<form id="permSubmit" name="permSubmit" method="post">
+		<input type="hidden" name="save" value="1" />
+		<input type="hidden" name="token" value="{{ token }}" />
 
-	<div class="tabs clear">
-		<!-- Navigation bar -->
-		<ul class="tabs-title clear">
+		<!-- Group menu header -->
+		<ul class="nav nav-tabs nav-justified">
 			{% for group in GRP %}
-				<li>{{ group.title }}</li>
+			<li {% if (loop.index == 1) %}class="active"{% endif %}><a href="#userTabs-{{ group.id }}" data-toggle="tab" aria-expanded="{% if (loop.index == 1) %}true{% else %}false{% endif %}">{{ group.title }}</a></li>
 			{% endfor %}
 		</ul>
-		<!-- /Navigation bar -->
-		
-		<!-- Group content header -->
-		{% for group in GRP %}
+		<div id="userTabs" class="tab-content">
+			<!-- Group content header -->
+			{% for group in GRP %}
 			<!-- Content for group [{{ group.id }}] {{ group.title }} -->
-			<div class="tabs-content" id="userTabs-{{ group.id }}">
-				<p>Управление правами группы пользователей: <b>{{ group.title }}</b></p>
-
+			<div id="userTabs-{{ group.id }}" class="tab-pane {% if (loop.index == 1) %} active in{% endif %}">
+				<h3>{{ lang['permissions_for_user_group'] }}: {{ group.title }}</h3>
+				
 				{% for block in CONFIG %}
-					<div class="pconf">
-						<h3>{{ block.title }}</h3>
-						{% if (block.description) %}<i>{{ block.description }}</i>{% endif %}
+				<div class="pconf">
+					<h3>{{ block.title }}</h3>
+					{% if (block.description) %}<p>{{ block.description }}</p>{% endif %}
 
-						{% for area in block.items %}
-							<h4>{{ area.title }}</h4>
-							{% if (area.description) %}<i>{{ area.description }}</i><br/><br/>{% endif %}
-
-							<table class="hover odd">
-								<thead>
-									<tr class="contHead">
-										<th>#ID</th><th>Описание</th><th width="90">Доступ</th>
-									</tr>
-								</thead>
-								{% for entry in area.items %}
-									<tr class="contentEntry1">
-										<td><strong>{{entry.id}}</strong></td>
-										<td>{{ entry.title }}</td>
-										<td>
-											<select name="{{ entry.name }}|{{group.id}}" onchange="onUpdatePerm('{{ entry.name }}|{{group.id}}');" value="{% if isSet(entry.perm[group.id]) %}{% if (entry.perm[group.id]) %}1{% else %}0{% endif %}{% else %}-1{% endif %}">
-												<option value="-1">--</option>
-												<option value="0"{% if (isSet(entry.perm[group.id]) and (not entry.perm[group.id])) %} selected="selected"{% endif %}>Нет</option>
-												<option value="1"{% if (isSet(entry.perm[group.id]) and (entry.perm[group.id])) %} selected="selected"{% endif %}>Да</option>
-											</select>
-										</td>
-									</tr>
-								{% endfor %}
-							</table>
-						{% endfor %}
-					</div>
+					{% for area in block.items %}
+						<div class="panel panel-default panel-table">
+							<div class="panel-heading">
+								<h4>{{ area.title }}</h4>
+								{% if (area.description) %}<p>{{ area.description }}</p>{% endif %}
+							</div>
+							<div class="panel-body table-responsive">
+								<table class="table table-condensed">
+									<thead>
+										<tr class="contHead"><td><b>#ID</b></td><td><b>{{ lang['description'] }}</b></td><td width="90"><b>{{ lang['access'] }}</b></td></td>
+									</thead>
+									<tbody>
+										{% for entry in area.items %}
+										<tr>
+											<td width="20%">{{entry.id}}</td>
+											<td>{{ entry.title }}</td>
+											<td width="20%">
+												<select name="{{ entry.name }}|{{group.id}}" onchange="onUpdatePerm('{{ entry.name }}|{{group.id}}');" value="{% if isSet(entry.perm[group.id]) %}{% if (entry.perm[group.id]) %}1{% else %}0{% endif %}{% else %}-1{% endif %}">
+													<option value="-1">--</option>
+													<option value="0"{% if (isSet(entry.perm[group.id]) and (not entry.perm[group.id])) %} selected="selected"{% endif %}>{{ lang['noa'] }}</option>
+													<option value="1"{% if (isSet(entry.perm[group.id]) and (entry.perm[group.id])) %} selected="selected"{% endif %}>{{ lang['yesa'] }}</option>
+												</select>
+											</td>
+										</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
 				{% endfor %}
 			</div>
 			<!-- /Content for group [{{ group.id }}] {{ group.title }} -->
-		{% endfor %}
-	</div>
+			{% endfor %}
+		</div>
+		<div class="well text-center">
+			<input type="submit" value="{{ lang['save'] }}" class="btn btn-success" onclick="return onUpdateSubmit();"/>
+		</div>
+	</form>
+</div>
 
-	<div class="content-footer clear">
-		<input class="button-success fr" type="submit" value="Сохранить изменения" onclick="return onUpdateSubmit();" />
-	</div>
-</form>
-
-<script type="text/javascript">
+<script>
 var permDefault = {{ DEFAULT_JSON }};
 
 function onUpdatePerm(name) {

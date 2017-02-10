@@ -1,41 +1,55 @@
-<h2 class="content-head">{% if flags.editMode %}Редактирование группы пользователей "{{ entry.identity }}" [ {{ entry.id }} ]{% else %}Добавление группы пользователей{% endif %}</h2>
+<!-- Navigation bar -->
+<ul class="breadcrumb">
+	<li><a href="admin.php">{{ lang['home'] }}</a></li>
+	<li><a href="admin.php?mod=users">{{ lang['users'] }}</a></li>
+	<li><a href="admin.php?mod=ugroup">{{ lang['user_groups'] }}</a></li>
+	<li class="active">{% if flags.editMode %} {{ lang['edit_group'] }} "{{ entry.identity }}" [ {{ entry.id }} ]{% else %}{{ lang['add_group'] }}{% endif %}</li>
+</ul>
 
-	<form action="{{ php_self }}?mod=ugroup" method="post">
-		<input type="hidden" name="token" value="{{ token }}"/>
-		<input type="hidden" name="id" value="{{ entry.id }}"/>
-		<input type="hidden" name="action" value="{% if (flags.editMode) %}edit{% else %}add{% endif %}" />
-		
-		<ul class="config-list">
-			<li class="config-box clear">
-				<div class="config-descr">
-					<h4 class="config-title">ID:</h4>
-				</div>
-				<div class="config-var"><b>{{ entry.id }}</b></div>
-			</li>
-			<li class="config-box clear">
-				<div class="config-descr">
-					<h4 class="config-title">Идентификатор группы:</h4>
-					<p>Например: uguest</p>
-				</div>
-				<div class="config-var"><input type="text" name="identity" value="{{ entry.identity }}" /></div>
-			</li>
-			{% for eLang,eLValue in entry.langName %}
-			<li class="config-box clear">
-				<div class="config-descr">
-					<h4 class="config-title">Название группы на языке [{{ eLang }}]:</h4>
-					{% if eLang=='russian' %}<p>Например: Гость</p>{% endif %}
-					{% if eLang=='english' %}<p>Например: Guest</p>{% endif %}
-				</div>
-				<div class="config-var"><input type="text" name="langname[{{ eLang }}]" value="{{ eLValue }}"/></div>
-			</li>
-			{% endfor %}
-		</ul>
-
-		{% if (flags.canModify) %}
-		<div class="content-footer clear">
-			<input class="fr" type="submit" value="{{ lang['save'] }}" />
-			<input class="fr" type="button" value="{{ lang['cancel'] }}" onClick="history.back();" />
+<!-- Info content -->
+<div class="page-main">
+	<div id="add_edit_form">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form action="admin.php?mod=ugroup" method="post" class="form-horizontal">
+					<input type="hidden" name="token" value="{{ token }}"/>
+					<input type="hidden" name="id" value="{{ entry.id }}"/>
+					<input type="hidden" name="action" value="{% if (flags.editMode) %}edit{% else %}add{% endif %}" />
+					
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4>{% if flags.editMode %} {{ lang['edit_group'] }} "{{ entry.identity }}" [ {{ entry.id }} ]{% else %}{{ lang['add_group'] }}{% endif %}</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="col-sm-4">ID</label>
+							<div class="col-sm-8">
+								{{ entry.id }}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4">{{ lang['identifier'] }}</label>
+							<div class="col-sm-8">
+								<input type="text" name="identity" value="{{ entry.identity }}" class="form-control" />
+							</div>
+						</div>
+						{% for eLang,eLValue in entry.langName %}
+						<div class="form-group">
+							<label class="col-sm-4">{{ lang['name_group_lang'] }} [{{ eLang }}]</label>
+							<div class="col-sm-8">
+								<input type="text" name="langname[{{ eLang }}]" value="{{ eLValue }}" class="form-control" />
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+					<div class="modal-footer">
+						<button type="cancel" class="btn btn-default" data-dismiss="modal">{{ lang['cancel'] }}</button>
+						{% if (flags.canModify) %}
+						<button type="submit" class="btn btn-success">{% if flags.editMode %}{{ lang['save'] }}{% else %}{{ lang['add_group'] }}{% endif %}</button>
+						{% endif %}
+					</div>
+				</form>
+			</div>
 		</div>
-		{% endif %}
-		
-	</form>
+	</div>
+</div>

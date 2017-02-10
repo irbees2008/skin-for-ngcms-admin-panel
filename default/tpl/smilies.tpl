@@ -1,1 +1,1 @@
-<span onclick="insertext(':{smile}: ','', {area})"><img class="smilies" alt="{smile}" src="{skins_url}/smilies/{smile}.gif" /></span>
+<a href="#" onclick="insertext(':{smile}: ','', {area})" class="btn btn-default btn-sm" data-dismiss="modal"><img alt="{smile}" src="{skins_url}/smilies/{smile}.gif"/></a>

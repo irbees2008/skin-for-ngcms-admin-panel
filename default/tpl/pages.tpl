@@ -1,1 +1,7 @@
-<div class="adminNavPages clear">[prev-link]{l_prevpage}[/prev-link] {pages} [next-link]{l_nextpage}[/next-link]</div>
+<div role="navigation">
+	<ul class="pagination">
+		[prev-link]{l_prevpage}[/prev-link]
+		{pages}
+		[next-link]{l_nextpage}[/next-link]
+	</ul>
+</div>

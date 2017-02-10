@@ -1,97 +1,139 @@
-<h2 class="content-head">{{ lang['profile_of'] }} "{{ name }}"</h2>
+<!-- Navigation bar -->
+<ul class="breadcrumb">
+	<li><a href="admin.php">{{ lang['home'] }}</a></li>
+	<li><a href="admin.php?mod=users">{{ lang['users'] }}</a></li>
+	<li class="active">{{ lang['profile_of'] }} <b>{{ name }}</b></li>
+</ul>
 
-<form action="{{ php_self }}?mod=users" method="post">
-<input type="hidden" name="token" value="{{ token }}"/>
-<table class="content" border="0" cellspacing="0" cellpadding="0" align="center">
-<tr>
-<td width="100%" style="padding-right:10px;" valign="top">
-<table border="0" width="100%" cellspacing="0" cellpadding="0" align="left">
-<tr>
-<td width=50% class=contentEntry1>{{ lang['groupName'] }}</td>
-<td width=50% class=contentEntry2 valign=middle><select name="status">{{ status }}</select></td>
-</tr>
-<tr>
-<td width=50% class=contentEntry1>{{ lang['regdate'] }}</td>
-<td width=50% class=contentEntry2 valign=middle>{{ regdate }}</td>
-</tr>
-<tr>
-<td width=50% class=contentEntry1>{{ lang['last_login'] }}</td>
-<td width=50% class=contentEntry2 valign=middle>{{ last }}</td>
-</tr>
-<tr>
-<td width=50% class=contentEntry1>{{ lang['last_ip'] }}</td>
-<td width=50% class=contentEntry2 valign=middle>{{ ip }} <a href="http://www.nic.ru/whois/?ip={{ ip }}" title="{{ lang['whois'] }}">{{ lang['whois'] }}</a></td>
-</tr>
-<tr>
-<td width=50% class=contentEntry1>{{ lang['all_news'] }}</td>
-<td width=50% class=contentEntry2 valign=middle>{{ news }}</td>
-</tr>
-<tr>
-<td width=50% class=contentEntry1>{{ lang['all_comments'] }}</td>
-<td width=50% class=contentEntry2 valign=middle>{{ com }}</td>
-</tr>
-<tr>
-<td width=50% class=contentEntry1>{{ lang['new_pass'] }}</td>
-<td width=50% class=contentEntry2 valign=middle><input class="password" name="password" size="40" maxlength="16" /><br /><small>{{ lang['pass_left'] }}</small></td>
-</tr>
-<tr>
-<td width=50% class=contentEntry1>{{ lang['email'] }}</td>
-<td width=50% class=contentEntry2 valign=middle><input class="email" type="text" name="mail" value="{{ mail }}" size=40 /></td>
-</tr>
-<tr>
-<td width=50% class=contentEntry1>{{ lang['site'] }}</td>
-<td width=50% class=contentEntry2 valign=middle><input type="text" name="site" value="{{ site }}" size=40 /></td>
-</tr>
-<tr>
-<td width=50% class=contentEntry1>{{ lang['icq'] }}</td>
-<td width=50% class=contentEntry2 valign=middle><input type="text" name="icq" value="{{ icq }}" size=40 maxlength=10 /></td>
-</tr>
-<tr>
-<td width=50% class=contentEntry1>{{ lang['from'] }}</td>
-<td width=50% class=contentEntry2 valign=middle><input type="text" name="where_from" value="{{ where_from }}" size=40 maxlength=60 /></td>
-</tr>
-<tr>
-<td width=50% class=contentEntry1>{{ lang['about'] }}</td>
-<td width=50% class=contentEntry2 valign=middle><textarea name="info" rows="7" cols="60">{{ info }}</textarea></td>
-</tr>
-</table>
-</td>
-</tr>
-<tr align="center">
-<td width=100% class="contentEdit" colspan="2">
-{% if (perm.modify) %}<input type="submit" value="{{ lang['save'] }}" class="button" />
-<input type="button" value="{{ lang['cancel'] }}" onClick="history.back();" class="button" />{% endif %}&nbsp;
-<input type="hidden" name="id" value="{{ id }}" />
-<input type="hidden" name="action" value="edit" />
-</td>
-</tr>
-</table>
-</form>
-
-
-{% if (pluginIsActive('xfields')) %}
-<table width="100%">
-<tr>
-<td colspan="8" width="100%" class="contentHead"><img src="{{ skins_url }}/images/nav.gif" hspace="8">Доп. поля в профиле пользователя (только просмотр)</td>
-</tr>
-<tr align="left">
-<td class="contentHead"><b>ID поля</b></td>
-<td class="contentHead"><b>Название поля</b></td>
-<td class="contentHead"><b>Тип поля</b></td>
-<td class="contentHead"><b>Блок</b></td>
-<!-- <td class="contentHead"><b>V</b></td> -->
-<td class="contentHead"><b>Значение</b></td>
-</tr>
-{% for xFN,xfV in p.xfields.fields %}
-<tr>
-	<td>{{ xFN }}</td>
-	<td>{{ xfV.title }}</td>
-	<td>{{ xfV.data.type }}</td>
-	<td>{{ xfV.data.area }}</td>
-<!-- 	<td>{% if (xfV.data.type == "select") and (xfV.data.storekeys) %}<span style="font-color: red;"><b>{{ xfV.secure_value }}{% else %}&nbsp;{% endif %}</td> -->
-	<td>{{ xfV.input }}</td>
-
-</tr>
-{% endfor %}
-</table>
-{% endif %}
+<!-- Info content -->
+<div class="page-main">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h4>{{ lang['users.edit'] }}</h4></div>
+				<form action="admin.php?mod=users" method="post" class="form-horizontal">
+					<input type="hidden" name="token" value="{{ token }}" />
+					<input type="hidden" name="id" value="{{ id }}" />
+					<input type="hidden" name="action" value="edit" />
+					
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="status" class="col-sm-4">{{ lang['groupName'] }}</label>
+							<div class="col-sm-8">
+								<select name="status" id="status" class="form-control">{{ status }}</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-sm-4">{{ lang['new_pass'] }}</label>
+							<div class="col-sm-8">
+								<input type="password" name="password" id="password" class="form-control">
+								<span class="help-block">{{ lang['pass_left'] }}</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="mail" class="col-sm-4">{{ lang['email'] }}</label>
+							<div class="col-sm-8">
+								<input type="email" name="mail" id="email" value="{{ mail }}" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="site" class="col-sm-4">{{ lang['site'] }}</label>
+							<div class="col-sm-8">
+								<input type="url" name="site" id="site" value="{{ site }}" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="icq" class="col-sm-4">{{ lang['icq'] }}</label>
+							<div class="col-sm-8">
+								<input type="text" name="icq" id="icq" value="{{ icq }}" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="where_from" class="col-sm-4">{{ lang['from'] }}</label>
+							<div class="col-sm-8">
+								<input type="text" name="where_from" id="where_from" value="{{ where_from }}" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="info" class="col-sm-4">{{ lang['about'] }}</label>
+							<div class="col-sm-8">
+								<textarea name="info" id="info" rows="8" class="form-control">{{ info }}</textarea>
+							</div>
+						</div>
+					</div>
+					
+					{% if (perm.modify) %}
+					<div class="panel-footer">
+						<div class="clearfix">
+							<div class="col-sm-offset-4 col-sm-8">
+								<button type="submit" class="btn btn-success">{{ lang['save'] }}</button>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+				</form>
+			</div>
+		</div>
+		
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>{{ lang['statistics'] }}</h4>
+				</div>
+				<div class="panel-body">
+					<dl class="dl-horizontal">
+						<dt>{{ lang['regdate'] }}</dt>
+						<dd>{{ regdate }}</dd>
+					</dl>
+					<dl class="dl-horizontal">
+						<dt>{{ lang['last_login'] }}</dt>
+						<dd>{{ last }}</dd>
+					</dl>
+					<dl class="dl-horizontal">
+						<dt>{{ lang['last_ip'] }}</dt>
+						<dd><a href="http://www.nic.ru/whois/?ip={{ ip }}" title="{{ lang['whois'] }}">{{ ip }}</a></dd>
+					</dl>
+					<dl class="dl-horizontal">
+						<dt>{{ lang['all_news'] }}</dt>
+						<dd>{{ news }}</dd>
+					</dl>
+					<dl class="dl-horizontal">
+						<dt>{{ lang['all_comments'] }}</dt>
+						<dd>{{ com }}</dd>
+					</dl>
+				</div>
+			</div>
+			
+			{% if (pluginIsActive('xfields')) %}
+			<div class="panel panel-default panel-table">
+				<div class="panel-heading">
+					<h4>Доп. поля в профиле пользователя (только просмотр)</h4>
+				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>ID поля</th>
+							<th>Название поля</th>
+							<th>Тип поля</th>
+							<th>Блок</th>
+							<th>Значение</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for xFN,xfV in p.xfields.fields %}
+						<tr>
+							<td>{{ xFN }}</td>
+							<td>{{ xfV.title }}</td>
+							<td>{{ xfV.data.type }}</td>
+							<td>{{ xfV.data.area }}</td>
+							<td>{{ xfV.input }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>

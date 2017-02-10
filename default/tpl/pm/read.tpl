@@ -1,15 +1,21 @@
-<h2 class="content-head">Чтение сообщения {from}</h2>
+<!-- Navigation bar -->
+<ul class="breadcrumb">
+	<li><a href="admin.php">{l_home}</a></li>
+	<li><a href="admin.php?mod=pm">{l_pm}</a></li>
+	<li class="active">{title}</li>
+</ul>
 
-<form method="POST" action="{php_self}?mod=pm&action=reply&pmid={pmid}">
-	<input type="hidden" name="title" value="{title}">
-	<input type="hidden" name="from" value="{from}">
-
-	<div class="content-main-left clear">
-		<h3 class="content-title">{title}</h3>
-		<p class="comment-content">{content}</p>
+<!-- Info content -->
+<div class="page-main">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4>{title}</h4>
+		</div>
+		<div class="panel-body table-responsive">
+			<p>{content}</p>
+		</div>
+		<div class="panel-footer text-center">
+			<a href="admin.php?mod=pm&action=reply&pmid={pmid}" title="{l_reply}" class="btn btn-success edit_form">{l_reply}</a>
+		</div>
 	</div>
-
-	<div class="content-footer-left clear">
-		<input class="button-success fr" type="submit" value="{l_reply}" accesskey="s" />
-	</div>
-</form>
+</div>

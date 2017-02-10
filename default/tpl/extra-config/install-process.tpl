@@ -1,17 +1,27 @@
-<h2 class="content-head"><a href="admin.php?mod=extras" title="{l_extras}">{l_extras}</a></h2>
-<h3 class="content-title">{mode_text}: <a href="?mod=extra-config&plugin={plugin}">{plugin}</a></h3>
+<!-- Navigation bar -->
+<ul class="breadcrumb">
+	<li><a href="admin.php">{l_home}</a></li>
+	<li><a href="admin.php?mod=extras">{l_extras}</a></li>
+	<li class="active">{mode_text}</li>
+</ul>
 
-
-<div class="content clear">
-<form method="get" action="{php_self}?mod=extras">
-	<div class="content-main clear">
-		<ul class="config-list">
-			{entries}
-		</ul>
-	</div>
-	<div class="content-footer clear">
-		<input type="hidden" name="mod" value="extras">
-		<input class="fr button-success" type="submit" value="{msg}" />
-	</div>
-</form>
+<!-- Info content -->
+<div class="page-main">
+	<form action="admin.php?mod=extras" method="post">
+		<input type="hidden" name="mod" value="extras" />
+		
+		<div class="panel panel-default panel-table">
+			<div class="panel-heading">
+				<h3>{plugin}</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-condensed">
+					{entries}
+				</table>
+			</div>
+			<div class="panel-footer text-center">
+				<input type="submit" value="{msg}" class="btn btn-success" />
+			</div>
+		</div>
+	</form>
 </div>

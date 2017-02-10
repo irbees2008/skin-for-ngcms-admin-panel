@@ -1,72 +1,104 @@
-<h2 class="content-head">{{ lang['extras'] }}</h2>
+<!-- Navigation bar -->
+<ul class="breadcrumb">
+	<li><a href="admin.php">{{ lang['home'] }}</a></li>
+	<li class="active">{{ lang['extras'] }}</li>
+</ul>
 
-<script type="text/javascript" src="{{ admin_url }}/includes/js/admin.js"></script>
-
-<div class="content clear" id="pluginMenu">
-	<!-- Navigation bar -->
-	<ul class="tabs-title clear">
-		<li data-filter="all">{{ lang['list.all'] }} <span class="count-label" id="count-plugin-all">{{ cntAll }}</span></li>
-		<li data-filter="pluginEntryActive">{{ lang['list.active'] }} <span class="count-label" id="cnt-plug-active">{{ cntActive }}</span></li>
-		<li data-filter="pluginEntryInactive">{{ lang['list.inactive'] }} <span class="count-label" id="cnt-plug-inactive">{{ cntInactive }}</span></li>
-		<li data-filter="pluginEntryUninstalled">{{ lang['list.needinstall'] }} <span class="count-label" id="cnt-plug-needinstall">{{ cntUninstalled }}</span></li>
+<!-- Info content -->
+<div class="page-main">
+	<!-- Filter form: BEGIN -->
+	<div class="well">
+		<div class="has-feedback">
+			<input type="text" id="searchInput" class="search form-control"  placeholder="{{ lang['extras.search'] }}">
+			<i class="fa fa-search form-control-feedback"></i>
+		</div>
+	</div>
+	<ul class="nav nav-tabs nav-justified">
+		<li data-filter="all" class="active"><a href="#">{{ lang['list.all'] }} <span class="badge">{{ cntAll }}</span></a></li>
+		<li data-filter="pluginEntryActive"><a href="#">{{ lang['list.active'] }} <span class="badge">{{ cntActive }}</span></a></li>
+		<li data-filter="pluginEntryInactive"><a href="#">{{ lang['list.inactive'] }} <span class="badge">{{ cntInactive }}</span></a></li>
+		<li data-filter="pluginEntryUninstalled"><a href="#">{{ lang['list.needinstall'] }} <span class="badge">{{ cntUninstalled }}</span></a></li>
 	</ul>
-	<!-- /Navigation bar -->
-
-	<div class="tabs-content" id="maincontent">
-		<table class="table-resp table-extras">
+	<!-- Filter form: END -->
+	
+	<!-- List of plugins: BEGIN -->
+	<div class="table-responsive">
+		<table id="maincontent" class="table table-hover table-condensed table-extras">
 			<thead>
 				<tr>
-					<th>{{ lang['id'] }}</th>
-					<th>{{ lang['title'] }}</th>
-					<th>{{ lang['type'] }}</th>
-					<th>{{ lang['version'] }}</th>
-					<th>{{ lang['description'] }}</th>
-					<th>{{ lang['author'] }}</th>
-					<th>{{ lang['action'] }}</th>
+				<th>{{ lang['id'] }}</th>
+				<th>{{ lang['title'] }}</th>
+				<th class="hidden-xs">{{ lang['type'] }}</th>
+				<th class="hidden-xs">{{ lang['version'] }}</th>
+				<th class="hidden-xs">{{ lang['description'] }}</th>
+				<th class="hidden-xs">{{ lang['author'] }}</th>
+				<th>{{ lang['action'] }}</th>
 				</tr>
 			</thead>
-		<tbody id="entryList">
-		{% for entry in entries %}
-			<tr class="all {{ entry.style }}" id="plugin_{{ entry.id }}">
-				<td>{{ entry.id }} {{ entry.new }}</td>
-				<td>{{ entry.url }}</td>
-				<td>{{ entry.type }}</td>
-				<td nowrap class="ar">{{ entry.version }}&nbsp;<a href="/engine/includes/showinfo.php?mode=plugin&amp;item=readme&amp;plugin={{ entry.id }}" target="_blank" title="Документация по плагину"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;<a href="/engine/includes/showinfo.php?mode=plugin&amp;item=history&amp;plugin={{ entry.id }}" target="_blank" title="История изменений плагина"><i class="fa fa-history"></i></a></td>
-				<td>{{ entry.description }}</td>
-				<td>{{ entry.author_url }}</td>
-				<td nowrap>{{ entry.link }} {{ entry.install }}</td>
-			</tr>
-		{% endfor %}
-		</tbody>
+			<tbody id="entryList">
+				{% for entry in entries %}
+				<tr class="all {{ entry.style }}" id="plugin_{{ entry.id }}">
+					<td>{{ entry.id }} {{ entry.new }}</td>
+					<td>{{ entry.url }}</td>
+					<td class="hidden-xs">{{ entry.type }}</td>
+					<td nowrap class="hidden-xs">{{ entry.history }} {{ entry.version }}</td>
+					<td class="hidden-xs">{{ entry.readme }} {{ entry.description }}</td>
+					<td class="hidden-xs">{{ entry.author_url }}</td>
+					<td nowrap="nowrap">{{ entry.link }} {{ entry.install }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
 		</table>
 	</div>
+	<!-- List of plugins: End -->
 </div>
-<script type="text/javascript">
-$(document).ready(function(){
 
-	var newSelection = "";
+<script>
+function tabsSwitch(tabs) {
+	var newSelection;
 
-	function tabsSwitch(tabs) {
-		//$("#maincontent").fadeOut(1);
-		$(".tabs-title li").removeClass("active");
-		tabs.addClass("active");
-		newSelection = tabs.attr("data-filter");
-		$("."+newSelection).show(1);
-		$(".all").not("."+newSelection).hide(1);
-		$("#maincontent").fadeIn(1);
-	}
-
-	$('.tabs-title').each(function(i) {
-		var storage = localStorage.getItem('tab' +document.getElementById('skin_module_name').value+ i);
-		if (storage) {
-			tabsSwitch($(this).find('li').eq(storage));
-		} else {
-			tabsSwitch($('.tabs-title li:first'));
-		}
-	});
+	$(".nav-tabs li").removeClass("active");
+	tabs.addClass("active");
+	newSelection = tabs.attr("data-filter");
+	$(".all").not("."+newSelection).hide();
+	$("."+newSelection).show();
 	
-	$(".tabs-title").on('click', 'li:not(.active)', function(){
+}
+
+function searchInTable() {
+	
+	// Declare variables 
+	var input, filter, table, tr, td, i;
+	input = $('#searchInput');
+	filter = input.val().toUpperCase();
+	table = $('#maincontent');
+	tr = table.find('tr');
+	// Loop through all table rows, and hide those who don't match the search query
+	for (i=0;i<tr.length;i++) {
+		td = tr[i].getElementsByTagName("td")[0];
+		if (td) {
+			if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = '';
+			} else {
+				tr[i].style.display = 'none';
+			}
+		} 
+	}
+}
+
+$(document).ready(function() {
+
+	$("#searchInput").on('keyup', function(){
+		// Reset nav-tabs
+		tabsSwitch($('.nav-tabs li').eq(0));
+		searchInTable();
+		return false;
+	});
+
+	$(".nav-tabs").on('click', 'li:not(.active)', function(){
+		$("#searchInput").val('');
 		tabsSwitch($(this));
+		return false;
 	});
 });
 </script>

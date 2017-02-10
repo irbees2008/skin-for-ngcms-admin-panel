@@ -1,313 +1,321 @@
-<h2 class="content-head">{l_files_title}</h2>
+<!-- Navigation bar -->
+<ul class="breadcrumb">
+	<li><a href="admin.php">{l_home}</a></li>
+	<li class="active">{l_files_title}</li>
+</ul>
 
-<!-- Preload uploadify engine -->
-<script type="text/javascript" src="{admin_url}/includes/js/swfobject.js"></script>
-<script type="text/javascript" src="{admin_url}/includes/js/jquery.uploadify.v2.1.4.min.js"></script>
-
-<!-- Main scripts -->
-<script type="text/javascript">
-var flagRequireReload = 0;
-
-function setStatus(mode) {
- var st = document.getElementById('delform');
- st.subaction.value = mode;
-}
-</script>
-
-<!-- Main content form -->
-<div class="content tabs clear">
-
-	<!-- Navigation bar -->
-	<ul class="tabs-title clear">
-		<li>{l_list}</li>
-		[status]<li>{l_categories}</li>[/status]
-		<li>{l_uploadnew}</li>
-	</ul>
-	<!-- /Navigation bar -->
-	
-	<div class="tabs-content">
-		
-		<div class="clear" id="list">
-		<form action="{php_self}?mod=files&amp;action=list" method="post" name="options_bar">
-			<input type="hidden" name="area" value="{area}" />
-			<dl class="fl">
-				<dt><label class="fl" for="author">{l_author}</label></dt>
-				<dd><select name="author" id="author"><option value="">- {l_all} -</option>{authorlist}</select></dd>
-				[status]
-				<dt><label class="fl" for="">{l_category} </label></dt>
-				<dd>{dirlistcat}</dd>
-				[/status]
-			</dl>
-			<dl class="fl">
-				<dt><label class="fl" for="postdate">{l_month}</label></dt>
-				<dd><select name="postdate" id="postdate"><option selected value="">- {l_all} -</option>{dateslist}</select></dd>
-				<dt><label class="fl" for="npp">{l_per_page}</label></dt>
-				<dd>
-					<input class="fl" type="text" name="npp" id="npp" value="{npp}" />
-					<input class="fr" type="submit" value="{l_show}" />
-				</dd>
-			</dl>
-		</form>
+<!-- Info content -->
+<div class="page-main">
+	<!-- Filter form: BEGIN -->
+	<div id="filter" class="collapse">
+		<div class="well">
+			<form name="options_bar" id="options_bar" action="admin.php?mod=files" method="post">
+				<input type="hidden" name="action" value="list" />
+				<input type="hidden" name="area" value="{area}" />
+				
+				<div class="row">
+					<!--Block 1-->
+					<div class="col col-md-3 col-sm-6">
+						[status]
+						<div class="form-group">
+							<label>{l_category}</label>
+							{dirlistcat}
+						</div>
+						<div class="form-group">
+							<label for="">{l_author}</label>
+							<select name="author" class="form-control">
+								<option value="">- {l_all} -</option>
+								{authorlist}
+							</select>
+						</div>
+						[/status]
+					</div>
+					<!--/Block 1-->
+					<!--Block 2-->
+					<div class="col col-md-3 col-sm-6">
+						<div class="form-group">
+							<label for="">{l_month}</label>
+							<select name="postdate" class="form-control">
+								<option selected value="">- {l_all} -</option>
+								{dateslist}
+							</select>
+						</div>
+					</div>
+					<!--/Block 2-->
+					<!--Block 3-->
+					<div class="col col-md-3 col-sm-6">
+						<div class="form-group">
+							<label for="">{l_per_page}</label>
+							<input type="text" name="npp" id="npp" value="{npp}" class="form-control">
+						</div>
+					</div>
+					<!--/Block 3-->
+					<!--Block 4-->
+					<div class="col col-md-3 col-sm-6">
+						<div class="form-group">
+							<label for="">&nbsp;</label>
+							<button type="submit" class="btn btn-primary form-control">{l_do_show}</button>
+						</div>
+					</div>
+					<!--/Block 4-->
+				</div>
+			</form>
 		</div>
-
-		<form action="{php_self}?mod=files" method="post" name="delform" id="delform">
-			<input type="hidden" name="area" value="{area}" />
-			<input type="hidden" name="subaction" value="" />
-			<table class="table-resp table-files" id="entries">
-				<thead>
-				<tr>
-					<th><input class="check" type="checkbox" name="master_box" title="{l_select_all}" onclick="check_uncheck_all(delform)" /></th>
-					<th>ID</th>
-					<th>{l_name}</th>
-					<th>{l_category}</th>
-					<th>{l_author}</th>
-					<th>{l_size}</th>
-					<th>{l_action}</th>
-				</tr>
-				</thead>
-					{entries}
-			</table>
+	</div>
+	<!-- Filter form: END -->
+	
+	<!-- List of files: BEGIN -->
+	<div class="panel panel-default panel-table">
+		<div class="panel-heading text-right">
+			<a href="#" data-toggle="modal" data-target="#categories" class="btn btn-default"><i class="fa fa-pencil"></i></a>
+			<button type="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="filter" class="btn btn-primary"><i class="fa fa-cog"></i></button>
+			<a href="#" title="{l_uploadnew}" class="btn btn-success" data-toggle="modal" data-target="#modal-upload"><i class="fa fa-plus"></i></a>
+		</div>
+		<form name="imagedelete" id="delform" action="admin.php?mod=files" method="post">
+			<input type="hidden" name="area" value="{area}">
 			
-			<div class="content-footer clear">
-				[status]
-				<input type="submit" class="fr button-danger" onclick="setStatus('delete');" value="{l_delete}" />
-				<div class="div-resp">
-					<div class="input-group">
-						{dirlist}
-						<span>
-							<button type="submit" onclick="setStatus('move');">{l_move}</button>
-						</span>
+			<div class="panel-body table-responsive">
+				<table class="table table-condensed">
+					<thead>
+						<tr>
+							<th><input type="checkbox" class="select-all"></th>
+							<th>#</th>
+							<th>{l_name}</th>
+							<th>{l_size}</th>
+							<th>{l_category}</th>
+							<th>{l_author}</th>
+							<th>{l_action}</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						{entries}
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<div class="row">
+					<div class="col col-md-4">
+						[status]
+						<div class="form-group">
+							<div class="input-group">
+								<select name="subaction" onchange="updateAction();" onclick="updateAction();" class="form-control">
+									<option value="">-- {l_action} --</option>
+									<option value="move">{l_move}</option>
+									<option value="delete">{l_delete}</option>
+								</select>
+								<span class="input-group-btn">
+									<button type="submit" class="btn btn-default">{l_ok}</button>
+								</span>
+							</div>
+						</div>
+						<div class="form-group" id="category" style="display: none;">
+							{dirlist}
+						</div>
+						[/status]
+					</div>
+					<div class="col col-md-8 text-right">
+						{pagesss}
 					</div>
 				</div>
-				[/status]
 			</div>
 		</form>
-		{pagesss}
 	</div>
-	
-	[status]
-	<div class="tabs-content" id="categories">
-		<div class="div-resp">
-			<h3 class="content-title">{l_addnewcat}</h3>
-			<form action="{php_self}?mod=files" method="post" name="newcat">
-				<input type="hidden" name="area" value="{area}" />
-				<input type="hidden" name="subaction" value="newcat" />
-				
-				<div class="input-group">
-					<input type="text" name="newfolder" required />
-					<span>
-						<button type="submit">Применить</button>
-					</span>
-				</div>
-			</form>
-		</div>
-		
-		<div class="div-resp">
-			<h3 class="content-title">{l_delcat}</h3>
-			<form action="{php_self}?mod=files" method="post" name="delcat">
-				<input type="hidden" name="area" value="{area}" />
-				<input type="hidden" name="subaction" value="delcat" />
-				
-				<div class="input-group">
-					{dirlist}
-					<span>
-						<button type="submit">Применить</button>
-					</span>
-				</div>
-			</form>
-		</div>
-	</div>
-	[/status]
-
-	<div class="tabs-content" id="uploadnew">
-		<div class="div-resp">
-			<!-- UPLOAD_FILE_GOVNO_FLASH -->
-			<h3 class="content-title">{l_upload_file}</h3>
-			<!-- Main scripts -->
-			<form action="{php_self}?mod=files" method="post" enctype="multipart/form-data" name="sn">
-				<input type="hidden" name="area" value="{area}" />
-				<input type="hidden" name="subaction" value="upload" />
-				
-				<div class="input-group">
-					<span class="input-group-check">
-						<i class="fa fa-folder-open-o"></i>
-					</span>
-					{dirlistS}
-				</div>
-				<div class="input-group">
-					<span class="input-group-check"><input type="checkbox" name="replace" id="flagReplace" value="1"/></span>
-					<input type="text" value="{l_do_replace}" disabled />
-				</div>
-				<div class="input-group">
-					<span class="input-group-check"><input type="checkbox" name="rand" id="flagRand" value="1"/></span>
-					<input type="text" value="{l_do_rand}" disabled />
-				</div>
-
-				<span id="showRemoveAddButtoms">
-					<input type="button" value='{l_delone}' onClick="RemoveFiles();return false;" />
-					<input type="button" value='{l_onemore}' onClick="AddFiles();return false;" />
-				</span>
-				
-				<table id="fileup" class="upload">
-					<tr id="row">
-						<td>1: </td><td><input type="file" id="fileUploadInput" name="userfile[0]" required /></td>
-					</tr>
-				</table>
-
-				<div class="clear">
-					<span id="mfs"></span><script type="text/javascript">$('#mfs').text('Максимальный размер файла ' + formatSize({maxSize}));</script>
-					<button class="fr" type="submit" onclick="uploadifyDoUpload(); return false;"/><i class="fa fa-upload"></i></button>
-				</div>
-
-				<script language="javascript" type="text/javascript">
-					function AddFiles() {
-						var tbl = document.getElementById('fileup');
-						var lastRow = tbl.rows.length;
-						var iteration = lastRow+1;
-						var row = tbl.insertRow(lastRow);
-						var cellRight = row.insertCell(0);
-						cellRight.innerHTML = '<span style="font-size: 12px;">'+iteration+': </span>';
-						cellRight = row.insertCell(1);
-
-						var el = document.createElement('input');
-						el.setAttribute('type', 'file');
-						el.setAttribute('name', 'userfile[' + iteration + ']');
-						el.setAttribute('size', '30');
-						el.setAttribute('value', iteration);
-						cellRight.appendChild(el);
-					}
-					function RemoveFiles() {
-						var tbl = document.getElementById('fileup');
-						var lastRow = tbl.rows.length;
-						if (lastRow > 1){
-							tbl.deleteRow(lastRow - 1);
-						}
-					}
-				</script>
-				<!-- BEGIN: Init UPLOADIFY engine -->
-				<script type="text/javascript">
-				$(document).ready(function() {
-					$('#fileUploadInput').uploadify({
-						'uploader' : '{admin_url}/includes/js/uploadify.swf',
-						'script' : '{admin_url}/rpc.php?methodName=admin.files.upload',
-						'cancelImg' : '{skins_url}/images/up_cancel.png',
-						'folder' : '',
-						'fileExt' : '{listExt}',
-						'fileDesc' : '{descExt}',
-						'sizeLimit' : {maxSize},
-						'auto' : false,
-						'multi' : true,
-						'buttonText' : 'Select ...',
-						'width' : 100,
-						'removeCompleted' : true,
-						'onInit' : function() { document.getElementById('showRemoveAddButtoms').style.display= 'none'; },
-						'onComplete' : function(ev, ID, fileObj, res, data) {
-							// Response should be in JSON format
-							var resData;
-							var resStatus = 0;
-							try {
-								resData = eval('('+res+')');
-								if (typeof(resData['status']))
-									resStatus = 1;
-							} catch (err) { alert('Error parsing JSON output. Result: '+res); }
-
-							if (!resStatus) {
-								alert('Upload resp: '+res);
-								return false;
-							}
-
-							flagRequireReload = 1;
-
-							// If upload fails
-							if (resData['status'] < 1) {
-								$('#' + $(ev.target).attr('id') + ID).append('<div class="msg">('+resData['errorCode']+') '+resData['errorText']+'</div>');
-								if (typeof(resData['errorDescription']) !== 'undefined') {
-									$('#' + $(ev.target).attr('id') + ID).append('<div class="msgInfo">'+resData['errorDescription']+'</div>');
-								}
-								$('#' + $(ev.target).attr('id') + ID).css('border', '2px solid red');
-								return false;
-							} else {
-								$('#' + $(ev.target).attr('id') + ID).append('<div>'+resData['errorText']+'</div>');
-								$('#' + $(ev.target).attr('id') + ID).fadeOut(5000);
-							}
-							return true;
-						},
-					});
-				});
-
-				function uploadifyDoUpload() {
-					// Prepare script data
-					var scriptData = new Array();
-					scriptData['ngAuthCookie'] = '{authcookie}';
-					scriptData['uploadType'] = 'file';
-					scriptData['category'] = document.getElementById('categorySelect').value;
-					scriptData['rand'] = document.getElementById('flagRand').checked?1:0;
-					scriptData['replace'] = document.getElementById('flagReplace').checked?1:0;
-
-					$('#fileUploadInput').uploadifySettings('scriptData',scriptData,true);
-					$('#fileUploadInput').uploadifyUpload();
-				}
-				</script>
-				<!-- END: Init UPLOADIFY engine -->
-			</form>
-		</div>
-		
-		<div class="div-resp">
-			<!-- UPLOAD_FILE_URL -->
-			<h3 class="content-title">{l_upload_file_url}</h3>
-			<form action="{php_self}?mod=files" method="post" name="snup">
-				<input type="hidden" name="subaction" value="uploadurl" />
-				<input type="hidden" name="area" value="{area}" />
-				
-				<div class="input-group">
-					<span class="input-group-check">
-						<i class="fa fa-folder-open-o"></i>
-					</span>
-					{dirlist}
-				</div>
-				<div class="input-group">
-					<span class="input-group-check"><input type="checkbox" name="replace" value="replace" id="replace" /></span>
-					<input type="text" value="{l_do_replace}" disabled />
-				</div>
-				<div class="input-group">
-					<span class="input-group-check"><input type="checkbox" name="rand" value="rand" id="rand" /></span>
-					<input type="text" value="{l_do_rand}" disabled />
-				</div>
-				<table class="upload" id="fileup2">
-					<tr id="row">
-						<td>
-							<div class="input-group">
-								<span class="input-group-check">1</span>
-								<input type="url" name="userurl[0]" required />
-							</div>
-						</td>
-					</tr>
-				</table>
-				
-				<div class="clear">
-					<button class="button-danger fl" type="button" onClick="RemoveFiles2();return false;" >-</button>
-					<button class="button-success fl" type="button" onClick="AddFiles2();return false;" >+</button>
-					<button class="fr" type="submit"><i class="fa fa-upload"></i></button>
-				</div>
-				
-				<script type="text/javascript">
-					function AddFiles2() {
-						var tbl = document.getElementById('fileup2');
-						var lastRow = tbl.rows.length;
-						var iteration = lastRow+1;
-						var row = tbl.insertRow(lastRow);
-						var cellRight = row.insertCell(0);
-						cellRight.innerHTML = '<div class="input-group"><span class="input-group-check">'+ iteration +'</span><input type="url" name="userurl[' + lastRow + ']" required /></div>';
-					}
-					function RemoveFiles2() {
-						var tbl = document.getElementById('fileup2');
-						var lastRow = tbl.rows.length;
-						if (lastRow > 1){
-							tbl.deleteRow(lastRow - 1);
-						}
-					}
-				</script>
-			</form>
-		</div>
-	</div>
+	<!-- List of images: END -->
 </div>
+
+[status]
+<div id="categories" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">{l_categories}</h4>
+			</div>
+			<div class="modal-body">
+				<form name="newcat" action="admin.php?mod=files" method="post">
+					<input type="hidden" name="subaction" value="newcat">
+					<input type="hidden" name="area" value="{area}">
+					<div class="form-group">
+						<label for="">{l_addnewcat}</label>
+						<div class="input-group">
+							<input type="text" name="newfolder" class="form-control" >
+							<span class="input-group-btn">
+								<button type="submit" class="btn btn-success">{l_ok}</button>
+							</span>
+						</div>
+						
+					</div>
+				</form>
+				<form name="delcat" action="admin.php?mod=files" method="post">
+					<input type="hidden" name="subaction" value="delcat">
+					<input type="hidden" name="area" value="{area}">
+					<label for="">{l_delcat}</label>
+					<div class="input-group">
+						{dirlist}
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-success">{l_ok}</button>
+						</span>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">{l_cancel}</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+[/status]
+
+<div id="modal-upload" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">{l_uploadnew}</h4>
+			</div>
+			<div class="modal-body">
+				<div id="mfs" class="alert alert-info"></div>
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active">
+						<a href="#upload" id="upload-tab" aria-controls="upload" data-toggle="tab" aria-expanded="true" role="tab">{l_upload_file}</a>
+					</li>
+					<li role="presentation">
+						<a href="#uploadurl" id="uploadurl-tab" aria-controls="uploadurl" data-toggle="tab" aria-expanded="false" role="tab">{l_upload_file_url}</a>
+					</li>
+				</ul>
+				
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div id="upload" class="tab-pane active in" aria-labelledby="upload-tab" role="tabpanel">
+						<form name="sn" id="upload-files" action="admin.php?mod=files" method="post" enctype="multipart/form-data" class="form-horizontal">
+							<input type="hidden" name="uploadType" value="file">
+							<input type="hidden" name="subaction" value="upload">
+							<input type="hidden" name="area" value="{area}">
+							
+							<table id="fileup" class="table table-condensed table-bordered">
+								<thead>
+									<tr>
+										<th>{l_attach.filename} - {l_attach.size}</th>
+										<th class="text-right" width="10">{l_do_delete}</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td></td>
+										<td class="text-center" width="10">
+											<button type="button" title="{l_attach.more_rows}" onclick="attachAddRow('fileup');" class="btn btn-primary" title="{l_attach.more_rows}"><i class="fa fa-plus"></i></button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="form-group">
+								<label class="col-sm-4">{l_category}</label>
+								<div class="col-sm-8">
+									{dirlistS}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4">{l_options}</label>
+								<div class="col-sm-8">
+									<label for="flagReplace">
+										<input type="checkbox" name="replace" id="flagReplace" value="1">&nbsp;{l_do_replace}
+									</label><br>
+									<label for="flagRand">
+										<input type="checkbox" name="rand" id="flagRand" value="1">&nbsp;{l_do_rand}
+									</label>
+								</div>
+							</div>
+							<div class="row text-right">
+								<hr>
+								<label class="col-sm-4"></label>
+								<div class="col-sm-8">
+									<button type="button" class="btn btn-default" data-dismiss="modal">{l_cancel}</button>
+									<input type="submit" id="i_submit" value='{l_upload}' class="btn btn-success">
+								</div>
+							</div>
+						</form>
+					</div>
+					
+					<div id="uploadurl" class="tab-pane" aria-labelledby="uploadurl-tab" role="tabpanel">
+						<form name="snup" action="admin.php?mod=files" method="post" class="form-horizontal">
+							<input type="hidden" name="subaction" value="uploadurl">
+							<input type="hidden" name="area" value="{area}">
+							
+							<table id="fileup2" class="table table-condensed table-bordered">
+								<thead>
+									<tr>
+										<th>{l_attach.url}</th>
+										<th class="text-right" width="10">{l_do_delete}</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td></td>
+										<td class="text-center" width="10">
+											<button type="button" title="{l_attach.more_rows}" onclick="attachAddRow('fileup2');" class="btn btn-primary" title="{l_attach.more_rows}"><i class="fa fa-plus"></i></button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="form-group">
+								<label class="col-sm-4">{l_category}</label>
+								<div class="col-sm-8">
+									{dirlist}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4">{l_options}</label>
+								<div class="col-sm-8">
+									<label for="replace2">
+										<input type="checkbox" name="replace" id="replace2" value="1">&nbsp;{l_do_replace}
+									</label><br>
+									<label for="rand2">
+										<input type="checkbox" name="rand" id="rand2" value="1">&nbsp;{l_do_rand}
+									</label>
+								</div>
+							</div>
+							
+							<div class="row text-right">
+								<hr>
+								<label class="col-sm-4"></label>
+								<div class="col-sm-8">
+									<button type="button" class="btn btn-default" data-dismiss="modal">{l_cancel}</button>
+									<input type="submit" value='{l_upload}' class="btn btn-success">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Main scripts -->
+<script>
+$(document).ready(function(){
+
+	$('#mfs').html('Максимальный размер файлов: ' + formatSize({maxSize})+'<br>Допустимые расширения файлов: {listExt}');
+
+	$('#modal-upload').on("hidden.bs.modal", function(){
+		if (flagRequireReload)
+			document.location.href = document.location.href;
+	});
+
+});
+
+function updateAction() {
+	mode = document.forms['delform'].subaction.value;
+	if (mode == 'move')
+		$('#category').css( "display", "block" );
+	else
+		$('#category').css( "display", "none" );
+}
+
+// Add first row
+var flagRequireReload = 0;
+attachAddRow('fileup');
+attachAddRow('fileup2');
+
+</script>

@@ -1,138 +1,105 @@
-<h2 class="content-head">{{ lang['editing'] }} "{{ name }}"</h2>
+<!-- Navigation bar -->
+<ul class="breadcrumb">
+	<li><a href="admin.php">{{ lang['home'] }}</a></li>
+	<li><a href="admin.php?mod=categories">{{ lang['categories_title'] }}</a></li>
+	<li class="active">{{ lang['editing'] }} <b>{{ name }}</b></li>
+</ul>
 
-<form method="post" action="{{ php_self }}?mod=categories" enctype="multipart/form-data">
-	<input type="hidden" name="token" value="{{ token }}"/>
-
-	<ul class="config-list">
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title"><label for="cat_show">{{ lang['show_main'] }}</label></h4>
-				<p></p>
-			</div>
-			<div class="config-var"><input type="checkbox" id="cat_show" name="cat_show" value="1" class="check" {% if flags.showInMenu %}checked="checked" {% endif %}/></div>
-		</li>
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{{ lang['show.link'] }}</h4>
-				<p></p>
-			</div>
-			<div class="config-var"><select name="show_link">{{ show_link }}</select></div>
-		</li>
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{{ lang['title'] }}</h4>
-				<p></p>
-			</div>
-			<div class="config-var"><input type="text" name="name" value="{{ name }}" /></div>
-		</li>
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{{ lang['alt_name'] }}</h4>
-				<p></p>
-			</div>
-			<div class="config-var"><input type="text" name="alt" value="{{ alt }}" /></div>
-		</li>
-		{% if flags.haveMeta %}
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{{ lang['cat_desc'] }}</h4>
-				<p></p>
-			</div>
-			<div class="config-var"><input type="text" name="description" value="{{ description }}" /></div>
-		</li>
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{{ lang['cat_keys'] }}</h4>
-				<p></p>
-			</div>
-			<div class="config-var"><input type="text" name="keywords" value="{{ keywords }}" /></div>
-		</li>
-		{% endif %}
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{{ lang['cat_number'] }}</h4>
-				<p></p>
-			</div>
-			<div class="config-var"><input type="number" name="number" value="{{ number }}" /></div>
-		</li>
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{{ lang['cat_tpl'] }}</h4>
-				<p></p>
-			</div>
-			<div class="config-var"><select name="tpl">{{ tpl_list }}</select></div>
-		</li>
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{{ lang['template_mode'] }}</h4>
-				<p></p>
-			</div>
-			<div class="config-var"><select name="template_mode">{{ template_mode }}</select></div>
-		</li>
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{{ lang['parent'] }}</h4>
-				<p></p>
-			</div>
-			<div class="config-var">{{ parent }}</div>
-		</li>
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{{ lang['icon'] }}</h4>
-				<p>URL картинки, используемой в качестве иконки категории</p>
-			</div>
-			<div class="config-var"><input type="text" name="icon" value="{{ icon }}" maxlength="255" /></div>
-		</li>
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">Прикрепленная иконка</h4>
-				<p>Вы можете прикрепить изображение-иконку непосредственно к категории.<br/>Данное поле имеет приоритет.</p>
-			</div>
-			<div class="config-var">
-			{% if flags.haveAttach %}<div id="previewImage"><img class="w_100" src="{{ attach_url }}"/></div>
-			<div class="input-group w_100">
-				<span class="input-group-check">
-					<input type="checkbox" name="image_del" value="1">
-				</span>
-				<input type="text" value="удалить иконку" disabled />
-			</div>
-			{% endif %}
-			<div class="button button-fileinput">
-				<span id="spanfile1"><i class="fa fa-plus"></i> Add files...</span> <span id="spansize1"></span>
-				<input type="file" name="image" onchange="validateFile(this, 1);">
-			</div>
-			</div>
-		</li>
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{{ lang['alt_url'] }}</h4>
-				<p></p>
-			</div>
-			<div class="config-var"><input type="text" name="alt_url" value="{{ alt_url }}" /></div>
-		</li>
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{{ lang['orderby'] }}</h4>
-				<p></p>
-			</div>
-			<div class="config-var">{{ orderlist }}</div>
-		</li>
-		<li class="config-box clear">
-			<div class="config-descr">
-				<h4 class="config-title">{{ lang['category.info'] }}</h4>
-				<p>{{ lang['category.info#desc'] }}</p>
-			</div>
-			<div class="config-var"><textarea name="info" id="info">{{ info }}</textarea></div>
-		</li>
-		<table>{{ extend }}</table>
-
-	{% if flags.canModify %}
-	<div class="clear">
-		<input class="fr button-success" type="submit" value="{{ lang['save'] }}" />
-		<input class="fr" type="button" value="{{ lang['cancel'] }}" onclick="document.location='admin.php?mod=categories';" />
-		
+<!-- Info content -->
+<div class="page-main">
+	<form action="admin.php?mod=categories" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="token" value="{{ token }}" />
 		<input type="hidden" name="action" value="doedit" />
 		<input type="hidden" name="catid" value="{{ catid }}" />
-	</div>
-	{% endif %}
-</form>
+
+		<table class="table table-condensed">
+			<tr>
+				<td width="70%">{{ lang['show_main'] }}</td>
+				<td width="30%">
+					<label class="btn btn-default form-control">
+						<input type="checkbox" autocomplete="off" id="cat_show" name="cat_show" value="1" {% if flags.showInMenu %}checked="checked" {% endif %}>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td width="70%">{{ lang['parent'] }}</td>
+				<td width="30%">{{ parent }}</td>
+			</tr>
+			<tr>
+				<td width="70%">{{ lang['title'] }}</td>
+				<td width="30%"><input value="{{ name }}" type=text size="40" name="name" /></td>
+			</tr>
+			<tr>
+				<td width="70%">{{ lang['alt_name'] }}</td>
+				<td width="30%"><input value="{{ alt }}" type=text size="40" name="alt" /></td>
+			</tr>
+			{% if flags.haveMeta %}
+			<tr>
+				<td width="70%">{{ lang['cat_desc'] }}</td>
+				<td width="30%"><input type="text" size="40" name="description" value="{{ description }}" /></td>
+			</tr>
+			<tr>
+				<td width="70%">{{ lang['cat_keys'] }}</td>
+				<td width="30%"><input type="text" size="40" name="keywords" value="{{ keywords }}" /></td>
+			</tr>
+			{% endif %}
+			<tr>
+				<td width="70%">{{ lang['cat_number'] }}</td>
+				<td width="30%"><input type="text" size="4" name="number" value="{{ number }}" /></td>
+			</tr>
+			<tr>
+				<td width="70%">{{ lang['show.link'] }}</td>
+				<td width="30%"><select name="show_link">{{ show_link }}</select></td>
+			</tr>
+			<tr>
+				<td width="70%">{{ lang['cat_tpl'] }}</td>
+				<td width="30%"><select name="tpl">{{ tpl_list }}</select></td>
+			</tr>
+			<tr>
+				<td width="70%">{{ lang['template_mode'] }}</td>
+				<td width="30%"><select name="template_mode">{{ template_mode }}</select></td>
+			</tr>
+			<tr>
+				<td width="70%">{{ lang['icon'] }}<br/><small>{{ lang['icon#desc'] }}</small></td>
+				<td width="30%"><input type="text" size="40" name="icon" value="{{ icon }}" maxlength="255" /></td>
+			</tr>
+			<tr>
+			<td width="70%">{{ lang['attached_icon'] }}<br/><small>{{ lang['attached_icon#desc'] }}</small></td>
+			<td width="30%">
+				{% if flags.haveAttach %}
+				<div id="previewImage" class="text-center form-group">
+					<img src="{{ attach_url }}"/>
+				</div>
+				<div class="form-group">
+					<label for="image_del"class="btn btn-danger form-control" title="">
+						<input type="checkbox" autocomplete="off" id="image_del" name="image_del" value="1">
+						{{ lang['delete_icon'] }}
+					</label>
+				</div>
+				{% endif %}
+				<div class="btn btn-default btn-fileinput form-control">
+					<span><i class="fa fa-plus"></i> {l_attach.new}</span>
+					<input type="file" name="image" id="image" onchange="validateFile(this);">
+				</div>
+			</td>
+			</tr>
+			<tr>
+				<td width="70%">{{ lang['alt_url'] }}</td>
+				<td width="30%"><input value="{{ alt_url }}" type=text size="40" name="alt_url" /></td>
+			</tr>
+			<tr>
+				<td width="70%">{{ lang['orderby'] }}</td>
+				<td width="30%">{{ orderlist }}</td>
+			</tr>
+			<tr>
+				<td width="70%" valign="top">{{ lang['category.info'] }}<br/><small>{{ lang['category.info#desc'] }}</small></td>
+				<td width="30%"><textarea id="info" name="info" cols="70" rows="5">{{ info }}</textarea></td>
+			</tr>
+			{{ extend }}
+		</table>
+		
+		<div class="well text-center">
+			{% if flags.canModify %}<input type="submit" value="{{ lang['save'] }}" class="btn btn-success">{% endif %}
+		</div>
+	</form>
+</div>

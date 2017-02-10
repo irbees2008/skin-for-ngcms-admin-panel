@@ -1,57 +1,83 @@
-<h2 class="content-head">{{ lang['rewrite'] }}</h2>
+<!-- Navigation bar -->
+<ul class="breadcrumb">
+	<li><a href="admin.php">{{ lang['home'] }}</a></li>
+	<li><a href="admin.php?mod=options">{{ lang['options'] }}</a></li>
+	<li class="active">{{ lang['rewrite'] }}</li>
+</ul>
 
-<script type="text/javascript" src="{{ admin_url }}/includes/js/ajax.js"></script>
-<script type="text/javascript" src="{{ admin_url }}/includes/js/admin.js"></script>
-<form method="post" action="{{ php_self }}?mod=rewrite" name="rewriteForm" id="rewriteForm">
-	<span id="temp.data" style="position: absolute; display: none;"></span>
-	<span id="DEBUG"></span>
-	<table class="hover odd">
-		<thead>
-			<tr>
-				<th>&nbsp;</th>
-				<th width="20">ID</th>
-				<th width="60">{{ lang['hdr.plugin'] }}</th>
-				<th width="80">{{ lang['hdr.action'] }}</th>
-				<th>{{ lang['hdr.description'] }}</th>
-				<th>URL</th>
-				<th>{{ lang['hdr.flags'] }}</th>
-				<th>&nbsp;</th>
-			</tr>
-		</thead>
-	<tbody id="cfg.body">
-	</tbody>
-	<!-- ROW FOR EDITING / ADDING -->
+<!-- Info content -->
+<div class="page-main">
+	<div class="panel panel-default panel-table">
+		<form method="post" action="admin.php?mod=rewrite" name="rewriteForm" id="rewriteForm">
+			<span id="temp.data" style="position: absolute; display: none;"></span>
+			<span id="DEBUG"></span>
 
-	<tr id="row.editRow" valign="top" class="rewriteEditLine">
-	 <td width="1px">&nbsp;</td>
-	 <td id="row.id" width="24px" >*</td>
-	 <td id="row.pluginName">*&nbsp;</td>
-	 <td id="row.cmd">&nbsp;</td>
-	 <td id="row.description">&nbsp;</td>
-	 <td id="row.url"><input type="text"  id="ed.regex" style="width: 90%;"/><br/>
-		{{ lang['tbl.available_vars'] }}:<br/><span id="ed.varlist"></span>
-	 </td>
-	 <td id="row.flags"><input id="ed.flagPrimary" type="checkbox"/> <input id="ed.flagFailContinue" type="checkbox"/> <input id="ed.flagDisabled" type="checkbox"/></td>
-	 <td nowrap><input type="button" onclick="reSubmitEdit();" id="ed.button" value="Add" class="button"  style="padding: 2px 2px;" /> <input type="button" id="ed.bcancel" onclick="reCancelEdit();" class="button" style="padding: 2px 2px;" value="Cancel"/></td>
-	</tr>
-	<tr id="row.editRow2" valign="top" class="rewriteEditLine">
-	<td colspan="4">&nbsp;</td>
-	<td colspan="2">
-	<!--
-	Переопределение значений переменных:
-	<table width="100%">
-	<tr><td>altname</td><td width="20"><input type="checkbox"></td><td><input type="text"/></td></tr>
-	</table>
-	-->
-	</td>
-	<td colspan="2">&nbsp;</td>
-	</tr>
+			<div class="panel-body table-responsive">
+				<table class="table table-condensed table-hover">
+					<thead>
+						<tr>
+							
+							<th width="20">ID</th>
+							<th width="60">{{ lang['hdr.plugin'] }}</th>
+							<th width="80">{{ lang['hdr.action'] }}</th>
+							<th>{{ lang['hdr.description'] }}</th>
+							<th>URL</th>
+							<th>{{ lang['hdr.flags'] }}</th>
+							<th>{{ lang['action'] }}</th>
+						</tr>
+					</thead>
+				<tbody id="cfg.body">
+					
+				</tbody>
+				<!-- ROW FOR EDITING / ADDING -->
+
+				<tr id="row.editRow" valign="top" class="bg-info">
+					
+					<td id="row.id" width="24px" >*</td>
+					<td id="row.pluginName">*&nbsp;</td>
+					<td id="row.cmd">&nbsp;</td>
+					<td id="row.description">&nbsp;</td>
+					<td id="row.url">
+						<input type="text" id="ed.regex"><br/>
+						{{ lang['tbl.available_vars'] }}:<br/>
+						<span id="ed.varlist"></span>
+					</td>
+					<td id="row.flags" class="text-center">
+						<input id="ed.flagPrimary" type="checkbox">&nbsp;
+						<input id="ed.flagFailContinue" type="checkbox">&nbsp;
+						<input id="ed.flagDisabled" type="checkbox">
+					</td>
+					<td nowrap>
+						<button id="ed.button" type="button" class="btn btn-default" onclick="reSubmitEdit();"><i class="fa fa-plus"></i> Add</button>
+						<button id="ed.bcancel" type="button" class="btn btn-warning" onclick="reCancelEdit();"><i class="fa fa-ban"></i> Cancel</button>
+					</td>
+				</tr>
+				<tr id="row.editRow2" valign="top" class="bg-info">
+				<td colspan="4">&nbsp;</td>
+				<td colspan="2">
+				<!--
+				Переопределение значений переменных:
+				<table width="100%">
+				<tr><td>altname</td><td width="20"><input type="checkbox"></td><td><input type="text"/></td></tr>
+				</table>
+				-->
+				</td>
+				<td colspan="2">&nbsp;</td>
+				</tr>
 
 
-	</table>
+			</table>
 
-	<input type="button" value="SAVE" onclick="reServerSubmit();" class="button"/>
-</form>
+			<div class="panel-footer text-center">
+				<input type="button" value="{{ lang['save'] }}" onclick="reServerSubmit();" class="btn btn-success">
+			</div>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript" src="{{ scriptLibrary }}/ajax.js"></script>
+<script type="text/javascript" src="{{ scriptLibrary }}/admin.js"></script>
+
 <script type="text/javascript" language="javascript">
 <!--
 // Connect to configuration data
@@ -127,7 +153,9 @@ function reServerSubmit() {
   if (linkTX.responseStatus[0] == 200) {
         try {
   	 resTX = eval('('+linkTX.response+')');
-  	} catch (err) { alert('{{ lang['fmsg.save.json_parse_error'] }} '+linkTX.response); }
+  	} catch (err) {
+		$.notify({message: '{{ lang['fmsg.save.json_parse_error'] }} '+linkTX.response},{type: 'danger'});
+	}
 
   	// First - check error state
   	if (!resTX['status']) {
@@ -135,12 +163,12 @@ function reServerSubmit() {
   		if (resTX['recID'])
   			document.getElementById('re.row.'+resTX['recID']).style.background = '#AAAAAA';
   		// ERROR. Display it
-  		alert('Error ('+resTX['errorCode']+'): '+resTX['errorText']);
+		$.notify({message: 'Error ('+resTX['errorCode']+'): '+resTX['errorText']},{type: 'danger'});
   	} else {
-  		alert('{{ lang['fmsg.save.done'] }}');
+		$.notify({message: '{{ lang['fmsg.save.done'] }}'},{type: 'success'});
   	}
   } else {
-  	alert('{{ lang['fmsg.save.httperror'] }} '+linkTX.responseStatus[0]);
+	$.notify({message: '{{ lang['fmsg.save.httperror'] }} '+linkTX.responseStatus[0]},{type: 'danger'});
   }
  }
  linkTX.runAJAX();
@@ -189,9 +217,9 @@ function reSetData(id, plugin, cmd, regex, flagPrimary, flagFailContinue, flagDi
  document.getElementById('ed.flagDisabled').checked = flagDisabled;
 
  if (id=='*') {
-  document.getElementById('ed.button').value = 'Add';
+  document.getElementById('ed.button').innerHTML = '<i class="fa fa-plus"></i> Add';
  } else {
-  document.getElementById('ed.button').value = 'Save';
+  document.getElementById('ed.button').innerHTML = '<i class="fa fa-save"></i> Save';
  }
 }
 
@@ -211,13 +239,14 @@ function reEditRow(id) {
 
  currentEditRow = id;
  document.getElementById('re.row.'+currentEditRow).style.background = '#ecf3f7';
-
+	
+	$('#ed\\.regex').focus();
 }
 
 // Action on "DELETE" button click
 function reDeleteRow(id) {
  if (currentEditRow > 0) {
-  alert('{{ lang['fmsg.edit.shouldleave'] }}');
+	$.notify({message: '{{ lang['fmsg.edit.shouldleave'] }}'},{type: 'danger'});
   return false;
  }
  if (confirm('{{ lang['fmsg.edit.rowdel_confirm'] }} '+id)) {
@@ -237,7 +266,7 @@ function reDeleteRow(id) {
 // Move record UP
 function reMoveUp(id) {
  if (currentEditRow > 0) {
-  alert('{{ lang['fmsg.edit.shouldleave'] }}');
+	$.notify({message: '{{ lang['fmsg.edit.shouldleave'] }}'},{type: 'danger'});
   return false;
  }
  // Самую первую строчку некуда двигать
@@ -261,7 +290,7 @@ function reMoveUp(id) {
 // Move record DOWN
 function reMoveDown(id) {
  if (currentEditRow > 0) {
-  alert('{{ lang['fmsg.edit.shouldleave'] }}');
+	$.notify({message: '{{ lang['fmsg.edit.shouldleave'] }}'},{type: 'danger'});
   return false;
  }
  var dCounter = document.getElementById('cfg.body').rows.length;
@@ -355,4 +384,3 @@ function reSubmitEdit() {
 
 -->
 </script>
-

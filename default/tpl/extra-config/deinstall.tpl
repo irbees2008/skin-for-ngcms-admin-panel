@@ -1,16 +1,29 @@
-<h2 class="content-head"><a href="admin.php?mod=extras" title="{l_extras}">{l_extras}</a></h2>
-<h3 class="content-title">{l_deinstall_text}: <a href="?mod=extra-config&plugin={plugin}">{plugin}</a></h3>
+<!-- Navigation bar -->
+<ul class="breadcrumb">
+	<li><a href="admin.php">{l_home}</a></li>
+	<li><a href="admin.php?mod=extras">{l_extras}</a></li>
+	<li class="active">{l_deinstall_text}</li>
+</ul>
 
-<div class="content clear">
-<form method="post" action="{php_self}?mod=extra-config">
-	<div class="content-main clear">
-		{install_text}
-	</div>
-	<div class="content-footer clear">
+<!-- Info content -->
+<div class="page-main">
+	<form action="admin.php?mod=extra-config" method="post">
 		<input type="hidden" name="plugin" value="{plugin}" />
 		<input type="hidden" name="stype" value="install" />
 		<input type="hidden" name="action" value="commit" />
-		<input class="fr button-danger" type="submit" value="{l_commit_deinstall}" />
-	</div>
-</form>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>{plugin}</h3>
+			</div>
+			<div class="panel-body">
+				{install_text}
+			</div>
+			<div class="panel-footer text-center">
+				<input type="submit" value="{l_commit_deinstall}" class="btn btn-success" />
+			</div>
+		</div>
+	</form>
 </div>
+
+

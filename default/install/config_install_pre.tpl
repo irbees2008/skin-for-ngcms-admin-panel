@@ -1,24 +1,68 @@
-<script type="text/javascript">
-var ajax = new sack();
-function check_connection(){
-	//var res = document.getElementById('connection_result');
-	var form = document.getElementById('db');
-	ajax.execute = 1;
-	ajax.setVar("action", "testdb");
-	ajax.setVar("host", form.reg_dbhost.value);
-	if (form.reg_autocreate.checked) {
-		ajax.setVar("user", form.reg_dbadminuser.value);
-		ajax.setVar("pass", form.reg_dbadminpass.value);
-	} else {
-		ajax.setVar("user", form.reg_dbuser.value);
-		ajax.setVar("pass", form.reg_dbpass.value);
-	}
-	ajax.setVar("dbname", form.reg_dbname.value);
-	ajax.requestFile = 'install.php';
-	ajax.method = 'POST';
-	ajax.runAJAX();
-}
-</script>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1 form-box">
+			<form action="" method="post" class="f1">
+				<input type="hidden" name="action" value="config">
+				<input type="hidden" name="stage" value="0">
+
+				<div class="f1-steps">
+					<div class="f1-progress">
+						<div class="f1-progress-line" data-now-value="14.28" data-number-of-steps="3" style="width: 14.28%;"></div>
+					</div>
+					<div class="f1-step active">
+						<div class="f1-step-icon"><i class="fa fa-user"></i></div>
+						<p>{l_header.menu.begin}</p>
+					</div>
+					<div class="f1-step">
+						<div class="f1-step-icon"><i class="fa fa-key"></i></div>
+						<p>{l_header.menu.db}</p>
+					</div>
+					<div class="f1-step">
+						<div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
+						<p>{l_header.menu.perm}</p>
+					</div>
+					<div class="f1-step">
+						<div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
+						<p>{l_header.menu.plugins}</p>
+					</div>
+					<div class="f1-step">
+						<div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
+						<p>{l_header.menu.template}</p>
+					</div>
+					<div class="f1-step">
+						<div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
+						<p>{l_header.menu.common}</p>
+					</div>
+					<div class="f1-step">
+						<div class="f1-step-icon"><i class="fa fa-twitter"></i></div>
+						<p>{l_header.menu.install}</p>
+					</div>
+				</div>
+				
+				<p>{l_welcome.textblock2} {l_welcome.textblock1}</p>
+				
+				<fieldset>
+					<h4>{l_welcome.licence}</h4>
+					<div class="form-group">
+						<div class="form-control" style="height: 288px; padding: 5px; overflow: auto;">
+							{license}
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="agree"><input type="checkbox" name="agree" id="agree" value="1" {ad}/> {l_welcome.licence.accept}</label>
+					</div>
+					<div class="f1-buttons">
+						<button type="submit" class="btn btn-next">{l_welcome.continue} &raquo;</button>
+					</div>
+				</fieldset>
+				
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
 
 <form action="" method="post" name="db" id="db">
 <input type="hidden" name="agree" value="1" />
@@ -93,3 +137,25 @@ $ERR[general_error_info]
 </table>
 </p>
 </form>
+
+<script type="text/javascript">
+var ajax = new sack();
+function check_connection(){
+	//var res = document.getElementById('connection_result');
+	var form = document.getElementById('db');
+	ajax.execute = 1;
+	ajax.setVar("action", "testdb");
+	ajax.setVar("host", form.reg_dbhost.value);
+	if (form.reg_autocreate.checked) {
+		ajax.setVar("user", form.reg_dbadminuser.value);
+		ajax.setVar("pass", form.reg_dbadminpass.value);
+	} else {
+		ajax.setVar("user", form.reg_dbuser.value);
+		ajax.setVar("pass", form.reg_dbpass.value);
+	}
+	ajax.setVar("dbname", form.reg_dbname.value);
+	ajax.requestFile = 'install.php';
+	ajax.method = 'POST';
+	ajax.runAJAX();
+}
+</script>
