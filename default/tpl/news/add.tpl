@@ -7,7 +7,7 @@
 
 <script type="text/javascript" src="{{ home }}/lib/ajax.js"></script>
 <script type="text/javascript" src="{{ home }}/lib/libsuggest.js"></script>
-
+<script type="text/javascript" src="{{ skins_url }}/assets/jscolor/jscolor.js"></script>
 <!-- Info content -->
 <div class="page-main">
 	<!-- Main content form -->
