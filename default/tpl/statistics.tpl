@@ -260,4 +260,4 @@
 	</div>
 </div>
 
-<script src="{{ versionNotify }}"></script>
+<script>{{ versionNotify }}</script>
